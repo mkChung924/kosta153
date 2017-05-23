@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+<tiles-definitions>
+
+	<!-- definition 엘리먼트: 화면구성 한 페이지를 표현 -->
+	
+	<definition name=".main" path="/0523/base.jsp">
+		
+		<!-- put태그의 value에는 definition의 path에 포함될 페이지들을 정의 -->
+		<put name="header" value="/0523/header.jsp"></put>
+		<put name="menu" value="/0523/menu.jsp"></put>
+		<put name="body" value="/0523/body.jsp"></put>
+		<put name="footer" value="/0523/footer.jsp"></put>
+	</definition>
+	
+	<definition name=".menu1" extends=".main">
+		<put name="body" value="/0523/menu1.jsp"></put>
+
+	</definition>
+	
+	<definition name=".menu2" extends=".main">
+		<put name="body" value="/0523/menu2.jsp"></put>
+
+	</definition>
+
+</tiles-definitions>
