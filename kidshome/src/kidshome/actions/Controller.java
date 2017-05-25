@@ -1,4 +1,4 @@
-package kidshome.control;
+package kidshome.actions;
 
 public class Controller {
 

@@ -6,13 +6,11 @@
 
 	<!-- definition 엘리먼트: 화면구성 한 페이지를 표현 -->
 	
-	<definition name=".main" path="/0523/base.jsp">
-		
+	<definition name=".main" path="/kids/index.jsp">
 		<!-- put태그의 value에는 definition의 path에 포함될 페이지들을 정의 -->
-		<put name="header" value="/0523/header.jsp"></put>
-		<put name="menu" value="/0523/menu.jsp"></put>
-		<put name="body" value="/0523/body.jsp"></put>
-		<put name="footer" value="/0523/footer.jsp"></put>
+		<put name="header" value="/kids/header.jsp"></put>
+		<put name="body" value="/kids/body.jsp"></put>
+		<put name="footer" value="/kids/footer.jsp"></put>
 	</definition>
 	
 	<definition name=".menu1" extends=".main">

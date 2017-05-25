@@ -190,15 +190,13 @@
 			
 		<!-- 타일즈 액션-->
 	
+			
 		<action 
-			path="/tiles/main"
-			forward=".main"/>
-		<action 
-			path="/tiles/menu1"
-			forward=".menu1"></action>	
-		<action 
-			path="/tiles/menu2"
-			forward=".menu2"></action>	
+			path="/kids/main"
+			type="kidshome.actions.MainAction">
+			
+			<forward name="success" path=".main"></forward>	
+		</action>	
 		
 
     <!-- sample input and input submit actions
@@ -229,7 +227,7 @@
     
 <!-- ======================================== Controller Definitions -->
 	<!-- 한글패치 컨트롤러 -->
-	<controller processorClass="com.kosta.control.MyRequestProcessor"/>
+	<controller processorClass="control.MyRequestProcessor"/>
 		
 
 

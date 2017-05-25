@@ -26,5 +26,5 @@
 	</transactionManager>
 
 	<!-- sql문들이 저장되어있는 XML을 등록 -->
-	<sqlMap resource="./iba/mapper/emp.xml"/>
+	<sqlMap resource="./iba/mapper/kidshome.xml"/>
 </sqlMapConfig>
