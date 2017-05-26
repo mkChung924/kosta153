@@ -15,7 +15,7 @@
 	<table id="heads" border=0>
 		<tr>
 			<td class="logo" align="left">
-				<img src="../image/shinroot.jpg" width="200" height="70" onclick="location.href='#'">
+				<img src="../image/logo.png" width="220" height="90" onclick="location.href='main.do'">
 			</td>
 			<td class="member" align="right">
 				<logic:present name="user" scope="session">
@@ -34,39 +34,39 @@
 		<div class="topMenu">
 			<ul>
 				<li class="topMenuLi">
-				<a class="menuLink" href="#">소개</a>
+				<a class="menuLink" href="intro.do">소개</a>
 					<ul class="submenu">
-						<li><a class="submenuLink" href="#">Vision</a></li>
-						<li><a class="submenuLink" href="#">우리소개</a></li>
+						<li><a class="submenuLink" href="vision.do">Vision</a></li>
+						<li><a class="submenuLink" href="about.do">우리소개</a></li>
 					</ul></li>
 				<li><font color="black">|</font></li>
 				<li class="topMenuLi">
-				<a class="menuLink" href="#">안내</a>
+				<a class="menuLink" href="info.do">안내</a>
 					<ul class="submenu">
-						<li><a class="submenuLink" href="#">대여 안내</a></li>
-						<li><a class="submenuLink" href="#">기부 안내</a></li>
-						<li><a class="submenuLink" href="#">회원 안내</a></li>
+						<li><a class="submenuLink" href="rentinfo.do">대여 안내</a></li>
+						<li><a class="submenuLink" href="giveinfo.do">기부 안내</a></li>
+						<li><a class="submenuLink" href="meminfo.do">회원 안내</a></li>
 					</ul></li>
 				<li><font color="black">|</font></li>
 				<li class="topMenuLi">
-				<a class="menuLink" href="#">장난감</a>
+				<a class="menuLink" href="toy.do">장난감</a>
 					<ul class="submenu">
 						<li><a class="submenuLink" href="#">검색하기</a></li>
 						<li><a class="submenuLink" href="#">종류별로 보기</a></li>
 					</ul></li>
 				<li class="topMenuLi">
-				<a class="menuLink" href="#">신청</a>
+				<a class="menuLink" href="request.do">신청</a>
 				<ul class="submenu">
-						<li><a class="submenuLink" href="#">기부 신청하기</a></li>
-						<li><a class="submenuLink" href="#">정남감 요청하기</a></li>
+						<li><a class="submenuLink" href="givetoy.do">기부 신청하기</a></li>
+						<li><a class="submenuLink" href="reqtoy.do">정남감 요청하기</a></li>
 					</ul></li>
 				<li><font color="black">|</font></li>
 				<li class="topMenuLi">
-				<a class="menuLink" href="#">게시판</a>
+				<a class="menuLink" href="board.do">게시판</a>
 				<ul class="submenu">
-						<li><a class="submenuLink" href="#">공지사항</a></li>
-						<li><a class="submenuLink" href="#">자유게시판</a></li>
-						<li><a class="submenuLink" href="#">후기게시판</a></li>
+						<li><a class="submenuLink" href="announceboard.do">공지사항</a></li>
+						<li><a class="submenuLink" href="freeboard.do">자유게시판</a></li>
+						<li><a class="submenuLink" href="afterboard.do">후기게시판</a></li>
 				</ul></li>
 		
 			</ul>

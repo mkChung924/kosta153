@@ -13,14 +13,82 @@
 		<put name="footer" value="/kids/footer.jsp"></put>
 	</definition>
 	
-	<definition name=".menu1" extends=".main">
-		<put name="body" value="/0523/menu1.jsp"></put>
+	
+	<!-- 안내페이지(대여안내, 기부안내, 회원안내) -->
+	<definition name=".info" path="/kids/info/info.jsp">
+		<put name="header" value="/kids/header.jsp"></put>
+		<put name="menu" value="/kids/info/menu.jsp"></put>
+		<put name="body" value="/kids/info/infobody.jsp"></put>
+		<put name="footer" value="/kids/footer.jsp"></put>
+	</definition>
 
+	<definition name=".rentinfo" extends=".info">
+		<put name="body" value="/kids/info/rentinfo.jsp"></put>
+	</definition>
+	<definition name=".giveinfo" extends=".info">
+		<put name="body" value="/kids/info/giveinfo.jsp"></put>
+	</definition>
+	<definition name=".meminfo" extends=".info">
+		<put name="body" value="/kids/info/meminfo.jsp"></put>
 	</definition>
 	
-	<definition name=".menu2" extends=".main">
-		<put name="body" value="/0523/menu2.jsp"></put>
-
+	<!-- 신청페이지(요청신청, 기부신청) -->
+	<definition name=".request" path="/kids/request/request.jsp">
+		<put name="header" value="/kids/header.jsp"></put>
+		<put name="menu" value="/kids/request/reqmenu.jsp"></put>
+		<put name="body" value="/kids/request/reqbody.jsp"></put>
+		<put name="footer" value="/kids/footer.jsp"></put>
+	</definition>
+	
+	<definition name=".reqtoy" extends=".request">
+		<put name="body" value="/kids/request/reqtoy.jsp"></put>
+	</definition>
+	<definition name=".givetoy" extends=".request">
+		<put name="body" value="/kids/request/givetoy.jsp"></put>
+	</definition>
+	
+	<!-- 소개 페이지(vision, about) -->
+	<definition name=".intro" path="/kids/intro/intro.jsp">
+		<put name="header" value="/kids/header.jsp"></put>
+		<put name="menu" value="/kids/intro/intromenu.jsp"></put>
+		<put name="body" value="/kids/intro/introbody.jsp"></put>
+		<put name="footer" value="/kids/footer.jsp"></put>
+	</definition>
+	<definition name=".vision" extends=".intro">
+		<put name="body" value="/kids/intro/vision.jsp"></put>
+	</definition>
+	<definition name=".about" extends=".intro">
+		<put name="body" value="/kids/intro/about.jsp"></put>
+	</definition>
+	
+	<!-- 게시판 (공지사항, 자유글, 후기글) -->
+	<definition name=".board" path="/kids/board/board.jsp">
+		<put name="header" value="/kids/header.jsp"></put>
+		<put name="menu" value="/kids/board/boardmenu.jsp"></put>
+		<put name="body" value="/kids/board/boardbody.jsp"></put>
+		<put name="footer" value="/kids/footer.jsp"></put>
+	</definition>
+	<definition name=".freeboard" extends=".board">
+		<put name="body" value="/kids/board/free.jsp"></put>
+	</definition>	
+	<definition name=".announceboard" extends=".board">
+		<put name="body" value="/kids/board/announce.jsp"></put>
+	</definition>
+	<definition name=".afterboard" extends=".board">
+		<put name="body" value="/kids/board/after.jsp"></put>
+	</definition>		
+	
+	<definition name=".toy" path="/kids/toy/toy.jsp">
+		<put name="header" value="/kids/header.jsp"></put>
+		<put name="menu" value="/kids/toy/toymenu.jsp"></put>
+		<put name="body" value="/kids/toy/toybody.jsp"></put>
+		<put name="footer" value="/kids/footer.jsp"></put>
+	</definition>
+	<definition name=".search" extends=".toy">
+		<put name="body" value="/kids/board/search.jsp"></put>
+	</definition>
+	<definition name=".toykinds" extends=".toy">
+		<put name="body" value="/kids/board/toykinds.jsp"></put>
 	</definition>
 
 </tiles-definitions>

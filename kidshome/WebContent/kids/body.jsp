@@ -33,30 +33,35 @@
 <div id="toys" style="margin-top: 50px">
 	<table border=0 cellspacing="0" cellpadding="0" width="1295px">
 	<tr>
-		<td align="center"><font color=blue size="5"><b>최신 장난감</b></font></td>
-		<td align="center"><font color=blue size="5"><b>인기 장난감</b></font></td>
+		<td align="center"><font color=green size="5"><b>최신 장난감</b></font></td>
+		<td align="center"><font color=green size="5"><b>인기 장난감</b></font></td>
 	</tr>
 	</table>
-	<br><br>
+	<br>
 	<table border=0 cellspacing="0" cellpadding="2" width="1300">
+	<tr>
+	<td align="right"><a href='#'><font color="black">최신장난감 더보기</font></a></td>
+	<td align="right"><a href='#'><font color="black">인기장난감 더보기</font></a></td>
+	</tr>
 	<tr height="500">
+		
 		<td>
 			<table border=1 cellspacing="0" cellpadding="0" width="650" height="500">
 			<!-- JSTL forEeach를 사용해서 DB에서 얻은 값을 출력해야함. -->
 				<tr>
 					<td align="center" width="300" height="250">
-						<img alt="최신장난감1" src="../image/shinroot.jpg" width="300" height="250">
+						<img alt="최신장난감1" src="../image/${newToy[0] }" width="300" height="250">
 					</td>
 					<td align="center" width="300" height="250">
-						<img alt="최신장난감2" src="../image/${recent.url }" width="300" height="250">
+						<img alt="최신장난감2" src="../image/${newToy[1] }" width="300" height="250">
 					</td>
 				</tr>
 				<tr>
 					<td align="center" width="300" height="250">
-						<img alt="최신장난감3" src="../image/${recent.url }" width="300" height="250">
+						<img alt="최신장난감3" src="../image/${newToy[1] }" width="300" height="250">
 					</td>
 					<td align="center" width="300" height="250">
-						<img alt="최신장난감4" src="../image/${recent.url }" width="300" height="250">
+						<img alt="최신장난감4" src="../image/${newToy[1] }" width="300" height="250">
 					</td>
 				</tr>
 			</table>
@@ -65,18 +70,18 @@
 			<table border="1" cellspacing="0" cellpadding="0" width="650" height="500">
 				<tr>
 					<td align="center" width="300" height="250">
-						<img alt="인기장난감1" src="../image/${recent.url }" width="300" height="250">
+						<img alt="인기장난감1" src="../image/${popToy[0] }.jpg" width="300" height="250">
 					</td>
 					<td align="center" width="300" height="250">
-						<img alt="인기장난감2" src="../image/${recent.url }" width="300" height="250">
+						<img alt="인기장난감2" src="../image/${popToy[1] }.jpg" width="300" height="250">
 					</td>
 				</tr>
 				<tr>
 					<td align="center" width="300" height="250">
-						<img alt="인기장난감3" src="../image/${recent.url }" width="300" height="250">
+						<img alt="인기장난감3" src="../image/${popToy[2] }.jpg" width="300" height="250">
 					</td>
 					<td align="center" width="300" height="250">
-						<img alt="인기장난감4" src="../image/${recent.url }" width="300" height="250">
+						<img alt="인기장난감4" src="../image/${popToy[3] }.jpg" width="300" height="250">
 					</td>
 				</tr>
 			</table>
@@ -87,9 +92,16 @@
 
 <div id="news">
 	<table border=0 cellspacing="1" cellpadding="2" width="1300">
-		<tr><td align="center"><font color=blue size=5><b>키즈홈 소식</b></font></td></tr>
+		<tr><td align="center"><font color=green size=5><b>키즈홈 소식</b></font></td></tr>
 	</table>
 	<br><br>
+	<table border=0 cellspacing="0" cellpadding="1" width="1300">
+		<tr>
+			<td align="right"><a href='#'><font color="black">공지사항 보기</font></a></td>
+			<td align="right"><a href='#'><font color="black">자유글 더보기</font></a></td>
+			<td align="right"><a href='#'><font color="black">후기글 더보기</font></a></td>
+		</tr>
+	</table>
 	<table border=1 cellspacing="0" cellpadding="1" width="1300">
 		<tr>
 			<td align="center" width="433">

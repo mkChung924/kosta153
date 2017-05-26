@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd" >
-<sqlMap namespace="emp">
-<typeAlias alias="main" type="kidshome.model.MainDTO"/>
-
-<select id="sel7788" resultClass="String">
-	select ename from emp where empno=7788
-</select>
-
-<select id="selectAll" resultClass="com.kosta.s0519.Emp2">
-	select empno, ename, hiredate from emp
-</select>
+<sqlMap namespace="kids">
 
 <!-- =================================================================================================== -->
 <!-- =================================메인페이지 쿼리======================================================= -->
 <!-- =================================================================================================== -->
 	<!-- 최신 장난감 정보 4개 -->
 <select id="selectNewToy" resultClass="String">
-	select toyimage from (select toyimage from toyinfo order by date desc) where rownum between 1 and 4
+	select toy_image from (select toy_image from toyinfo order by toy_date desc) where rownum between 1 and 4
 </select>
 
 	<!-- 인기 장난감 정보 4개 -->
 <select id="selectPopToy" resultClass="String">
-	select toyimage from (select toyimage from toyinfo order by date desc) where rownum between 1 and 4
+	 select toy_serial from (select toy_serial, count(*) as num from toyrent group by toy_serial order by num desc) where rownum between 1 and 4
 </select>
 
+
 	<!-- 공지 정보 4개 -->
-<select id="selectAnnounce" resultClass="String">
+<select id="selectAnnounce1" resultClass="String">
 	select title from (select title from announce order by date desc) where rownum between 1 and 4
 </select>
 
 	<!-- 자유게시글 정보 4개 -->
-<select id="selectAnnounce" resultClass="String">
+<select id="selectAnnounce2" resultClass="String">
 	select title from (select title from free order by date desc) where rownum between 1 and 4
 </select>
 
 	<!-- 후기게시글 정보 4개 -->
-<select id="selectAnnounce" resultClass="String">
+<select id="selectAnnounce3" resultClass="String">
 	select title from (select title from after order by date desc) where rownum between 1 and 4
+</select>
+
+<!-- =================================================================================================== -->
+<!-- =================================장난감 정보 쿼리======================================================= -->
+<!-- =================================================================================================== -->
+
+<select id="selectToys" resultClass="kidshome.model.Toys">
+	select toy_name, toy_image, count(*) as num from toyinfo group by toy_image, toy_name
 </select>
 
 <!-- =================================================================================================== -->
@@ -47,9 +47,4 @@
 <!-- ================================= 쿼리======================================================= -->
 <!-- =================================================================================================== -->
 
-<!-- =================================================================================================== -->
-<!-- ================================= 쿼리======================================================= -->
-<!-- =================================================================================================== -->
-
-<select id=""></select>
 </sqlMap>

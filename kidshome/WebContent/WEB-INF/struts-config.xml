@@ -189,14 +189,73 @@
 			
 			
 		<!-- 타일즈 액션-->
-	
-			
+		
+		<!-- 메인페이지 타일즈 -->
 		<action 
 			path="/kids/main"
 			type="kidshome.actions.MainAction">
 			
 			<forward name="success" path=".main"></forward>	
 		</action>	
+		
+		<!-- 소개 페이지 타일즈 -->
+		<action 
+			path="/kids/intro"
+			forward=".intro"/>
+		<action 
+			path="/kids/vision"
+			forward=".vision"/>
+		<action 
+			path="/kids/about"
+			forward=".about"/>	
+		
+		<!-- 안내 페이지 타일즈 -->
+		<action 
+			path="/kids/info"
+			forward=".info"/>
+		<action 
+			path="/kids/rentinfo"
+			forward=".rentinfo"/>	
+		<action 
+			path="/kids/giveinfo"
+			forward=".giveinfo"/>	
+		<action 
+			path="/kids/meminfo"
+			forward=".meminfo"/>
+			
+		<!-- 신청 페이지 타일즈 -->	
+		<action 
+			path="/kids/request"
+			forward=".request"/>
+		<action 
+			path="/kids/reqtoy"
+			forward=".reqtoy"/>	
+		<action 
+			path="/kids/givetoy"
+			forward=".givetoy"/>	
+		
+		<!-- 게시판 타일즈 -->
+		<action 
+			path="/kids/board"
+			forward=".board"/>
+		<action 
+			path="/kids/announce"
+			forward=".announceboard"/>	
+		<action 
+			path="/kids/free"
+			forward=".freeboard"/>	
+		<action 
+			path="/kids/after"
+			forward=".afterboard"/>		
+			
+		<!-- 장난감 페이지 타일즈 -->
+		<action 
+			path="/kids/toy"
+			type="kidshome.actions.ToyAction">
+		
+			<forward name="success" path=".toy"></forward>	
+		</action>				
+	
 		
 
     <!-- sample input and input submit actions
