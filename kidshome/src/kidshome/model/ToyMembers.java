@@ -11,13 +11,19 @@ public class ToyMembers {
 	private String addr;
 	private String email;
 	private String tel;
-	private Date gdate;
+	private String secure_code ;
+	private String secure_ans;
+	private int auth;
+	private String regdate;
 	
 	public ToyMembers() {
-		
+		// TODO Auto-generated constructor stub
 	}
+	
+	
 
-	public ToyMembers(String id, String pass, String name, String birth, String addr, String email, String tel,Date gdate) {
+	public ToyMembers(String id, String pass, String name, String birth, String addr, String email, String tel,
+			String secure_code, String secure_ans) {
 		super();
 		this.id = id;
 		this.pass = pass;
@@ -26,8 +32,11 @@ public class ToyMembers {
 		this.addr = addr;
 		this.email = email;
 		this.tel = tel;
-		this.gdate = gdate;
+		this.secure_code = secure_code;
+		this.secure_ans = secure_ans;
 	}
+
+
 
 	public String getId() {
 		return id;
@@ -85,12 +94,38 @@ public class ToyMembers {
 		this.tel = tel;
 	}
 
-	public Date getGdate() {
-		return gdate;
+	public String getSecure_code() {
+		return secure_code;
 	}
 
-	public void setGdate(Date gdate) {
-		this.gdate = gdate;
+	public void setSecure_code(String secure_code) {
+		this.secure_code = secure_code;
 	}
+
+	public String getSecure_ans() {
+		return secure_ans;
+	}
+
+	public void setSecure_ans(String secure_ans) {
+		this.secure_ans = secure_ans;
+	}
+
+	public int getAuth() {
+		return auth;
+	}
+
+	public void setAuth(int auth) {
+		this.auth = auth;
+	}
+
+	public String getRegdate() {
+		return regdate;
+	}
+
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
+	}
+	
+	
 	 
 }	// class

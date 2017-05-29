@@ -6,12 +6,43 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+
+.menu ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+    text-align: center;
+    
+}
+
+.menu li {
+	text-decoration:none;
+	margin-top: 30px;
+    margin-right: 40px;
+    margin-left: 40px;
+    display: inline;
+}
+
+.menu a {
+	color: black;
+	text-decoration:none;
+	font-size: 18px;
+}
+
+.menu a:hover{
+	color: blue;
+}
+
+</style>
 </head>
 <body>
+<div class="menu">
 	<ul>
-		<li style="margin-top: 30px"><html:link action="/kids/rentinfo">대여 안내</html:link>
-		<li style="margin-top: 30px"><html:link action="/kids/giveinfo">기부 안내</html:link>
-		<li style="margin-top: 30px"><html:link action="/kids/meminfo">회원 안내</html:link>
+		<li><a href="rentinfo.do">대여 안내</a>
+		<li><a href="giveinfo.do">기부 안내</a>
+		<li><a href="meminfo.do">회원 안내</a>
 	</ul>
+</div>
 </body>
 </html>

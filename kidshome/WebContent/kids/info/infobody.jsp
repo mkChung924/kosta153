@@ -10,11 +10,11 @@
 <center>
 <h3>안내 페이지</h3>
 <br>처음 오신 여러분들께 저희 서비스에 대해 간단하게 설명드리겠습니다.
-<br><br><br><br><br><br><br><br>
+<br><br><br><br>
 대여안내, 기부안내, 회원안내
-<br><br><br><br><br><br><br><br>
+<br><br><br><br>
 스크롤이 생기면 화면의 이동이 이루어집니다.
-<br><br><br><br><br><br><br><br>
+<br><br><br><br>
 스크롤이 생길만한 길이가 되어야함.
 <br><br><br><br>
 </center>

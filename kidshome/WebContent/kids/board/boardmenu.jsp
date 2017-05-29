@@ -6,12 +6,43 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+
+.menu ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+    text-align: center;
+    
+}
+
+.menu li {
+	text-decoration:none;
+	margin-top: 30px;
+    margin-right: 40px;
+    margin-left: 40px;
+    display: inline;
+}
+
+.menu a {
+	color: black;
+	text-decoration:none;
+	font-size: 18px;
+}
+
+.menu a:hover{
+	color: blue;
+}
+
+</style>
 </head>
 <body>
+<div class="menu">
 <ul>
-	<li style="margin-top: 30px"><html:link action="/kids/announce">공지사항</html:link>
-	<li style="margin-top: 30px"><html:link action="/kids/free">자유 게시판</html:link>
-	<li style="margin-top: 30px"><html:link action="/kids/after">후기 게시판</html:link>
+	<li><html:link action="/kids/announce">공지사항</html:link>
+	<li><html:link action="/kids/free">자유 게시판</html:link>
+	<li><html:link action="/kids/after">후기 게시판</html:link>
 </ul>
+</div>
 </body>
 </html>

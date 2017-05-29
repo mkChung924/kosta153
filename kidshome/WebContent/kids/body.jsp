@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,7 +18,7 @@
 <body>
 <center>
 
-<div style="text-align: center; margin-top: 30px"><img src="../image/shinroot.jpg" width="1300px" height="200px"></div>
+<div style="text-align: center; margin-top: 30px"><img src="../image/kidshomelogo2.png" width="1300px" height="220px"></div>
 <div id="image_list_2">
         <div class="clsBannerScreen">
             <div class="images" style="display:block">
@@ -58,10 +59,10 @@
 				</tr>
 				<tr>
 					<td align="center" width="300" height="250">
-						<img alt="최신장난감3" src="../image/${newToy[1] }" width="300" height="250">
+						<img alt="최신장난감3" src="../image/${newToy[2] }" width="300" height="250">
 					</td>
 					<td align="center" width="300" height="250">
-						<img alt="최신장난감4" src="../image/${newToy[1] }" width="300" height="250">
+						<img alt="최신장난감4" src="../image/${newToy[3] }" width="300" height="250">
 					</td>
 				</tr>
 			</table>
@@ -70,18 +71,18 @@
 			<table border="1" cellspacing="0" cellpadding="0" width="650" height="500">
 				<tr>
 					<td align="center" width="300" height="250">
-						<img alt="인기장난감1" src="../image/${popToy[0] }.jpg" width="300" height="250">
+						<img alt="인기장난감1" src="../image/${popToy[0] }" width="300" height="250">
 					</td>
 					<td align="center" width="300" height="250">
-						<img alt="인기장난감2" src="../image/${popToy[1] }.jpg" width="300" height="250">
+						<img alt="인기장난감2" src="../image/${popToy[1] }" width="300" height="250">
 					</td>
 				</tr>
 				<tr>
 					<td align="center" width="300" height="250">
-						<img alt="인기장난감3" src="../image/${popToy[2] }.jpg" width="300" height="250">
+						<img alt="인기장난감3" src="../image/${popToy[2] }" width="300" height="250">
 					</td>
 					<td align="center" width="300" height="250">
-						<img alt="인기장난감4" src="../image/${popToy[3] }.jpg" width="300" height="250">
+						<img alt="인기장난감4" src="../image/${popToy[3] }" width="300" height="250">
 					</td>
 				</tr>
 			</table>

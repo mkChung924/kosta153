@@ -8,6 +8,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
 public class LoginActionForm extends ActionForm{
+	
 	private String id;
 	private String pass;
 	
@@ -26,16 +27,21 @@ public class LoginActionForm extends ActionForm{
 		this.pass = pass;
 	}
 	
-	// 유효성 검사
 	@Override
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
 		ActionErrors error = new ActionErrors();
 		
-		if(id.trim().isEmpty()){
-			error.add("errorid",new ActionMessage("toy.idE"));
-		}else if(pass.trim().isEmpty()){
-			error.add("errorpass",new ActionMessage("toy.passE"));
+		if(id != null && pass != null){
+			
+			if(id.trim().isEmpty()){
+				error.add("errorid",new ActionMessage("kids.idE"));
+			}else if(pass.trim().isEmpty()){
+				error.add("errorpass",new ActionMessage("kids.passE"));
+			}
+			return error;
+		} else {
+			return null;
 		}
-		return error;
+
 	}
 }

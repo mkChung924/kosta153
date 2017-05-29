@@ -6,11 +6,42 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+
+.menu ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+    text-align: center;
+    
+}
+
+.menu li {
+	text-decoration:none;
+	margin-top: 30px;
+    margin-right: 40px;
+    margin-left: 40px;
+    display: inline;
+}
+
+.menu a {
+	color: black;
+	text-decoration:none;
+	font-size: 18px;
+}
+
+.menu a:hover{
+	color: blue;
+}
+
+</style>
 </head>
 <body>
+<div class="menu">
 	<ul>
-		<li style="margin-top: 30px"><html:link action="/kids/givetoy">장난감 기부</html:link>
-		<li style="margin-top: 30px"><html:link action="/kids/reqtoy">장난감 신청</html:link>
+		<li><html:link action="/kids/givetoy">기부 신청하기</html:link>
+		<li><html:link action="/kids/reqtoy">장난감 요청하기</html:link>
 	</ul>
+</div>	
 </body>
 </html>

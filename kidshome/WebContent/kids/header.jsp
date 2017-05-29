@@ -18,11 +18,13 @@
 				<img src="../image/logo.png" width="220" height="90" onclick="location.href='main.do'">
 			</td>
 			<td class="member" align="right">
-				<logic:present name="user" scope="session">
-				<a href="#"><font color="blue">로그아웃</font></a> | <a href="#"><font color="blue">마이페이지</font></a>
+				<logic:present name="id" scope="session">
+				<a href="logout.do"><font color="blue">로그아웃</font></a> | <a href="my.do"><font color="blue">마이페이지</font></a>
 				</logic:present>
-				<logic:notPresent name="user" scope="session">
-				<a href="#"><font color="blue">로그인</font></a> | <a href="#"><font color="blue">회원가입</font></a>
+				<logic:notPresent name="id" scope="session">
+				<a href="login.do" style="text-decoration: none;"><font color="blue" size=4px>로그인</font></a> 
+				<font size=4px>|</font> 
+				<a href="signUp.do"  style="text-decoration: none"><font color="blue" size=4px>회원가입</font></a>
 				</logic:notPresent>
 				
 			</td>
@@ -39,7 +41,6 @@
 						<li><a class="submenuLink" href="vision.do">Vision</a></li>
 						<li><a class="submenuLink" href="about.do">우리소개</a></li>
 					</ul></li>
-				<li><font color="black">|</font></li>
 				<li class="topMenuLi">
 				<a class="menuLink" href="info.do">안내</a>
 					<ul class="submenu">
@@ -47,7 +48,6 @@
 						<li><a class="submenuLink" href="giveinfo.do">기부 안내</a></li>
 						<li><a class="submenuLink" href="meminfo.do">회원 안내</a></li>
 					</ul></li>
-				<li><font color="black">|</font></li>
 				<li class="topMenuLi">
 				<a class="menuLink" href="toy.do">장난감</a>
 					<ul class="submenu">
@@ -60,7 +60,6 @@
 						<li><a class="submenuLink" href="givetoy.do">기부 신청하기</a></li>
 						<li><a class="submenuLink" href="reqtoy.do">정남감 요청하기</a></li>
 					</ul></li>
-				<li><font color="black">|</font></li>
 				<li class="topMenuLi">
 				<a class="menuLink" href="board.do">게시판</a>
 				<ul class="submenu">

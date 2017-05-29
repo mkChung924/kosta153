@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,16 +9,16 @@
 </head>
 <body>
 	<center>
-		<h3>장난감 기부 신청 페이지</h3>
-
-		<img alt="" src="../image/shinroot.jpg" width="1000px" height="200px"><br>
+		
+		
+		<logic:present scope="session" name="id">
+		<img alt="" src="../image/giveprocess.png" width="1200px" height="350px"><br>
 		<br>
-
-		<form action="#" method="post" enctype="multipart/form-data">
+		<form action="req_insert.do" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
 					<td>장난감 이름:</td>
-					<td><input type="text" name="nameoftoy"></td>
+					<td><input type="text" name="toyname"></td>
 				</tr>
 				<tr>
 					<td>장난감 설명:</td>
@@ -40,11 +41,18 @@
 				<td colspan="2" align="right">※ 택배를 선택하신분만 입력바랍니다.</td>
 				</tr>
 			</table>
-			<br> <input type="submit" value="신청" onclick=""> <input
-				type="reset" value="초기화">
+			<input type="hidden" name="action" value="give">
+			<br> <input type="submit" value="신청"> 
+			<input type="reset" value="초기화">
 
 		</form>
-
+		</logic:present>
+		<logic:notPresent scope="session" name="id">
+			<form action="login.do" method="post">
+				현재 회원만 기부 신청이 가능합니다. 로그인하여 신청해주십시오.<br><br>감사합니다.<br><br>
+				<input type="submit" value="로그인">
+			</form>	
+		</logic:notPresent>
 		<br>
 		<br>
 	</center>

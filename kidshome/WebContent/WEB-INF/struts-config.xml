@@ -46,6 +46,11 @@
     		
     	<form-bean name="calcForm"
     	type="com.kosta.s0523.forms.CalcActionForm"/>
+    	
+   		<form-bean name="loginActionForm"
+               type="kidshome.forms.LoginActionForm"></form-bean>
+
+
     
     <!-- sample form bean descriptor for an ActionForm
         <form-bean
@@ -198,6 +203,17 @@
 			<forward name="success" path=".main"></forward>	
 		</action>	
 		
+		<action 
+			path="/kids/login_w"
+			type="kidshome.actions.LoginAction"
+			name="loginActionForm"
+			scope="request"
+			validate="true"
+			input=".main2">
+			
+			<forward name="success" path="/kids/main.do" redirect="true"></forward>	
+		</action>
+		
 		<!-- 소개 페이지 타일즈 -->
 		<action 
 			path="/kids/intro"
@@ -233,6 +249,17 @@
 		<action 
 			path="/kids/givetoy"
 			forward=".givetoy"/>	
+			
+		<action 
+			path="/kids/req_suc"
+			forward=".reqsuc"/>	
+			
+		<action 
+			path="/kids/req_insert"
+			type="kidshome.actions.ReqAction">
+			
+			<forward name="success" path="/kids/req_suc.do" redirect="true"></forward>
+		</action>	
 		
 		<!-- 게시판 타일즈 -->
 		<action 
@@ -255,7 +282,142 @@
 		
 			<forward name="success" path=".toy"></forward>	
 		</action>				
-	
+		
+		<!-- 장난감 로그인 단순 포워딩 -->
+      <action path="/kids/login"
+            forward=".login"/>
+            
+      <action path="/kids/signUp"
+      		forward=".signUp"/>
+      		
+      	<!-- 아이디/비밀번호 찾기 -->	
+      	<action 
+      		path="/kids/findid"
+      		forward=".idfind"/>
+      		
+      	<action 
+      		path="/kids/findpass"
+      		forward=".passfind"/>	
+      			   	   
+      		
+      	<action path="/kids/idFoundGo"
+				type="kidshome.actions.IdFoundAction"
+				input=".idfind">
+				
+				<forward name="fail" path=".idfindfail"></forward>
+				<forward name="success" path=".idfindsuc"></forward>
+				</action>
+				
+
+		<!-- 비밀번호 찾기에 대한 액션폼 -->
+		<action path="/kids/passFound"
+				forward=".passfind"></action>
+				
+		<action path="/kids/passup"
+			forward=".passupdatesuc"/>
+			
+				
+		<action path="/kids/passFoundGo"
+				type="kidshome.actions.PassFoundAction"
+				input=".passfindsuc">
+
+				<forward name="fail" path=".idfindfail"></forward>
+				<forward name="success" path=".passfindsuc"></forward>
+				<forward name="update" path=".passupdate"></forward>
+				<forward name="success_passUpdate" path="/kids/passup.do" redirect="true"></forward>
+			</action>			
+      		
+      	<!-- 장난감 로그아웃 -->
+      	<action 
+      		path="/kids/logout"
+      		type="kidshome.actions.LogoutAction">
+      	
+      		<forward name="success" path="/kids/main.do" redirect="true"></forward>	
+      	</action>	
+      	
+      	<!-- 마이페이지 -->
+      	
+      	<action 
+      		path="/kids/mypage"
+      		forward=".mypage"/>
+      	
+      	<action 
+      		path="/kids/my"
+      		type="kidshome.actions.MyPageAction"
+      		input=".wrong">
+      	
+      		<forward name="success" path="/kids/mypage.do" redirect="true"></forward>	
+      	</action>
+      	
+      	<action 
+      		path="/kids/upForm"
+      		forward=".passcheck"/>
+      		
+      	<action 
+      		path="/kids/delInfo"
+      		forward=".delcheck"/>	
+      		
+		<action 
+      		path="/kids/myRent"
+      		forward=".myRent"/>    
+      		
+      	<action 
+      		path="/kids/myRentReq"
+      		forward=".myRentReq"/>
+      	
+      	<action 
+      		path="/kids/myToyReq"
+      		type="kidshome.actions.MyRequestListAction">
+      		
+      		<forward name="success_toy" path=".myToyReq"></forward>
+      		</action>	
+      			  		
+      	<action 
+      		path="/kids/myGiveReq"
+      		type="kidshome.actions.MyRequestListAction">
+      		
+      		<forward name="success_give" path=".myGiveReq"></forward>
+      		</action>		  		
+
+		<action 
+      		path="/kids/updatefail"
+      		forward=".updatefail"/>	
+      		
+      	<action 
+      		path="/kids/update"
+      		type="kidshome.actions.UpFormAction">	
+      		
+      		<forward name="fail" path="/kids/updatefail.do"></forward><!-- 사용자 인증절차 실패 -->
+      		<forward name="success" path=".update"></forward>
+      		<forward name="success_update" path=".updatesuc"></forward>
+      		<forward name="success_del" path=".delsuc"></forward>
+      	</action>	
+      	
+      	<!-- 회원가입 -->
+      	
+      	<action 
+      		path="/kids/join"
+      		forward=".join"/>
+      		
+      	<action 
+			path="/kids/joindone"
+			type="kidshome.actions.JoinAction">
+			
+			<forward name="toy_success" path=".joinsuc"></forward>
+		</action>
+
+		<!-- 관리자페이지 -->
+		
+		<action 
+		path="/kids/members"
+		 forward=".memeberselect"/>
+		
+		<action 
+			path="/kids/selectMember" 
+			type="kidshome.actions.MemberSelectAction">
+			
+			<forward name="success" path="/kids/members.do"/>
+		</action>
 		
 
     <!-- sample input and input submit actions

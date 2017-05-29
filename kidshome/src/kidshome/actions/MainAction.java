@@ -9,7 +9,10 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 
+import kidshome.forms.LoginActionForm;
 import kidshome.model.KidshomeDAO;
 
 public class MainAction extends Action {
@@ -25,9 +28,15 @@ public class MainAction extends Action {
 		
 		System.out.println(newToy.size());
 		System.out.println(popToy.size());
+		
+		for(int i = 0; i < newToy.size(); i++){
+			System.out.println(newToy.get(i));
+		}
+		
 
 		request.setAttribute("newToy", newToy);
 		request.setAttribute("popToy", popToy);
+		
 		
 		return mapping.findForward("success");
 	}

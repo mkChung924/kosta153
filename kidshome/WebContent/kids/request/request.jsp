@@ -17,16 +17,19 @@
 		</tr>
 		
 		<tr>
-			<td width="263px" bgcolor="pink" height="500">
-				<table border=0 cellspacing="0" cellpadding="5">
+			<td height="40">
+				<table align="center" border=0 cellspacing="0" cellpadding="1" height="100%">
 					<tr>
-						<td width="263px" align="center">
+						<td bgcolor="pink" width="1300px" align="center">
 						<tiles:insert attribute="menu"/>
 						</td>
 					</tr>
 				</table>
-			</td>
-			<td><tiles:insert attribute="body"/></td>
+			</td>	
+		</tr>
+		<tr>
+			<td height="580"><tiles:insert attribute="body"/></td>
+		
 		</tr>
 		
 		<tr>

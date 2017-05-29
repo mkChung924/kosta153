@@ -7,13 +7,15 @@
 <!-- =================================================================================================== -->
 	<!-- 최신 장난감 정보 4개 -->
 <select id="selectNewToy" resultClass="String">
-	select toy_image from (select toy_image from toyinfo order by toy_date desc) where rownum between 1 and 4
-</select>
+<!-- 	select toy_image from (select toy_image from toyinfo order by toy_date desc) where rownum between 1 and 4
+ -->
+ 	select image from (select image from toyinfo natural join toynum order by toy_date desc) where rownum between 1 and 4
+ 
+ </select>
 
 	<!-- 인기 장난감 정보 4개 -->
 <select id="selectPopToy" resultClass="String">
-	 select toy_serial from (select toy_serial, count(*) as num from toyrent group by toy_serial order by num desc) where rownum between 1 and 4
-</select>
+select image from (select toyrent.toy_serial,count(*) as num from toyrent, toyinfo where toyrent.toy_serial = toyinfo.toy_serial group by toyrent.toy_serial order by num desc) i,toynum, toyinfo where toyinfo.toy_serial = i.toy_serial and toyinfo.toy_num = toynum.toy_num and rownum between 1 and 4</select>
 
 
 	<!-- 공지 정보 4개 -->
@@ -39,12 +41,120 @@
 	select toy_name, toy_image, count(*) as num from toyinfo group by toy_image, toy_name
 </select>
 
-<!-- =================================================================================================== -->
-<!-- ================================= 쿼리======================================================= -->
-<!-- =================================================================================================== -->
+<!-- <select id="selectAllToys" resultClass="kidshome.model.Toys">
+
+</select> -->
 
 <!-- =================================================================================================== -->
-<!-- ================================= 쿼리======================================================= -->
+<!-- ================================= 로그인 관련 쿼리======================================================= -->
 <!-- =================================================================================================== -->
 
+<select id="selectId" resultClass="String" parameterClass="String">
+		select id
+		from userinfo
+		where id=#id#
+	</select>
+	
+	<select id="selectLogin" resultClass="String" parameterClass="String">
+		 select pass from userinfo 
+		 where id=#id#
+	</select>
+	
+	
+	<!-- 정보수정 -->
+	<select id="selectAll" resultClass="kidshome.model.ToyMembers" parameterClass="String">
+		select id,pass,name,to_char(birth,'yyyy-mm-dd') as birth, addr, email, tel, secure_code, secure_ans, auth, regdate from userinfo where id=#id#
+	</select>
+	
+	<update id="updateMem" parameterClass="kidshome.model.ToyMembers">
+		update userinfo 
+		set pass=#pass#,addr=#addr#,email=#email#,tel=#tel#,secure_code=#secure_code#, secure_ans=#secure_ans# 
+		where id = #id#
+	</update>
+	
+	<select id="selectAuth" resultClass="int" parameterClass="String">
+      select auth
+      from userinfo
+      where id = #id#
+   </select>
+   
+<!-- =================================================================================================== -->
+<!-- ================================= 아이디/비밀번호 찾기 쿼리======================================================= -->
+<!-- =================================================================================================== -->
+   
+   	<select id="foundid" resultClass="String" parameterClass="kidshome.model.ToyMembers">
+		select id
+		from userinfo
+		where name=#name# and tel=#tel#
+	</select>
+	
+	<select id="selectPass" resultClass="kidshome.model.ToyMembers" parameterClass="String">
+		select id,secure_code, secure_ans
+		from userinfo
+		where id=#id#
+	</select>
+
+	<!-- 보안 코드 확인 -->
+	
+	<select id="selectSecure" resultClass="String" parameterClass="String">
+	 select secure_ans
+	 from userinfo
+	 where secure_ans=#secure_ans#
+	</select>
+
+	<!-- 비밀번호 변경 -->
+
+	<update id="updatePass" parameterClass="kidshome.model.ToyMembers">
+		update userinfo set pass=#pass#
+		where id = #id#
+	</update>
+
+
+<!-- =================================================================================================== -->
+<!-- ================================= 신청관련 쿼리======================================================= -->
+<!-- =================================================================================================== -->
+<insert id="giveInsert" parameterClass="kidshome.model.Give">
+	insert into give_req values(give_seq.nextval,#id#,#toyname#,#method#,#toydesc#,#addr#,#image#,0,sysdate)
+</insert>
+
+<insert id="toyreqInsert" parameterClass="kidshome.model.ReqToy">
+	insert into toy_req values(reqtoy_seq.nextval,#id#,#toyname#,#image#,#reason#,0,sysdate)
+</insert>
+
+<delete id="rentRequestdelete" parameterClass="int">
+	delete from toyrequestinfo where requestnum=#requestnum#
+</delete>
+
+
+<!-- =================================================================================================== -->
+<!-- ================================= 신청관련 불러오기 쿼리======================================================= -->
+<!-- =================================================================================================== -->
+
+<!-- 기부현황 불러오기 -->
+<select id="selectMyGive" resultClass="kidshome.model.Give" parameterClass="String">
+ select toy_name as toyname, give_method method, toy_desc toydesc, addr, image, give_state, givedate dates from give_req where id=#id#
+</select>
+
+<!-- 장난감 요청 불러오기 -->
+<select id="selectMyToyReq" resultClass="kidshome.model.ReqToy" parameterClass="String">
+ select toy_name as toyname, toy_desc reason, toy_image image, reqdate, req_state from toy_req where id=#id#
+</select>
+
+<!-- =================================================================================================== -->
+<!-- =================================회원가입 & 탈퇴 쿼리======================================================= -->
+<!-- =================================================================================================== -->
+<insert id="insert" parameterClass="kidshome.model.ToyMembers">
+	insert into userinfo values (#id#,#pass#,#name#,#birth#,#addr#,#email#,#tel#,#secure_code#,#secure_ans#,0,sysdate)
+</insert>
+<delete id="userinfodelete" parameterClass="String">
+	delete from userinfo where id=#id#
+</delete>
+
+<!-- =================================================================================================== -->
+<!-- ================================관리자 페이지 쿼리======================================================= -->
+<!-- =================================================================================================== -->
+<!-- 회원정보 불러오기 -->
+<select id="selectAllMember" resultClass="kidshome.model.ToyMembers">
+		select id,name,to_char(birth,'yyyy-mm-dd') as birth, addr, email,tel, auth, regdate from userinfo
+</select>
 </sqlMap>

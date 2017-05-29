@@ -46,6 +46,9 @@
 	<definition name=".givetoy" extends=".request">
 		<put name="body" value="/kids/request/givetoy.jsp"></put>
 	</definition>
+	<definition name=".reqsuc" extends=".request">
+		<put name="body" value="/kids/request/reqsuccess.jsp"></put>
+	</definition>
 	
 	<!-- 소개 페이지(vision, about) -->
 	<definition name=".intro" path="/kids/intro/intro.jsp">
@@ -72,12 +75,13 @@
 		<put name="body" value="/kids/board/free.jsp"></put>
 	</definition>	
 	<definition name=".announceboard" extends=".board">
-		<put name="body" value="/kids/board/announce.jsp"></put>
+		<put name="body" value="/kids/board/ann.jsp"></put>
 	</definition>
 	<definition name=".afterboard" extends=".board">
 		<put name="body" value="/kids/board/after.jsp"></put>
 	</definition>		
 	
+	<!-- 장난감 -->
 	<definition name=".toy" path="/kids/toy/toy.jsp">
 		<put name="header" value="/kids/header.jsp"></put>
 		<put name="menu" value="/kids/toy/toymenu.jsp"></put>
@@ -90,5 +94,96 @@
 	<definition name=".toykinds" extends=".toy">
 		<put name="body" value="/kids/board/toykinds.jsp"></put>
 	</definition>
+	
+	<!-- 로그인 -->
+	<definition name=".login" path="/kids/member/nlogin/signIn.jsp">
+		<put name="header" value="/kids/header.jsp"></put>
+		<put name="body" value="/kids/member/nlogin/login.jsp"></put>
+		<put name="footer" value="/kids/footer.jsp"></put>
+	</definition>
+	<definition name=".main2" extends=".login">
+		<put name="body" value="/kids/member/nlogin/login.jsp"></put>
+	</definition>	
+	
+	<!-- 회원가입 extends 로그인 화면 타일즈 -->
+	<definition name=".signUp" extends=".login">
+		<put name="body" value="/kids/member/nlogin/signUp.jsp"></put>
+	</definition>
+	<definition name=".join" extends=".login">
+		<put name="body" value="/kids/member/joinForm.jsp"></put>
+	</definition>
+	<definition name=".joinsuc" extends=".login">
+		<put name="body" value="/kids/member/joinsuc.jsp"></put>
+	</definition>
+	<definition name=".idfind" extends=".login">
+		<put name="body" value="/kids/member/idFound.jsp"></put>
+	</definition>
+	<definition name=".idfindfail" extends=".login">
+		<put name="body" value="/kids/member/idFoundFail.jsp"></put>
+	</definition>
+	<definition name=".idfindsuc" extends=".login">
+		<put name="body" value="/kids/member/idFoundSuccess.jsp"></put>
+	</definition>
+	<definition name=".passfind" extends=".login">
+		<put name="body" value="/kids/member/passFound.jsp"></put>
+	</definition>
+		<definition name=".passupdate" extends=".login">
+		<put name="body" value="/kids/member/passFoundUpdate.jsp"></put>
+	</definition>
+	<definition name=".passfindsuc" extends=".login">
+		<put name="body" value="/kids/member/passFoundSuccess.jsp"></put>
+	</definition>
+	<definition name=".passupdatesuc" extends=".mypage">
+		<put name="body" value="/kids/member/passup.jsp"></put>
+	</definition>
+	
+	
+	<!-- 마이페이지 -->
+	<definition name=".mypage" path="/kids/member/mypage/mypage.jsp">
+		<put name="header" value="/kids/header.jsp"></put>
+		<put name="menu" value="/kids/member/mypage/myMenu.jsp"></put>
+		<put name="body" value="/kids/member/mypage/mypageIntro.jsp"></put>
+		<put name="footer" value="/kids/footer.jsp"></put>
+	</definition>
+	<definition name=".update" extends=".mypage">
+		<put name="body" value="/kids/member/mypage/upForm.jsp"></put>
+	</definition>
+	<definition name=".myRent" extends=".mypage">
+		<put name="body" value="/kids/member/mypage/myRent.jsp"></put>
+	</definition>
+	<definition name=".myRentReq" extends=".mypage">
+		<put name="body" value="/kids/member/mypage/myRentReq.jsp"></put>
+	</definition>
+	<definition name=".myToyReq" extends=".mypage">
+		<put name="body" value="/kids/member/mypage/myToyReq.jsp"></put>
+	</definition>
+	<definition name=".myGiveReq" extends=".mypage">
+		<put name="body" value="/kids/member/mypage/myGive.jsp"></put>
+	</definition>
+	<definition name=".wrong" path="/kids/member/mypage/wrongaccess.jsp">
+		<put name="header" value="/kids/header.jsp"></put>
+		<put name="body" value="/kids/member/mypage/wrongbody.jsp"></put>
+		<put name="footer" value="/kids/footer.jsp"></put>
+	</definition>
+	<definition name=".passcheck" extends=".mypage">
+		<put name="body" value="/kids/member/mypage/passCheck.jsp"></put>
+	</definition>
+	<definition name=".updatefail" extends=".mypage">
+		<put name="body" value="/kids/member/mypage/updatefail.jsp"></put>
+	</definition>
+	<definition name=".updatesuc" extends=".mypage">
+		<put name="body" value="/kids/member/mypage/updatesuc.jsp"></put>
+	</definition>
+	<definition name=".delcheck" extends=".mypage">
+		<put name="body" value="/kids/member/mypage/delCheck.jsp"></put>
+	</definition>
+	<definition name=".delsuc" extends=".mypage">
+		<put name="body" value="/kids/member/mypage/delsuc.jsp"></put>
+	</definition>
+	
+	<!-- 관리자페이지 -->
+	<definition name=".memeberselect" extends=".mypage">
+		<put name="body" value="/kids/member/mypage/memberselect.jsp"></put>
+	</definition>	
 
 </tiles-definitions>
