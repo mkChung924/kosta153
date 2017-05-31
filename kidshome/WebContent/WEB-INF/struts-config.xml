@@ -281,6 +281,21 @@
 			type="kidshome.actions.ToyAction">
 		
 			<forward name="success" path=".toy"></forward>	
+		</action>
+		
+		<action
+			path="/kids/toydetail"
+			type="kidshome.actions.ToyDetailAction">
+			
+			<forward name="success" path=".toydetail"></forward>
+		</action>
+		
+		<action
+			path="/kids/search"
+			type="kidshome.actions.ToySearchAction">
+		
+		<forward name="searchfail" path=".search"></forward>	
+		<forward name="searchsuccess" path=".search"></forward>	
 		</action>				
 		
 		<!-- 장난감 로그인 단순 포워딩 -->
@@ -418,6 +433,27 @@
 			
 			<forward name="success" path="/kids/members.do"/>
 		</action>
+		
+		<action 
+      		path="/kids/ToyReq"
+      		type="kidshome.actions.AdminPageAction">
+      		
+      		<forward name="success_toyreq" path=".ToyReq"></forward>
+      		</action>	
+      			  		
+      	<action 
+      		path="/kids/GiveReq"
+      		type="kidshome.actions.AdminPageAction">
+      		
+      		<forward name="success_give" path=".GiveReq"></forward>
+      		</action>	
+      		
+      	<action 
+			path="/kids/Req"
+			type="kidshome.actions.ReqUpdateAction">
+		
+			<forward name="success" path="/kids/member/adminpage/update_result.jsp"></forward>
+		</action>	
 		
 
     <!-- sample input and input submit actions

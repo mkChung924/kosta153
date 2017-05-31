@@ -2,10 +2,11 @@ package kidshome.model;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
-
 import iba.conf.MySqlMapClient;
 
 public class KidshomeDAO {
@@ -55,6 +56,54 @@ public class KidshomeDAO {
 		}
 		return list;
 	}
+	
+	public int count(){
+		int count = 0;
+		
+		try {
+			count = (Integer) sqlMap.queryForObject("kids.toyCount");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return count;
+	}
+	
+	public ArrayList<Toys> selectPage(int page, int recordCount){
+		int max = page*recordCount;
+		int min = max-(recordCount-1);
+		ArrayList<Toys> list = null;
+		
+		try {
+			Map<String, Integer> map = new HashMap<>();
+			map.put("min", min);
+			map.put("max", max);
+			
+			list = (ArrayList<Toys>) sqlMap.queryForList("kids.selectPage", map);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+		
+	}
+	
+	public Toys selectDetailToy(String serial){
+		Toys toy = null;
+		
+		try {
+			
+			toy = (Toys) sqlMap.queryForObject("kids.selectToyDetail", serial);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return toy;
+	}
+	
 	
 	public boolean update(ToyMembers mem){
 		
@@ -168,6 +217,70 @@ public class KidshomeDAO {
 		return list;
 	}
 	
+	public List<Give> giveList(){
+		
+		List<Give> list = null;
+		
+		try {
+			list = sqlMap.queryForList("kids.selectGive");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public List<ReqToy> ToyReqList(){
+		
+		List<ReqToy> list = null;
+		
+		try {
+			list = sqlMap.queryForList("kids.selectToyReq");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public boolean updateToyReq(int num){
+		
+		try {
+			int t = sqlMap.update("kids.updateToyReq",num);
+			if(t == 1) return true;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean updateToyReqNo(int num){
+		
+		try {
+			int t = sqlMap.update("kids.updateToyReqNo",num);
+			if(t == 1) return true;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean updateGiveReq(int num){
+		
+		try {
+			int t = sqlMap.update("kids.updateGiveReq",num);
+			if(t == 1) return true;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	//장난감 요청
 	public boolean reqToy(ReqToy reqToy){
 		try {
@@ -277,5 +390,107 @@ public class KidshomeDAO {
 		}		
 	  return list;
 	}//selectAll
+	
+	public int searchToyCount(String tn,String age,String kind){
+		int count=0;
+		Map<String,String> sm = new HashMap<>();
+		sm.put("toyname",tn);
+		sm.put("toyage",age);
+		sm.put("toykind",kind);
+			try {
+				if(tn==null && age==null && kind==null)
+				{
+					count = (int)sqlMap.queryForObject("kids.selectcount",sm);
+				}
+				else if(tn!=null && age==null && kind==null)
+				{
+					
+					count = (int)sqlMap.queryForObject("kids.selectcountn",sm);
+				}
+				else if(tn==null && age!=null && kind==null)
+				{
+					count = (int)sqlMap.queryForObject("kids.selectcounta",sm);
+				}
+				else if(tn==null && age==null && kind!=null)
+				{
+					count = (int)sqlMap.queryForObject("kids.selectcountk",sm);
+				}
+				else if(tn!=null && age==null && kind!=null)
+				{
+					count = (int)sqlMap.queryForObject("kids.selectcountnk",sm);
+				}
+				else if(tn!=null && age!=null && kind==null)
+				{
+					count = (int)sqlMap.queryForObject("kids.selectcountna",sm);
+				}
+				else if(tn==null && age!=null && kind!=null)
+				{
+					count = (int)sqlMap.queryForObject("kids.selectcountak",sm);
+				}
+				else
+				{
+					count = (int)sqlMap.queryForObject("kids.selectcountnak",sm);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return count;
+	}
+	public List searchToy(String tn,String age,String kind,int page,int maxct){
+		Map<String,String> sm = new HashMap<>();
+		String min_ct;
+		String max_ct;
+		min_ct=""+((maxct*page)-(maxct-1));
+		max_ct=""+(maxct*page);
+		if(tn!=null)
+			tn="%"+tn+"%";
+		sm.put("toyname",tn);
+		sm.put("toyage",age);
+		sm.put("toykind",kind);
+		sm.put("min_ct",min_ct);
+		sm.put("max_ct",max_ct);
+		System.out.println(sm.get("toy_name"));
+		List<Toys> toylist = null;
+		try {
+			if(tn==null && age==null && kind==null)
+			{
+				toylist=(List<Toys>)sqlMap.queryForList("kids.searchtoy",sm);
+			}
+			else if(tn!=null && age==null && kind==null)
+			{
+				
+				toylist=(List<Toys>)sqlMap.queryForList("kids.searchtoyn",sm);
+			}
+			else if(tn==null && age!=null && kind==null)
+			{
+				toylist=(List<Toys>)sqlMap.queryForList("kids.searchtoya",sm);
+			}
+			else if(tn==null && age==null && kind!=null)
+			{
+				toylist=(List<Toys>)sqlMap.queryForList("kids.searchtoyk",sm);
+			}
+			else if(tn!=null && age==null && kind!=null)
+			{
+				toylist=(List<Toys>)sqlMap.queryForList("kids.searchtoynk",sm);
+			}
+			else if(tn!=null && age!=null && kind==null)
+			{
+				toylist=(List<Toys>)sqlMap.queryForList("kids.searchtoyna",sm);
+			}
+			else if(tn==null && age!=null && kind!=null)
+			{
+				toylist=(List<Toys>)sqlMap.queryForList("kids.searchtoyak",sm);
+			}
+			else
+			{
+				toylist=(List<Toys>)sqlMap.queryForList("kids.searchtoynak",sm);
+			}
+			return toylist;
+		} catch (SQLException e) {
+			
+		}
+		return toylist;
+	}
 	
 }

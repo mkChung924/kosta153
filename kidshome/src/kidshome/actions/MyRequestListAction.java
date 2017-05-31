@@ -63,7 +63,7 @@ public class MyRequestListAction extends Action{
 						toyReqList.get(i).setReq_state("신청 진행중");
 					} else if(toyReqList.get(i).getReq_state().equals("1")){
 						toyReqList.get(i).setReq_state("추가 완료");
-					} else {
+					} else if(toyReqList.get(i).getReq_state().equals("2")){
 						toyReqList.get(i).setReq_state("신청 반려");
 					}
 				}

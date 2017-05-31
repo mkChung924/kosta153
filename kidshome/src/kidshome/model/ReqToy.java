@@ -2,6 +2,7 @@ package kidshome.model;
 
 public class ReqToy {
 
+	private String num;
 	private String id;
 	private String toyname;
 	private String reason;
@@ -19,6 +20,16 @@ public class ReqToy {
 		this.toyname = toyname;
 		this.reason = reason;
 		this.image = image;
+	}
+	
+	
+
+	public String getNum() {
+		return num;
+	}
+
+	public void setNum(String num) {
+		this.num = num;
 	}
 
 	public String getId() {

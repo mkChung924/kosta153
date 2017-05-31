@@ -2,6 +2,7 @@ package kidshome.model;
 
 public class Give {
 	
+	private String num;
 	private String id;
 	private String toyname;
 	private String toydesc;
@@ -24,6 +25,17 @@ public class Give {
 		this.addr = addr;
 	}
 	
+	
+
+
+	public String getNum() {
+		return num;
+	}
+
+	public void setNum(String num) {
+		this.num = num;
+	}
+
 	public String getGive_state() {
 		return give_state;
 	}

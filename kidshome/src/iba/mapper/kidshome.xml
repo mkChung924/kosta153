@@ -9,14 +9,16 @@
 <select id="selectNewToy" resultClass="String">
 <!-- 	select toy_image from (select toy_image from toyinfo order by toy_date desc) where rownum between 1 and 4
  -->
- 	select image from (select image from toyinfo natural join toynum order by toy_date desc) where rownum between 1 and 4
+ 	select toyimage from (select toyimage from toyinfo order by add_date desc) where rownum between 1 and 4
  
  </select>
 
 	<!-- 인기 장난감 정보 4개 -->
 <select id="selectPopToy" resultClass="String">
-select image from (select toyrent.toy_serial,count(*) as num from toyrent, toyinfo where toyrent.toy_serial = toyinfo.toy_serial group by toyrent.toy_serial order by num desc) i,toynum, toyinfo where toyinfo.toy_serial = i.toy_serial and toyinfo.toy_num = toynum.toy_num and rownum between 1 and 4</select>
-
+	select toyimage 
+	from (select toyrent.toy_serial,count(*) as num from toyrent, toyinfo where toyrent.toy_serial = toyinfo.toy_serial group by toyrent.toy_serial order by num desc) i, toyinfo 
+	where toyinfo.toy_serial = i.toy_serial and rownum between 1 and 4
+</select>
 
 	<!-- 공지 정보 4개 -->
 <select id="selectAnnounce1" resultClass="String">
@@ -38,7 +40,27 @@ select image from (select toyrent.toy_serial,count(*) as num from toyrent, toyin
 <!-- =================================================================================================== -->
 
 <select id="selectToys" resultClass="kidshome.model.Toys">
-	select toy_name, toy_image, count(*) as num from toyinfo group by toy_image, toy_name
+	select t.toy_serial, t.toyname, t.toyimage, t.toytotal, t.toytotal-i.rentstate-i.reqstate-i.damage as vacant, add_date 
+	from toyinfo t, inventory i 
+	where t.toy_serial = i.toy_serial
+
+</select>
+
+<select id="selectPage" resultClass="kidshome.model.Toys" parameterClass="java.util.Map"><![CDATA[
+select toy_serial, toyname, toyimage, toytotal, vacant, add_date 
+from (select toy_serial, toyname, toyimage, toytotal, vacant, add_date, rownum rn from (select t.toy_serial, t.toyname, t.toyimage, t.toytotal, t.toytotal-i.rentstate-i.reqstate-i.damage as vacant, add_date 
+	from toyinfo t, inventory i 
+	where t.toy_serial = i.toy_serial)) 
+where rn between #min# and #max#
+]]>
+</select>
+
+<select id="selectToyDetail" resultClass="kidshome.model.Toys" parameterClass="String">
+	select toy_serial, toyname, toykind, toyage, toyimage, to_char(add_date,'yyyy-mm-dd') add_date from toyinfo where toy_serial=#toy_serial#
+</select>
+
+<select id="toyCount" resultClass="int">
+	select count(*) from toyinfo
 </select>
 
 <!-- <select id="selectAllToys" resultClass="kidshome.model.Toys">
@@ -140,6 +162,28 @@ select image from (select toyrent.toy_serial,count(*) as num from toyrent, toyin
  select toy_name as toyname, toy_desc reason, toy_image image, reqdate, req_state from toy_req where id=#id#
 </select>
 
+<!-- 모든 기부 현황 불러오기 -->
+<select id="selectGive" resultClass="kidshome.model.Give">
+ select num, toy_name as toyname, give_method method, toy_desc toydesc, addr, image, give_state, givedate dates from give_req
+</select>
+
+<!-- 모든 장난감 요청 불러오기-->
+<select id="selectToyReq" resultClass="kidshome.model.ReqToy">
+ select num, toy_name as toyname, toy_desc reason, toy_image image, reqdate, req_state from toy_req
+</select>
+
+<!-- 요청 사항 업데이트하기 -->
+<update id="updateToyReq" parameterClass="int">
+	update toy_req set req_state = 1 where num = #num#
+</update>
+<update id="updateToyReqNo" parameterClass="int">
+	update toy_req set req_state = 2 where num = #num#
+</update>
+
+<update id="updateGiveReq" parameterClass="int">
+	update give_req set give_state = 1 where num = #num#
+</update>
+
 <!-- =================================================================================================== -->
 <!-- =================================회원가입 & 탈퇴 쿼리======================================================= -->
 <!-- =================================================================================================== -->
@@ -157,4 +201,83 @@ select image from (select toyrent.toy_serial,count(*) as num from toyrent, toyin
 <select id="selectAllMember" resultClass="kidshome.model.ToyMembers">
 		select id,name,to_char(birth,'yyyy-mm-dd') as birth, addr, email,tel, auth, regdate from userinfo
 </select>
+
+
+<!-- =================================================================================================== -->
+<!-- ================================장난감 페이지 쿼리======================================================= -->
+<!-- =================================================================================================== -->
+
+  <select id="selectcount" resultClass="int">
+  select count(*) from toyinfo
+  </select>
+  <select id="selectcountn" resultClass="int" parameterClass="java.util.Map">
+  select count(*) from toyinfo where toyname=#toyname#
+  </select>
+  <select id="selectcounta" resultClass="int" parameterClass="java.util.Map">
+  select count(*) from toyinfo where toyage=#toyage#
+  </select>
+  <select id="selectcountk" resultClass="int" parameterClass="java.util.Map">
+  select count(*) from toyinfo where toykind=#toykind#
+  </select>
+  <select id="selectcountna" resultClass="int" parameterClass="java.util.Map">
+  select count(*) from toyinfo where toyname=#toyname# and toyage=#toyage#
+  </select>
+  <select id="selectcountnk" resultClass="int" parameterClass="java.util.Map">
+  select count(*) from toyinfo where toyname=#toyname# and toykind=#toykind#
+  </select>
+  <select id="selectcountak" resultClass="int" parameterClass="java.util.Map">
+  select count(*) from toyinfo where toyage=#toyage# and toykind=#toykind#
+  </select>
+  <select id="selectcountnak" resultClass="int" parameterClass="java.util.Map">
+  select count(*) from toyinfo where toyname=#toyname# and toyage=#toyage# and toykind=#toykind#
+  </select>
+  <select id="searchtoy" resultClass="kidshome.model.Toys" parameterClass="java.util.Map">
+  <![CDATA[select toy_serial,toyname,toykind,toyage,add_date,toyimage,vacant
+  from (select rownum rn,t.toy_serial toy_serial, t.toyname toyname,t.toykind toykind,t.toyage toyage, t.toyimage toyimage, i.toytotal toytotal, i.toytotal-i.rentstate-i.reqstate-i.damage as vacant, add_date 
+from toyinfo t, inventory i where t.toy_serial = i.toy_serial) 
+  where rn>=#min_ct# and rn<=#max_ct#]]>
+  </select>
+  <select id="searchtoyn" resultClass="kidshome.model.Toys" parameterClass="java.util.Map">
+    <![CDATA[select toy_serial,toyname,toykind,toyage,add_date,toyimage,vacant
+  from (select rownum rn,t.toy_serial toy_serial, t.toyname toyname,t.toykind toykind,t.toyage toyage, t.toyimage toyimage, i.toytotal toytotal, i.toytotal-i.rentstate-i.reqstate-i.damage as vacant, add_date 
+from toyinfo t, inventory i where t.toy_serial = i.toy_serial and where toyname like #toyname#) 
+  where rn>=#min_ct# and rn<=#max_ct#]]>
+  </select>
+  <select id="searchtoya" resultClass="kidshome.model.Toys" parameterClass="java.util.Map">
+  <![CDATA[select toy_serial,toyname,toykind,toyage,add_date,toyimage,vacant
+  from (select rownum rn,t.toy_serial toy_serial, t.toyname toyname,t.toykind toykind,t.toyage toyage, t.toyimage toyimage, i.toytotal toytotal, i.toytotal-i.rentstate-i.reqstate-i.damage as vacant, add_date 
+from toyinfo t, inventory i where t.toy_serial = i.toy_serial and toyage=#toyage#) 
+  where rn>=#min_ct# and rn<=#max_ct#]]>
+  </select>
+  <select id="searchtoyk" resultClass="kidshome.model.Toys" parameterClass="java.util.Map">
+  <![CDATA[select toy_serial,toyname,toykind,toyage,add_date,toyimage,vacant
+  from (select rownum rn,t.toy_serial toy_serial, t.toyname toyname,t.toykind toykind,t.toyage toyage, t.toyimage toyimage, i.toytotal toytotal, i.toytotal-i.rentstate-i.reqstate-i.damage as vacant, add_date 
+from toyinfo t, inventory i where t.toy_serial = i.toy_serial and toykind=#toykind#) 
+  where rn>=#min_ct# and rn<=#max_ct#]]>
+  </select>
+  <select id="searchtoyna" resultClass="kidshome.model.Toys" parameterClass="java.util.Map">
+  <![CDATA[select toy_serial,toyname,toykind,toyage,add_date,toyimage,vacant
+  from (select rownum rn,t.toy_serial toy_serial, t.toyname toyname,t.toykind toykind,t.toyage toyage, t.toyimage toyimage, i.toytotal toytotal, i.toytotal-i.rentstate-i.reqstate-i.damage as vacant, add_date 
+from toyinfo t, inventory i where t.toy_serial = i.toy_serial and toyname like #toyname# and toyage=#toyage#) 
+  where rn>=#min_ct# and rn<=#max_ct#]]>
+  </select>
+  <select id="searchtoyak" resultClass="kidshome.model.Toys" parameterClass="java.util.Map">
+  <![CDATA[select toy_serial,toyname,toykind,toyage,add_date,toyimage,vacant
+  from (select rownum rn,t.toy_serial toy_serial, t.toyname toyname,t.toykind toykind,t.toyage toyage, t.toyimage toyimage, i.toytotal toytotal, i.toytotal-i.rentstate-i.reqstate-i.damage as vacant, add_date 
+from toyinfo t, inventory i where t.toy_serial = i.toy_serial and toyage=#toyage# and toykind=#toykind#) 
+  where rn>=#min_ct# and rn<=#max_ct#]]>
+  </select>
+  <select id="searchtoynk" resultClass="kidshome.model.Toys" parameterClass="java.util.Map">
+  <![CDATA[select toy_serial,toyname,toykind,toyage,add_date,toyimage,vacant
+  from (select rownum rn,t.toy_serial toy_serial, t.toyname toyname,t.toykind toykind,t.toyage toyage, t.toyimage toyimage, i.toytotal toytotal, i.toytotal-i.rentstate-i.reqstate-i.damage as vacant, add_date 
+from toyinfo t, inventory i where t.toy_serial = i.toy_serial and toyname like #toyname# and toykind=#toykind#) 
+  where rn>=#min_ct# and rn<=#max_ct#]]>
+  </select>
+  <select id="searchtoynak" resultClass="kidshome.model.Toys" parameterClass="java.util.Map">
+  <![CDATA[select toy_serial,toyname,toykind,toyage,add_date,toyimage,vacant
+  from (select rownum rn,t.toy_serial toy_serial, t.toyname toyname,t.toykind toykind,t.toyage toyage, t.toyimage toyimage, i.toytotal toytotal, i.toytotal-i.rentstate-i.reqstate-i.damage as vacant, add_date 
+from toyinfo t, inventory i where t.toy_serial = i.toy_serial and toyname like #toyname# and toyage=#toyage# and toykind=#toykind#) 
+  where rn>=#min_ct# and rn<=#max_ct#]]>
+  </select>
+
 </sqlMap>

@@ -1,36 +1,81 @@
 package kidshome.model;
 
 public class Toys {
-	
-	private String toy_image;
-	private String toy_name;
-	private String num;
+		
+	private String toy_serial;
+	private String toyname;
+	private String toyimage;
+	private String vacant;
+	private String add_date;
+	private String toykind;
+	private String toyage;
 
 	public Toys() {
 		// TODO Auto-generated constructor stub
 	}
+
+
+	public String getToy_serial() {
+		return toy_serial;
+	}
+
+	public void setToy_serial(String toy_serial) {
+		this.toy_serial = toy_serial;
+	}
+
+	public String getToyname() {
+		return toyname;
+	}
+
+	public void setToyname(String toyname) {
+		this.toyname = toyname;
+	}
+
+	public String getToyimage() {
+		return toyimage;
+	}
+
+	public void setToyimage(String toyimage) {
+		this.toyimage = toyimage;
+	}
+
+	public String getVacant() {
+		return vacant;
+	}
+
+	public void setVacant(String vacant) {
+		this.vacant = vacant;
+	}
+
+	public String getAdd_date() {
+		return add_date;
+	}
+
+	public void setAdd_date(String add_date) {
+		this.add_date = add_date;
+	}
+
+
+	public String getToykind() {
+		return toykind;
+	}
+
+
+	public void setToykind(String toykind) {
+		this.toykind = toykind;
+	}
+
+
+	public String getToyage() {
+		return toyage;
+	}
+
+
+	public void setToyage(String toyage) {
+		this.toyage = toyage;
+	}
 	
-	public String getToy_image() {
-		return toy_image;
-	}
-	public void setToy_image(String toy_image) {
-		this.toy_image = toy_image;
-	}
-	public String getToy_name() {
-		return toy_name;
-	}
-	public void setToy_name(String toy_name) {
-		this.toy_name = toy_name;
-	}
-
-	public String getNum() {
-		return num;
-	}
-
-	public void setNum(String num) {
-		this.num = num;
-	}
-
+	
 	
 
 }

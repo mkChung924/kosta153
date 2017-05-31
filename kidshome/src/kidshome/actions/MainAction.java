@@ -33,11 +33,9 @@ public class MainAction extends Action {
 			System.out.println(newToy.get(i));
 		}
 		
-
 		request.setAttribute("newToy", newToy);
 		request.setAttribute("popToy", popToy);
-		
-		
+			
 		return mapping.findForward("success");
 	}
 }

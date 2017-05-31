@@ -89,10 +89,13 @@
 		<put name="footer" value="/kids/footer.jsp"></put>
 	</definition>
 	<definition name=".search" extends=".toy">
-		<put name="body" value="/kids/board/search.jsp"></put>
+		<put name="body" value="/kids/toy/search.jsp"></put>
 	</definition>
 	<definition name=".toykinds" extends=".toy">
-		<put name="body" value="/kids/board/toykinds.jsp"></put>
+		<put name="body" value="/kids/toy/toykinds.jsp"></put>
+	</definition>
+	<definition name=".toydetail" extends=".toy">
+		<put name="body" value="/kids/toy/detail.jsp"></put>
 	</definition>
 	
 	<!-- 로그인 -->
@@ -185,5 +188,11 @@
 	<definition name=".memeberselect" extends=".mypage">
 		<put name="body" value="/kids/member/mypage/memberselect.jsp"></put>
 	</definition>	
+		<definition name=".ToyReq" extends=".mypage">
+		<put name="body" value="/kids/member/adminpage/adminToyReq.jsp"></put>
+	</definition>
+	<definition name=".GiveReq" extends=".mypage">
+		<put name="body" value="/kids/member/adminpage/adminGive.jsp"></put>
+	</definition>
 
 </tiles-definitions>

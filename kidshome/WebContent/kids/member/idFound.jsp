@@ -8,14 +8,14 @@
 <script type="text/javascript">
 function check(){
     form = document.frm;
-       if(form.idName.value =="" || form.idTel.value == ""){
+       if(form.name.value =="" || form.tel.value == ""){
           alert('입력칸이 비어있습니다. 확인해주세요');         
-       }else if(!form.idName.value.match("^[가-힣]*$")){
+       }else if(!form.name.value.match("^[가-힣]*$")){
           alert('이름 형식이 올바르지 않습니다.');
-           form.idName.focus();
-       }else if(!form.idTel.value.match("[0-9]{3}-[0-9]{4}-[0-9]{4}")){
+           form.name.focus();
+       }else if(!form.tel.value.match("[0-9]{3}-[0-9]{4}-[0-9]{4}")){
           alert('전화번호 형식이 올바르지 않습니다');
-           form.idTel.focus();
+           form.tel.focus();
        }else{
           form.submit();
        }

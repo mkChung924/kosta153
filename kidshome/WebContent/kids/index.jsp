@@ -6,11 +6,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>키즈 홈</title>
+<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('.body').slideDown(1000);
+});
+</script>
 </head>
 <%-- index.jsp --%>
-<body>
+<body bgcolor="#FFFFF0">
+<div id='body' style="display: ">
 <center>
-
 	<table border="0" width="1300px" cellspacing="1" cellpadding="1">
 		<tr>
 			<td align="center"><tiles:insert attribute="header"/></td>
@@ -23,6 +29,12 @@
 		</tr>
 	</table>
 </center>
+</div>
+<script>
+$('#body').fadeOut(0);
+$('#body').fadeIn(1200);
 
+
+</script>
 </body>
 </html>

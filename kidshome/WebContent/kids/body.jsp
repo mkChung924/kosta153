@@ -5,6 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+#toys td{
+	border-radius: 25px;
+}
+</style>
 <title>이미지 슬라이드 배너형</title>
     <!--스타일시트 추가-->
     <link rel="stylesheet" href="../css/body.css">
@@ -34,55 +39,55 @@
 <div id="toys" style="margin-top: 50px">
 	<table border=0 cellspacing="0" cellpadding="0" width="1295px">
 	<tr>
-		<td align="center"><font color=green size="5"><b>최신 장난감</b></font></td>
-		<td align="center"><font color=green size="5"><b>인기 장난감</b></font></td>
+		<td align="center"><font color=green size="5px"><b>최신 장난감</b></font></td>
+		<td align="center"><font color=green size="5px"><b>인기 장난감</b></font></td>
 	</tr>
 	</table>
 	<br>
-	<table border=0 cellspacing="0" cellpadding="2" width="1300">
-	<tr>
-	<td align="right"><a href='#'><font color="black">최신장난감 더보기</font></a></td>
-	<td align="right"><a href='#'><font color="black">인기장난감 더보기</font></a></td>
-	</tr>
+	<table border=0 cellspacing="0" cellpadding="10" width="1300">
+<!-- 		<tr>
+			<td align="right"><a href='toy.do'><font color="black">더보기</font></a></td>
+			<td align="right"><a href='toy.do'><font color="black">더보기</font></a></td>
+		</tr> -->
 	<tr height="500">
 		
 		<td>
-			<table border=1 cellspacing="0" cellpadding="0" width="650" height="500">
+			<table border=1 cellspacing="0" cellpadding="0" width="600" height="500" style="border-radius: 25px;">
 			<!-- JSTL forEeach를 사용해서 DB에서 얻은 값을 출력해야함. -->
 				<tr>
 					<td align="center" width="300" height="250">
-						<img alt="최신장난감1" src="../image/${newToy[0] }" width="300" height="250">
+						<img alt="최신장난감1" src="../image/toy/${newToy[0] }" width="300" height="250" style="border-radius: 25px;">
 					</td>
 					<td align="center" width="300" height="250">
-						<img alt="최신장난감2" src="../image/${newToy[1] }" width="300" height="250">
+						<img alt="최신장난감2" src="../image/toy/${newToy[1] }" width="300" height="250" style="border-radius: 25px;">
 					</td>
 				</tr>
 				<tr>
 					<td align="center" width="300" height="250">
-						<img alt="최신장난감3" src="../image/${newToy[2] }" width="300" height="250">
+						<img alt="최신장난감3" src="../image/toy/${newToy[2] }" width="300" height="250" style="border-radius: 25px;">
 					</td>
 					<td align="center" width="300" height="250">
-						<img alt="최신장난감4" src="../image/${newToy[3] }" width="300" height="250">
+						<img alt="최신장난감4" src="../image/toy/${newToy[3] }" width="300" height="250" style="border-radius: 25px;">
 					</td>
 				</tr>
 			</table>
 		</td>
 		<td>
-			<table border="1" cellspacing="0" cellpadding="0" width="650" height="500">
+			<table border="1" cellspacing="0" cellpadding="0" width="600" height="500" style="border-radius: 25px;">
 				<tr>
-					<td align="center" width="300" height="250">
-						<img alt="인기장난감1" src="../image/${popToy[0] }" width="300" height="250">
+					<td align="center" width="280" height="250">
+						<img alt="인기장난감1" src="../image/toy/${popToy[0] }" width="280" height="250" style="border-radius: 25px;">
 					</td>
-					<td align="center" width="300" height="250">
-						<img alt="인기장난감2" src="../image/${popToy[1] }" width="300" height="250">
+					<td align="center" width="280" height="250">
+						<img alt="인기장난감2" src="../image/toy/${popToy[1] }" width="280" height="250" style="border-radius: 25px;">
 					</td>
 				</tr>
 				<tr>
-					<td align="center" width="300" height="250">
-						<img alt="인기장난감3" src="../image/${popToy[2] }" width="300" height="250">
+					<td align="center" width="280" height="250">
+						<img alt="인기장난감3" src="../image/toy/${popToy[2] }" width="280" height="250" style="border-radius: 25px;">
 					</td>
-					<td align="center" width="300" height="250">
-						<img alt="인기장난감4" src="../image/${popToy[3] }" width="300" height="250">
+					<td align="center" width="280" height="250">
+						<img alt="인기장난감4" src="../image/toy/${popToy[3] }" width="280" height="250" style="border-radius: 25px;">
 					</td>
 				</tr>
 			</table>
