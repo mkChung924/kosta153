@@ -1,5 +1,7 @@
 package kidshome.actions;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,16 +20,22 @@ public class MyRentReqDeleteAction extends Action{
 		
 		KidshomeDAO dao = new KidshomeDAO();
 		ActionForward forward = null;
+		HashMap<String,String> map = new HashMap<>();
 		
-		String no[] = request.getParameterValues("no");
+		String action = request.getParameter("action");
+		String id = request.getParameter("id");
+		String serial = request.getParameter("serial");
+		map.put("id", id);
+		map.put("serial", serial);
 		
-		for(int i=0;i<no.length;i++){
-			if(!dao.delRentReq(Integer.parseInt(no[i])))
-				{
-					break;
+		if(action.equals("del")){
+			
+			if(dao.delMyRentReq(map)){
+				if(dao.upInventory(serial)){
+					forward = mapping.findForward("success");
 				}
+			}
 		}
-		forward = mapping.findForward("success");
 		
 		return forward;
 		

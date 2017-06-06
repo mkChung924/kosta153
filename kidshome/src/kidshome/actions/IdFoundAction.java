@@ -1,5 +1,7 @@
 package kidshome.actions;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -32,7 +34,8 @@ public class IdFoundAction extends Action{
 		
 		
 		KidshomeDAO dao = new KidshomeDAO();
-		String idFound = dao.foundId(user);
+		List<String> idFound = dao.foundId(user);
+		//System.out.println(idFound.get(0));
 		
 		 if(idFound == null){
 			 System.out.println(idFound);

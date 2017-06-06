@@ -20,13 +20,13 @@
 <body>
 	<center>
 		<h3>비밀번호 찾기</h3><br><br>
+		<b>아이디를 입력하세요.</b><br><br><br>
 		
-		<form action="passFoundGo.do?action=found" name="frm" method="post">			
-			아이디: <input type="text" name="id"><br><br>
-
-			<input type="button" value="찾기" name="idButton" onclick="check()"> &nbsp;&nbsp;
-			<a href="form.do"><input type="button" value="로그인" name="login"></a>
-
+		<form action="passFoundGo.do?action=found" name="frm" method="post">	
+		<table cellpadding="5"><tr>
+		<td><input type="text" name="id"></td>		
+		<td><img src="../image/button/search_icon.png" width="70" name="idButton" onclick="check()"></td>		
+		</tr></table>
 		</form>
 	</center>
 

@@ -27,12 +27,12 @@
 <div id="image_list_2">
         <div class="clsBannerScreen">
             <div class="images" style="display:block">
-                <img src="../image/google.jpg" width="1300px">
+                <img src="../image/slidetoy.png" width="1300px">
             </div>
             <div class="images"><img src="../image/daum.jpg" width="1300px"></div>
-            <div class="images"><img src="../image/naver.jpg" width="1300px"></div>
+            <div class="images"><img src="../image/slidetoy.png" width="1300px"></div>
             <div class="images"><img src="../image/nate.jpg" width="1300px"></div>
-            <div class="images"><img src="../image/yahoo.jpg" width="1300px"></div>
+            <div class="images"><img src="../image/slidetoy.png" width="1300px"></div>
         </div>
 </div>
 

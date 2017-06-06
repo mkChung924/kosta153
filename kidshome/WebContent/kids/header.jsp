@@ -179,8 +179,7 @@ a{
 				<li class="topMenuLi">
 				<a class="menuLink" id="flip3">장난감</a>
 					<ul class="submenu" id="panel3">
-						<li><a class="submenuLink" href="search.do">검색하기</a></li>
-						<li><a class="submenuLink" href="#">종류별로 보기</a></li>
+						<li><a class="submenuLink" href="search.do">우리 장난감</a></li>
 					</ul></li>
 				<li class="topMenuLi">
 				<a class="menuLink" id="flip4">신청</a>

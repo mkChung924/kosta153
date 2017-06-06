@@ -16,6 +16,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import kidshome.model.Give;
 import kidshome.model.KidshomeDAO;
 import kidshome.model.ReqToy;
+import kidshome.model.Toys;
 
 public class ReqAction extends Action{
 
@@ -51,7 +52,9 @@ public class ReqAction extends Action{
 			
 			if(dao.giveReq(give)){
 				System.out.println("기부 신청 성공");
+				request.setAttribute("option", "give");
 			}
+			
 			
 		} else if(action.equals("req")){
 			
@@ -63,6 +66,7 @@ public class ReqAction extends Action{
 			
 			if(dao.reqToy(reqToy)){
 				System.out.println("장난감 신청 성공");
+				request.setAttribute("option", "req");
 			}
 
 		}

@@ -12,13 +12,13 @@
 	<center>
 	<logic:notPresent name="admin" scope="session">
 		<h3>마이페이지</h3>
-		<table border=1 cellspacing="0" cellpadding="2" width="200">
+		<table border=1 cellspacing="0" cellpadding="3" width="300">
 			<tr>
-				<td align="center">아이디:</td>
-				<td align="center">${id }</td>
+				<td align="center">아이디</td>
+				<td align="center">${id.substring(0,id.length()-3) }***</td>
 			</tr>
 			<tr>
-				<td align="center">회원등급:</td>
+				<td align="center">회원등급</td>
 				<td align="center">${user1 }</td>
 			</tr>
 		</table>

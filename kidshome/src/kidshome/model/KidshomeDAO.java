@@ -46,50 +46,7 @@ public class KidshomeDAO {
 		
 	}
 	
-	public List<Toys> selectToys(){
-		List<Toys> list = null;
-		
-		try {
-			list = sqlMap.queryForList("kids.selectToys");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
-	
-	public int count(){
-		int count = 0;
-		
-		try {
-			count = (Integer) sqlMap.queryForObject("kids.toyCount");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return count;
-	}
-	
-	public ArrayList<Toys> selectPage(int page, int recordCount){
-		int max = page*recordCount;
-		int min = max-(recordCount-1);
-		ArrayList<Toys> list = null;
-		
-		try {
-			Map<String, Integer> map = new HashMap<>();
-			map.put("min", min);
-			map.put("max", max);
-			
-			list = (ArrayList<Toys>) sqlMap.queryForList("kids.selectPage", map);
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return list;
-		
-	}
-	
+
 	public Toys selectDetailToy(String serial){
 		Toys toy = null;
 		
@@ -116,17 +73,19 @@ public class KidshomeDAO {
 		return false;
 	}
 	
+	//아이디 중복확인
 	public String idCheck(String id){
 		String idC = null;
 		try {
 			idC = (String) sqlMap.queryForObject("kids.selectId",id);
-			System.out.println("æ∆¿Ãµ ∞°¡Æø¿¥œ"+idC);
+			System.out.println("불러온 아이디: "+idC);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return idC;
 	}	// idCheck()
 	
+	//로그인 하기
 	public String selectLogin(String id,String pass){	//
 		String mem = null;
 		try {
@@ -245,6 +204,121 @@ public class KidshomeDAO {
 		return list;
 	}
 	
+	//마이페이지 대여신청 가져오기
+	public List<RentreqBeans> selectMyRentReq(String id){
+		List<RentreqBeans> list = null;
+		
+		try {
+			list = sqlMap.queryForList("kids.selectMyRentReq",id);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	//마이페이지 대여 현황 가져오기
+	public List<RentBeans> selectMyRent(String id){
+		List<RentBeans> list = null;
+		
+		try {
+			list = sqlMap.queryForList("kids.selectMyRent",id);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public boolean delMyRentReq(HashMap<String, String> map){
+		
+		try {
+			int t = sqlMap.delete("kids.rentReqDel", map);
+			if(t==1) return true;
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	public boolean upInventory(String serial){
+		
+		try {
+			int t = sqlMap.update("kids.upInventory", serial);
+			if(t==1) return true;
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	//관리자가 대여신청에 대응하여 택배 또는 대여 버튼을 눌렀을 때
+	//택배 배송일 경우
+	public boolean insertRentInfoPost(HashMap map){
+		
+		try {
+			sqlMap.insert("kids.insertRentInfoPost", map);
+			return true;
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	//방문 대여일 경우
+	public boolean insertVisit(HashMap<String,String> map){
+		
+		try {
+			sqlMap.insert("kids.insertVisit", map);	
+			return true;
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	//대여 후 재고 정보 수정
+	public boolean updateStateOfInventory(String serial){
+		
+		try {
+			int t = sqlMap.update("kids.updateinventory", serial);
+			System.out.println("t: "+t);
+			System.out.println("Inventory 수정됨");
+			if(t == 1) return true;
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	//대여후 대여 신청 테이블 수정
+	public boolean updateStateOfRentReq(HashMap<String,String> map){
+		
+		try {
+			System.out.println(map.get("id"));
+			int t = sqlMap.update("kids.updateRentReq", map);
+			if(t == 1) return true;
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
 	public boolean updateToyReq(int num){
 		
 		try {
@@ -338,14 +412,14 @@ public class KidshomeDAO {
 	}//delete
 	
 	//아이디 찾기 및 비밀번호 변경
-	public String foundId(ToyMembers user){	// 아이디 찾기
-		String id = null;
+	public List<String> foundId(ToyMembers user){	// 아이디 찾기
+		List<String> list = null;
 		try {
-			id = (String) sqlMap.queryForObject("kids.foundid",user);
+			list = sqlMap.queryForList("kids.foundid",user);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return id;
+		return list;
 	}
 	
 	public List<ToyMembers> foundPass(String id){	// 비밀번호 찾기
@@ -389,7 +463,196 @@ public class KidshomeDAO {
 			e.printStackTrace();
 		}		
 	  return list;
-	}//selectAll
+	}//selectAllMember
+	
+	//재고 정보 가져오기
+	public List<Toys> selectAllInventory() {
+		List<Toys> list = null;
+		try {
+			list = (ArrayList<Toys>) sqlMap.queryForList("kids.selectAllInventory");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+
+	}
+	
+	//재고정보 업데이트
+	public boolean updateTotal(Toys toyinfo) {
+		try {
+			int t = sqlMap.update("kids.updateTotal", toyinfo);
+			if (t == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	//모든 회원 대여 신청 불러오기
+	public List<RentreqBeans> selectAllRentReq(){
+		List<RentreqBeans> list = null;
+		
+		try {
+			list = sqlMap.queryForList("kids.selectAllRentReq");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	//이름으로 회원 대여 신청 불러오기
+	public List<RentreqBeans> selectAllRentReqByName(String name){
+		List<RentreqBeans> list = null;
+		
+		try {
+			list = sqlMap.queryForList("kids.selectAllRentReqByName", name);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	//전화번호로 회원 대여 신청 불러오기
+	public List<RentreqBeans> selectAllRentReqByTel(String tel){
+		
+		List<RentreqBeans> list = null;
+		tel = "%"+tel;
+		try {
+			list = sqlMap.queryForList("kids.selectAllRentReqByTel", tel);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	//모든 대여 정보 불러오기
+	public List<RentBeans> selectAllRent(){
+		List<RentBeans> list = null;
+		
+		try {
+			list = sqlMap.queryForList("kids.selectAllRent");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	//이름 검색으로 대여 정보 불러오기
+	public List<RentBeans> selectAllRentByName(String name){
+		List<RentBeans> list = null;
+		
+		try {
+			list = sqlMap.queryForList("kids.selectAllRentByName", name);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	//번호 검색으로 대여 정보 불러오기
+	public List<RentBeans> selectAllRentByTel(String tel){
+		List<RentBeans> list = null;
+		tel = "%"+tel;
+		try {
+			list = sqlMap.queryForList("kids.selectAllRentByTel", tel);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public boolean checkIt(HashMap map){
+		
+		try {
+			List<String> list = sqlMap.queryForList("kids.checkIt",map);
+			if(list.get(0).equals("0")){
+				
+				return true;
+				
+			} else {
+				return false;
+			}
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	public boolean countMaximum(String id){
+		
+		try {
+			List<String> list = sqlMap.queryForList("kids.countMaximum",id);
+
+			int count = Integer.parseInt(list.get(0));
+			System.out.println("대여 신청중인 상품 개수: " + count);
+			if(count >= 3){
+				return false;
+			} else {
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	public boolean checkVacant(String serial){
+		
+		try {
+			int vacant = (Integer) sqlMap.queryForObject("kids.checkVacant",serial);
+			if(vacant > 0){
+				return true;
+			} else {
+				return false;
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	public boolean updateInventory(String serial){
+		
+		try {
+			int t = sqlMap.update("kids.updateInventory",serial);
+			if(t==1) return true;
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	public boolean insertMyRentReq(HashMap map){
+		
+		try {
+			sqlMap.insert("kids.InsertMyRentReq", map);
+			return true;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return false;
+	}
 	
 	public int searchToyCount(String tn,String age,String kind){
 		int count=0;

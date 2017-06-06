@@ -258,8 +258,21 @@
 			path="/kids/req_insert"
 			type="kidshome.actions.ReqAction">
 			
-			<forward name="success" path="/kids/req_suc.do" redirect="true"></forward>
+			<forward name="success" path="/kids/req_suc.do"></forward>
 		</action>	
+		
+		<!-- 장난감 대여 신청 -->
+		
+		<action 
+			path="/kids/rentreqstate"
+			forward=".rentreq"/>
+		
+		<action
+			path="/kids/rentreq"
+			type="kidshome.actions.MyRentReqAction">
+		
+			<forward name="success" path="/kids/rentreqstate.do" redirect="true"></forward>	
+		</action>
 		
 		<!-- 게시판 타일즈 -->
 		<action 
@@ -372,13 +385,19 @@
       		path="/kids/delInfo"
       		forward=".delcheck"/>	
       		
-		<action 
+      	<action
       		path="/kids/myRent"
-      		forward=".myRent"/>    
+      		type="kidshome.actions.MyRequestListAction">
       		
-      	<action 
+      		<forward name="success_rent" path=".myRent"></forward>
+      	</action>	
+      		
+      	<action
       		path="/kids/myRentReq"
-      		forward=".myRentReq"/>
+      		type="kidshome.actions.MyRequestListAction">
+      		
+      		<forward name="success_rentreq" path=".myRentReq"></forward>
+      	</action>
       	
       	<action 
       		path="/kids/myToyReq"
@@ -408,30 +427,67 @@
       		<forward name="success_del" path=".delsuc"></forward>
       	</action>	
       	
+      					<!-- 대여 신청 삭제 -->
+      	<action 
+			path="/kids/rentReqDel"
+			type="kidshome.actions.MyRentReqDeleteAction">
+		
+			<forward name="success" path="/kids/member/adminpage/update_result.jsp"></forward>
+		</action>	
+      	
       	<!-- 회원가입 -->
       	
       	<action 
       		path="/kids/join"
       		forward=".join"/>
-      		
+      			
       	<action 
 			path="/kids/joindone"
 			type="kidshome.actions.JoinAction">
 			
 			<forward name="toy_success" path=".joinsuc"></forward>
 		</action>
+		
+		<action path="/kids/member/idCheck"
+            type="kidshome.actions.IdCheckAction"
+            input="/kids/member/idCheck.jsp">
+            
+            <forward name="success" path="/kids/member/idCheck.jsp"></forward>
+        </action>
 
-		<!-- 관리자페이지 -->
+		<!-- 관리자페이지, 장난감 신청, 기부, 대여신청 불러오기-->
 		
 		<action 
 		path="/kids/members"
 		 forward=".memeberselect"/>
+		 
+		 <action 
+		path="/kids/inventory"
+		 forward=".inventory"/>
 		
+			<!-- 회원정보 -->
 		<action 
 			path="/kids/selectMember" 
 			type="kidshome.actions.MemberSelectAction">
 			
 			<forward name="success" path="/kids/members.do"/>
+		</action>
+		
+			<!-- 재고정보 -->
+		<action 
+			path="/kids/selectInventory" 
+			type="kidshome.actions.TotalInventoryAction">
+			
+			<forward name="success" path="/kids/inventory.do"/>
+		</action>
+			
+			<!-- 총 재고 업데이트 -->
+		<action path="/kids/updateTotalInventory" 
+			type="kidshome.actions.TotalInventoryUpdateAction"
+			input="/kids/selectInventory.do">
+		
+			<forward name="success" path="/kids/selectInventory.do" redirect="true"></forward>
+
 		</action>
 		
 		<action 
@@ -446,14 +502,31 @@
       		type="kidshome.actions.AdminPageAction">
       		
       		<forward name="success_give" path=".GiveReq"></forward>
-      		</action>	
-      		
+      	</action>
+      	
       	<action 
-			path="/kids/Req"
+      		path="/kids/adRentReq"
+      		type="kidshome.actions.AdminPageAction">
+      		
+      		<forward name="success_rentreq" path=".adRentReq"></forward>
+      	</action>
+      	
+      	<action 
+      		path="/kids/adRent"
+      		type="kidshome.actions.AdminPageAction">
+      		
+      		<forward name="success_rent" path=".adRent"></forward>
+      	</action>			
+      		
+      		<!-- 관리자가 기부신청이나 장난감 신청, 대여신청을 수락하는 부분 -->
+      	<action 
+			path="/kids/rentAccept"
 			type="kidshome.actions.ReqUpdateAction">
 		
 			<forward name="success" path="/kids/member/adminpage/update_result.jsp"></forward>
-		</action>	
+		</action>
+		
+			
 		
 
     <!-- sample input and input submit actions

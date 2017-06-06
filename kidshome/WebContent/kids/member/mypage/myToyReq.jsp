@@ -41,7 +41,7 @@
 		<br>
 		<!--  -->
 		<form action="main.do">
-			<input type="submit" value="메인으로">
+			<input type="image" src="../image/button/main_icon.png" width="80">
 		</form>
 		<br><br>
 	</center>

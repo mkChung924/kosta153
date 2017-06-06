@@ -10,7 +10,7 @@
 		form = document.frm;
 		if (form.pass1.value == "" || form.pass2.value == "") {
 			alert('값을 입력해 주세요.');
-		} else if (!(form.pass1.value.match("[a-zA-Z]*[0-9]{8}")) || !(form.pass2.value.match("[a-zA-Z]*[0-9]{8}"))) {
+		} else if (!(form.pass1.value.match("[a-zA-Z0-9]{6,10}")) || !(form.pass2.value.match("[a-zA-Z0-9]{6,10}"))) {
 			alert('비밀번호 형식이 일치하지 않습니다.');
 		} else if (form.pass1.value != form.pass2.value) {
 			alert('비밀번호가 일치하지 않습니다.')

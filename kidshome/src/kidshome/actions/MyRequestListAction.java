@@ -12,6 +12,8 @@ import org.apache.struts.action.ActionMapping;
 
 import kidshome.model.Give;
 import kidshome.model.KidshomeDAO;
+import kidshome.model.RentBeans;
+import kidshome.model.RentreqBeans;
 import kidshome.model.ReqToy;
 
 public class MyRequestListAction extends Action{
@@ -25,7 +27,7 @@ public class MyRequestListAction extends Action{
 		
 		KidshomeDAO dao = new KidshomeDAO();
 		ActionForward forward = null;
-		System.out.println("current action : " + action);
+		System.out.println("마이페이지 MyRequestListAction, current action : " + action);
 		
 		switch(action){
 
@@ -72,11 +74,42 @@ public class MyRequestListAction extends Action{
 			forward = mapping.findForward("success_toy");
 			break;
 			
-		case "rent_req":
-			forward = mapping.findForward("success_rent_req");
+		case "rentreq":
+			
+			
+			List<RentreqBeans> rentreqList = dao.selectMyRentReq(id);
+			
+			if(rentreqList.size() > 0){
+				request.setAttribute("list", rentreqList);
+				
+				for(int i = 0; i < rentreqList.size(); i++){
+					if(rentreqList.get(i).getRentstate().equals("0")){
+						rentreqList.get(i).setRentstate("대여 신청");
+					} else if(rentreqList.get(i).getRentstate().equals("1")){
+						rentreqList.get(i).setRentstate("대여 완료");
+					}
+				}
+			}
+			
+			forward = mapping.findForward("success_rentreq");
 			break;
 			
 		case "rent":
+			
+			List<RentBeans> rentList = dao.selectMyRent(id);
+			if(rentList.size() > 0){
+				request.setAttribute("list", rentList);
+				
+				for(int i = 0; i < rentList.size(); i++){
+					if(rentList.get(i).getRetstate().equals("0")){
+						rentList.get(i).setRetstate("대여중");
+					} else if(rentList.get(i).getRetstate().equals("1")){
+						rentList.get(i).setRetstate("반납완료");
+					}
+				}
+			}
+			
+			
 			forward = mapping.findForward("success_rent");
 			break;
 			

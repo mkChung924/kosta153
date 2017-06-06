@@ -44,7 +44,7 @@
 		<td align="right"><input type="checkbox" name="agree" value="agree" onclick="aaa(this)"> 내용을 읽었으며, 동의함<br><br><br></td>
 	</tr>
 	<tr>
-		<td align="center"><input type="button" value="회원가입" onclick="check()"></td>
+		<td align="center"><img src="../image/button/join.png" width="100" height="40" style="cursor: pointer;" onclick="check()"></td>
 	</tr>
 </table>
 <br><br><br>

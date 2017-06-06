@@ -44,10 +44,11 @@ function check(){
 				<td colspan="2" align="right"><font size="2" color="gray">'-'포함해서 입력해 주세요.</font></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="right"><input type="button" value="찾기" name="idButton" onclick="check()"> <a href="login.do"><input type="button" value="로그인" name="login"></a></td>
-				
+				<td colspan="2" align="center"><img src="../image/button/search_icon.png" width="70" name="idButton" onclick="check()"></td>
 			</tr>
 		</table>
+		<br><br>
+		<img src="../image/button/login_icon.png" width="70" onclick="location.href='login.do'">
 		</form>
 		<br><br>
 	</center>

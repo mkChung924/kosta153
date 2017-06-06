@@ -39,14 +39,12 @@
 <body>
 <div class="menu">
 <ul>
-	<li><html:link action="/kids/search">검색하기</html:link>
 	<li><html:link action="/kids/search.do?toy_n=&toy_a=&toy_k=놀이터">놀이터</html:link>
-	<li><html:link action="kids/search.do?toy_n=&toy_a=&toy_k=퍼즐">퍼즐</html:link>
-	<li><html:link action="kids/search.do?toy_n=&toy_a=&toy_k=블럭">블럭</html:link>
+	<li><html:link action="kids/search.do?toy_n=&toy_a=&toy_k=퍼즐조각,블록">퍼즐조각,블록</html:link>
 	<li><html:link action="kids/search.do?toy_n=&toy_a=&toy_k=조작놀이">조작놀이</html:link>
 	<li><html:link action="kids/search.do?toy_n=&toy_a=&toy_k=음률">음률</html:link>
 	<li><html:link action="kids/search.do?toy_n=&toy_a=&toy_k=역할놀이">역할놀이</html:link>
-	<li><html:link action="kids/search.do?toy_n=&toy_a=&toy_k=쏘서">쏘서</html:link>
+	<li><html:link action="kids/search.do?toy_n=&toy_a=&toy_k=소서">쏘서</html:link>
 	<li><html:link action="kids/search.do?toy_n=&toy_a=&toy_k=모빌">모빌</html:link>
 
 

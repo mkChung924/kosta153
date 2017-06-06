@@ -50,6 +50,8 @@
 		<put name="body" value="/kids/request/reqsuccess.jsp"></put>
 	</definition>
 	
+
+	
 	<!-- 소개 페이지(vision, about) -->
 	<definition name=".intro" path="/kids/intro/intro.jsp">
 		<put name="header" value="/kids/header.jsp"></put>
@@ -96,6 +98,11 @@
 	</definition>
 	<definition name=".toydetail" extends=".toy">
 		<put name="body" value="/kids/toy/detail.jsp"></put>
+	</definition>
+	
+		<!-- 장난감 대여 목록 요청 -->
+	<definition name=".rentreq" extends=".toy">
+		<put name="body" value="/kids/toy/rentreq.jsp"></put>
 	</definition>
 	
 	<!-- 로그인 -->
@@ -188,11 +195,20 @@
 	<definition name=".memeberselect" extends=".mypage">
 		<put name="body" value="/kids/member/mypage/memberselect.jsp"></put>
 	</definition>	
+	<definition name=".inventory" extends=".mypage">
+		<put name="body" value="/kids/member/adminpage/inventory.jsp"></put>
+	</definition>	
 		<definition name=".ToyReq" extends=".mypage">
 		<put name="body" value="/kids/member/adminpage/adminToyReq.jsp"></put>
 	</definition>
 	<definition name=".GiveReq" extends=".mypage">
 		<put name="body" value="/kids/member/adminpage/adminGive.jsp"></put>
+	</definition>
+	<definition name=".adRentReq" extends=".mypage">
+		<put name="body" value="/kids/member/adminpage/adminRentReq.jsp"></put>
+	</definition>
+	<definition name=".adRent" extends=".mypage">
+		<put name="body" value="/kids/member/adminpage/adminRent.jsp"></put>
 	</definition>
 
 </tiles-definitions>

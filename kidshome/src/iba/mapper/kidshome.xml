@@ -16,7 +16,7 @@
 	<!-- 인기 장난감 정보 4개 -->
 <select id="selectPopToy" resultClass="String">
 	select toyimage 
-	from (select toyrent.toy_serial,count(*) as num from toyrent, toyinfo where toyrent.toy_serial = toyinfo.toy_serial group by toyrent.toy_serial order by num desc) i, toyinfo 
+	from (select rentedtoy.toy_serial,count(*) as num from rentedtoy, toyinfo where rentedtoy.toy_serial = toyinfo.toy_serial group by rentedtoy.toy_serial order by num desc) i, toyinfo 
 	where toyinfo.toy_serial = i.toy_serial and rownum between 1 and 4
 </select>
 
@@ -39,29 +39,11 @@
 <!-- =================================장난감 정보 쿼리======================================================= -->
 <!-- =================================================================================================== -->
 
-<select id="selectToys" resultClass="kidshome.model.Toys">
-	select t.toy_serial, t.toyname, t.toyimage, t.toytotal, t.toytotal-i.rentstate-i.reqstate-i.damage as vacant, add_date 
-	from toyinfo t, inventory i 
-	where t.toy_serial = i.toy_serial
-
-</select>
-
-<select id="selectPage" resultClass="kidshome.model.Toys" parameterClass="java.util.Map"><![CDATA[
-select toy_serial, toyname, toyimage, toytotal, vacant, add_date 
-from (select toy_serial, toyname, toyimage, toytotal, vacant, add_date, rownum rn from (select t.toy_serial, t.toyname, t.toyimage, t.toytotal, t.toytotal-i.rentstate-i.reqstate-i.damage as vacant, add_date 
-	from toyinfo t, inventory i 
-	where t.toy_serial = i.toy_serial)) 
-where rn between #min# and #max#
-]]>
-</select>
 
 <select id="selectToyDetail" resultClass="kidshome.model.Toys" parameterClass="String">
 	select toy_serial, toyname, toykind, toyage, toyimage, to_char(add_date,'yyyy-mm-dd') add_date from toyinfo where toy_serial=#toy_serial#
 </select>
 
-<select id="toyCount" resultClass="int">
-	select count(*) from toyinfo
-</select>
 
 <!-- <select id="selectAllToys" resultClass="kidshome.model.Toys">
 
@@ -111,7 +93,7 @@ where rn between #min# and #max#
 	</select>
 	
 	<select id="selectPass" resultClass="kidshome.model.ToyMembers" parameterClass="String">
-		select id,secure_code, secure_ans
+		select id, secure_code, secure_ans
 		from userinfo
 		where id=#id#
 	</select>
@@ -143,9 +125,14 @@ where rn between #min# and #max#
 	insert into toy_req values(reqtoy_seq.nextval,#id#,#toyname#,#image#,#reason#,0,sysdate)
 </insert>
 
-<delete id="rentRequestdelete" parameterClass="int">
-	delete from toyrequestinfo where requestnum=#requestnum#
+<!-- 대여 신청 삭제 -->
+<delete id="rentReqDel" parameterClass="java.util.Map">
+	delete from rentreq where id=#id# and toy_serial = #serial#
 </delete>
+
+<update id="upInventory" parameterClass="String">
+	update inventory set reqstate = reqstate - 1 where toy_serial = #serial#
+</update>
 
 
 <!-- =================================================================================================== -->
@@ -166,6 +153,22 @@ where rn between #min# and #max#
 <select id="selectGive" resultClass="kidshome.model.Give">
  select num, toy_name as toyname, give_method method, toy_desc toydesc, addr, image, give_state, givedate dates from give_req
 </select>
+
+<!-- 나의 대여 요청 불러오기 -->
+<select id="selectMyRentReq" resultClass="kidshome.model.RentreqBeans" parameterClass="String">
+	select rentreq.no, userinfo.id, name, toyinfo.toy_serial,toyname,toykind,toyage,rentstate,rentmethod,to_char(reqdate,'yyyy-mm-dd') reqdate 
+	from rentreq, toyinfo, userinfo
+	where rentreq.toy_serial=toyinfo.toy_serial and userinfo.id = rentreq.id and userinfo.id =#id#
+</select>
+
+<!-- 나의 대여 현황 불러오기 -->
+<select id="selectMyRent" parameterClass="String" resultClass="kidshome.model.RentBeans">
+select t.toy_serial, t.toyname, t.toykind, t.toyage, to_char(r.sdate,'yyyy-mm-dd') sdate, to_char(r.edate,'yyyy-mm-dd') edate, r.retstate, r.rentmethod 
+from toyinfo t, rentinfo r 
+where t.toy_serial = r.toy_serial and r.id = #id#
+</select>
+
+
 
 <!-- 모든 장난감 요청 불러오기-->
 <select id="selectToyReq" resultClass="kidshome.model.ReqToy">
@@ -194,15 +197,112 @@ where rn between #min# and #max#
 	delete from userinfo where id=#id#
 </delete>
 
+
+
 <!-- =================================================================================================== -->
 <!-- ================================관리자 페이지 쿼리======================================================= -->
 <!-- =================================================================================================== -->
 <!-- 회원정보 불러오기 -->
 <select id="selectAllMember" resultClass="kidshome.model.ToyMembers">
-		select id,name,to_char(birth,'yyyy-mm-dd') as birth, addr, email,tel, auth, regdate from userinfo
+		select id,name,to_char(birth,'yyyy-mm-dd') as birth, addr, email,tel, auth, to_char(regdate,'yyyy-mm-dd hh24:mi') regdate from userinfo order by auth desc
 </select>
 
+<!-- 재고 정보 불러오기 -->
+ <select id="selectAllInventory" resultClass="kidshome.model.Toys">
+ 	select toy_serial, toyname, toykind, toyage, toyimage, toytotal,rentstate, reqstate, damage, toytotal-rentstate-reqstate-damage vacant from toyinfo natural join inventory
+ </select>
+ 
+ <!-- 재고의 총 재고 업데이트 하기 -->
+ <update id="updateTotal" parameterClass="kidshome.model.Toys">
+ 	update inventory set toytotal=#toytotal# where toy_serial=#toy_serial#
+ </update>
 
+<!-- 회원 대여신청 불러오기 -->
+<select id="selectAllRentReq" resultClass="kidshome.model.RentreqBeans">
+	select rentreq.no, userinfo.id, name, tel,toyinfo.toy_serial,toyname,toykind,toyage,rentstate,rentmethod,to_char(reqdate,'yyyy-mm-dd') reqdate 
+	from rentreq, toyinfo, userinfo
+	where rentreq.toy_serial=toyinfo.toy_serial and rentreq.id = userinfo.id order by rentstate
+</select>
+
+<!-- 이름으로 회원 대여신청 불러오기 -->
+<select id="selectAllRentReqByName" resultClass="kidshome.model.RentreqBeans" parameterClass="String">
+	select rentreq.no, userinfo.id, name, tel,toyinfo.toy_serial,toyname,toykind,toyage,rentstate,rentmethod,to_char(reqdate,'yyyy-mm-dd') reqdate 
+	from rentreq, toyinfo, userinfo
+	where rentreq.toy_serial=toyinfo.toy_serial and rentreq.id = userinfo.id and userinfo.name = #name# order by rentstate
+</select>
+
+<!-- 전화번호로 회원 대여신청 불러오기 -->
+<select id="selectAllRentReqByTel" resultClass="kidshome.model.RentreqBeans" parameterClass="String">
+	select rentreq.no, userinfo.id, name, tel,toyinfo.toy_serial,toyname,toykind,toyage,rentstate,rentmethod,to_char(reqdate,'yyyy-mm-dd') reqdate 
+	from rentreq, toyinfo, userinfo
+	where rentreq.toy_serial=toyinfo.toy_serial and rentreq.id = userinfo.id and userinfo.tel like #tel# order by rentstate
+</select>
+
+<!-- 모든대여 현황 불러오기 -->
+<select id="selectAllRent" resultClass="kidshome.model.RentBeans">
+select u.id, u.name, u.tel, t.toy_serial, t.toyname, t.toykind, t.toyage, to_char(r.sdate,'yyyy-mm-dd') sdate, to_char(r.edate,'yyyy-mm-dd') edate, r.retstate, r.rentmethod
+ from toyinfo t, rentinfo r, userinfo u 
+ where t.toy_serial = r.toy_serial and r.id = u.id
+</select>
+
+<!-- 이름 검색으로 대여 현황 불러오기 -->
+<select id="selectAllRentByName" resultClass="kidshome.model.RentBeans" parameterClass="String">
+select u.id, u.name, u.tel, t.toy_serial, t.toyname, t.toykind, t.toyage, to_char(r.sdate,'yyyy-mm-dd') sdate, to_char(r.edate,'yyyy-mm-dd') edate, r.retstate, r.rentmethod
+ from toyinfo t, rentinfo r, userinfo u 
+ where t.toy_serial = r.toy_serial and r.id = u.id and u.name = #name#
+</select>
+
+<!-- 전화번호 뒷자리 검색으로 대여 현황 불러오기 -->
+<select id="selectAllRentByTel" resultClass="kidshome.model.RentBeans" parameterClass="String">
+select u.id, u.name, u.tel, t.toy_serial, t.toyname, t.toykind, t.toyage, to_char(r.sdate,'yyyy-mm-dd') sdate, to_char(r.edate,'yyyy-mm-dd') edate, r.retstate, r.rentmethod
+ from toyinfo t, rentinfo r, userinfo u 
+ where t.toy_serial = r.toy_serial and r.id = u.id and u.tel like #tel#
+</select>
+  
+<!-- =================================================================================================== -->
+<!-- ================================장난감 대여 가능 여부 쿼리======================================================= -->
+<!-- =================================================================================================== -->
+<select id="checkIt" parameterClass="java.util.Map" resultClass="String">
+select count(*) cnt from rentreq where id = #id# and toy_serial = #serial# and rentstate = 0 union select count(*) cnt from rentinfo where id = #id# and toy_serial = #serial# and retstate = 0 order by cnt desc
+</select>
+
+<select id="countMaximum" parameterClass="String" resultClass="String">
+select count(*) cnt from rentreq where id = #id# and rentstate = 0 union select count(*) cnt from rentinfo where id = #id# and retstate = 0 order by cnt desc
+</select>
+
+<select id="checkVacant" parameterClass="String" resultClass="int">
+select toytotal-rentstate-reqstate-damage vacant from inventory where toy_serial = #toy_serial#
+</select>
+
+<update id="updateInventory" parameterClass="String">
+update inventory set reqstate = reqstate + 1 where toy_serial = #toy_serial#
+</update>
+
+<insert id="InsertMyRentReq" parameterClass="java.util.Map">
+insert into rentreq values(rentreq_seq.nextval, #serial#,#id#,0,#rentmethod#,sysdate)
+</insert>
+
+<!-- 관리자가 대여 버튼 클릭시 -->
+
+<!-- 택배신청 - [배송완료] -->
+<insert id="insertRentInfoPost" parameterClass="java.util.Map">
+insert into rentinfo values(rentinfo_seq.nextval, #serial#, #id#, sysdate+1, sysdate+16, 0)
+</insert>
+
+<!-- 방문신청 - [대여완료] -->
+<insert id="insertVisit" parameterClass="java.util.Map">
+	insert into rentinfo values(rentinfo_seq.nextval, #serial#, #id#, sysdate, sysdate+15, 0, #rentmethod#)
+</insert>
+
+<!-- <update id="updateinventory" parameterClass="String">
+	update inventory set reqstate = reqstate - 1, rentstate = rentstate + 1 where toy_serial = #serial#
+</update>
+
+<update id="updateRentReq" parameterClass="java.util.Map">
+	update rentreq set rentstate = 1 where id = #id# and toy_serial = #serial# and rentstate = 0
+</update> -->
+
+<!--  -->
 <!-- =================================================================================================== -->
 <!-- ================================장난감 페이지 쿼리======================================================= -->
 <!-- =================================================================================================== -->
@@ -240,7 +340,7 @@ from toyinfo t, inventory i where t.toy_serial = i.toy_serial)
   <select id="searchtoyn" resultClass="kidshome.model.Toys" parameterClass="java.util.Map">
     <![CDATA[select toy_serial,toyname,toykind,toyage,add_date,toyimage,vacant
   from (select rownum rn,t.toy_serial toy_serial, t.toyname toyname,t.toykind toykind,t.toyage toyage, t.toyimage toyimage, i.toytotal toytotal, i.toytotal-i.rentstate-i.reqstate-i.damage as vacant, add_date 
-from toyinfo t, inventory i where t.toy_serial = i.toy_serial and where toyname like #toyname#) 
+from toyinfo t, inventory i where t.toy_serial = i.toy_serial and toyname like #toyname#) 
   where rn>=#min_ct# and rn<=#max_ct#]]>
   </select>
   <select id="searchtoya" resultClass="kidshome.model.Toys" parameterClass="java.util.Map">

@@ -1,5 +1,7 @@
 package kidshome.actions;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,9 +19,12 @@ public class ReqUpdateAction extends Action{
 			HttpServletResponse response) throws Exception {
 		
 		String action = request.getParameter("action");
-		System.out.println(action);
+		System.out.println("ReqUpdateAction: "+action);
 		KidshomeDAO dao = new KidshomeDAO();
 		ActionForward forward = null;
+		String id = "";
+		String serial = "";
+		String method = "";
 		
 		switch(action){
 		
@@ -48,6 +53,51 @@ public class ReqUpdateAction extends Action{
 			}
 			
 			break;
+			
+		case "acceptRentVisit":
+			System.out.println("대여 수락 시작");
+			id = request.getParameter("id");
+			serial = request.getParameter("serial");
+			method = request.getParameter("method");
+			
+			HashMap<String,String> map = new HashMap<>();
+			System.out.println(map.size());
+			map.put("id", id);
+			map.put("serial",serial);
+			map.put("rentmethod", method);
+			System.out.println(map.get("id"));
+			System.out.println(map.get("serial"));
+			System.out.println(map.get("rentmethod"));
+			
+			if(dao.insertVisit(map)){
+				System.out.println("대여테이블에 추가됨");
+			}
+	
+			forward = mapping.findForward("success");
+			
+			break;
+			
+			
+		case "acceptRentPost":
+			System.out.println("택배 대여, 배송완료");
+			id = request.getParameter("id");
+			serial = request.getParameter("serial");
+			HashMap<String,String> map2 = new HashMap<>();
+			map2.put("id", id);
+			map2.put("serial",serial);
+			if(dao.insertRentInfoPost(map2)){
+				
+				if(dao.updateStateOfInventory(serial)){
+					System.out.println("재고정보수정완료");
+				}
+				
+				if(dao.updateStateOfRentReq(map2)){
+					System.out.println("대여신청정보수정완료");
+				}
+				
+				forward = mapping.findForward("success");
+			}
+			break;	
 		}
 		String no = request.getParameter("no");
 		System.out.println(no);

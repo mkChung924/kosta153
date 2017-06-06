@@ -1,5 +1,7 @@
 package kidshome.actions;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,19 +22,23 @@ public class ToyDetailAction extends Action{
 		System.out.println("ToyDetailAction");
 		
 		String serial = request.getParameter("serial");
+		String id = (String) request.getSession().getAttribute("id");
 		System.out.println(serial);
+		System.out.println(id);
+		HashMap<String,String> map = new HashMap<>();
+		map.put("id",id);
+		map.put("serial", serial);
 		
 		KidshomeDAO dao = new KidshomeDAO();
 		
 		Toys toy = dao.selectDetailToy(serial);
+		boolean t = dao.checkIt(map);
 		
-//		System.out.println(toy.getToy_serial());
-//		System.out.println(toy.getToyname());
-//		System.out.println(toy.getToykind());
-//		System.out.println(toy.getToyage());
-//		System.out.println(toy.getToyimage());
-//		System.out.println(toy.getAdd_date());
-		
+		if(t){
+			request.setAttribute("possible", "ok");
+		} else {
+			request.setAttribute("possible", "nok");
+		}
 		request.setAttribute("detail", toy);
 		
 		return mapping.findForward("success");

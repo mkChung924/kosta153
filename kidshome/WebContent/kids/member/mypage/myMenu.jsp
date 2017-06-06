@@ -43,7 +43,7 @@
 <ul>
 	<li><html:link action="/kids/upForm">정보수정</html:link>
 	<li><html:link action="/kids/myRent?action=rent">대여 현황</html:link>
-	<li><html:link action="/kids/myRentReq?action=rent_toy">대여 신청 현황 </html:link>
+	<li><html:link action="/kids/myRentReq?action=rentreq">대여 신청 현황 </html:link>
 	<li><html:link action="/kids/myToyReq?action=toy">장난감 요청 현황</html:link>
 	<li><html:link action="/kids/myGiveReq?action=give">기부 현황</html:link>
 	<li><html:link action="/kids/delInfo">탈퇴</html:link>
@@ -55,8 +55,9 @@
 <div class="menu">
 <ul>
 	<li><html:link action="/kids/selectMember">회원 정보</html:link>
-	<li><html:link action="/kids/Rent?action=rent">대여 현황</html:link>
-	<li><html:link action="/kids/RentReq?action=rent_toy">대여 신청 현황 </html:link>
+	<li><html:link action="/kids/selectInventory">재고 정보</html:link>
+	<li><html:link action="/kids/adRent?action=rent">대여 현황</html:link>
+	<li><html:link action="/kids/adRentReq?action=rentreq">대여 신청 현황 </html:link>
 	<li><html:link action="/kids/ToyReq?action=toy">장난감 요청 현황</html:link>
 	<li><html:link action="/kids/GiveReq?action=give">기부 현황</html:link>
 

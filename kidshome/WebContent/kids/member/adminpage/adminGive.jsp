@@ -40,7 +40,7 @@
 				<tr bgcolor="orange">
 					<th>기부 번호</th>
 					<th>장난감 이름</th>
-					<th>장난감 설명</th>
+					<th>설명</th>
 					<th>사진 정보</th>
 					<th>기부 방법</th>
 					<th>기부 상태</th>

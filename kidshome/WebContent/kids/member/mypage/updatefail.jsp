@@ -8,7 +8,9 @@
 </head>
 <body>
 <center>
-<h1>알 수 없는 오류가 발생하였습니다.</h1>
+<h2>로그인된 [아이디/비밀번호]와 일치하지 않습니다. 확인하세요.</h2><br><br>
+
+<input type="button" value="뒤로가기" style="font-size: 100px" onclick="history.back()">
 </center>
 </body>
 </html>

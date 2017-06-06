@@ -39,6 +39,12 @@ public class JoinAction extends Action{
 		String secure_code = request.getParameter("secure_code ");
 		String secure_ans= request.getParameter("secure_ans");
 		
+		System.out.println(id);
+		System.out.println(pass);
+		System.out.println(name);
+		
+		
+		
 		KidshomeDAO dao = new KidshomeDAO();
 		
 		ActionForward forward;

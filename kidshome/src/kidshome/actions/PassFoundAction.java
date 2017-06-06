@@ -18,6 +18,7 @@ import kidshome.model.ToyMembers;
 
 public class PassFoundAction extends Action{
 	String id;
+	List<ToyMembers> list;
 	
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -26,19 +27,18 @@ public class PassFoundAction extends Action{
 		String action = request.getParameter("action");
 		ActionForward forward = null;
 		KidshomeDAO dao = new KidshomeDAO();
-		List<ToyMembers> list;
-		
 		
 		if(action == null || action.equals("found")){
 
 			id = request.getParameter("id");
+			System.out.println("입력된 아이디: " + id);
 			
 			list = dao.foundPass(id);
 			
-			
 			if(list.size() == 0){
 				forward = mapping.findForward("fail");
-			}else if(list.size() != 0){
+				
+			} else if(list.size() != 0){
 				
 				request.getSession().setAttribute("list", list);
 				
@@ -47,28 +47,29 @@ public class PassFoundAction extends Action{
 		}else if(action.equals("secure")){ 
 			String anw = request.getParameter("anw");
 			
-			String anwC = dao.secureC(anw);
 			
 			ActionMessages msg = new ActionMessages();
-			if(anwC == null || !(anw.equals(anwC))){
+			if(!anw.equals(list.get(0).getSecure_ans())){
 				msg.add(ActionMessages.GLOBAL_MESSAGE,new ActionMessage("kids.secure"));
 				saveMessages(request, msg);
 		
 				forward = mapping.getInputForward();
 				//forward = mapping.findForward("fail");
-			}else if(anwC.equals(anw)){
+				
+			}else {
 				forward = mapping.findForward("update");
 			}
+			
 		}else if(action.equals("passUpdate")){
 			System.out.println("?");
 			String pass = request.getParameter("pass1");
-			
+			System.out.println("수정될 비밀번호: " + pass);
 			ToyMembers mem = new ToyMembers();
 			mem.setId(id);
 			mem.setPass(pass);
 	
 			if(dao.passUpdate(mem)){
-				request.getSession().invalidate();
+				//request.getSession().setAttribute("id", id);
 				forward = mapping.findForward("success_passUpdate");
 			}else{
 				forward = mapping.findForward("update");

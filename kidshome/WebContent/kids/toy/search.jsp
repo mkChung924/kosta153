@@ -11,31 +11,40 @@
 </head>
 <body>
 	<center>
-		<h4>검색</h4>
+	<h4><br>검색을 원하실 경우 장난감 이름으로 검색이 가능합니다.<br>또한 연령대와 종류별로 검색을 할 수 있습니다.</h4>
 		<form action='search.do' method="get">
-			<input type="text" name='toy_n'>
-			<table>
+			<table border = 0 cellpadding = 5>
 				<tr>
-					<td><select name='toy_a'>
-							<option value="">연령대
-							<option value="0~3">0-3살
-							<option value="4~7">4-7살
-					</select></td>
-					<td><select name='toy_k'>
+				<td rowspan="1">검색어:</td>
+				<td><input type="text" name='toy_n' size=22></td></tr>
+				<tr>
+					<td></td>
+					<td>
+						<select name='toy_a'>
+								<option value="">연령대
+								<option value="0~3">0-3살
+								<option value="4~7">4-7살
+						</select>
+						<select name='toy_k'>
 							<option value="">장난감종류
-							<option value="퍼즐">퍼즐,블럭
+							<option value="퍼즐조각,블록">퍼즐조각,블록
 							<option value="조작놀이">조작놀이
 							<option value="음률">음률
 							<option value="역할놀이">역할놀이
-							<option value="쏘서">쏘서
+							<option value="소서">쏘서
 							<option value="모빌">모빌
 							<option value="놀이터">놀이터
 					</select></td>
 				</tr>
 			</table>
-			<input type="submit">
+			<br>
+			<input type="image" src="../image/button/search_icon.png" width="80">
 		</form>
+		<br>
 		<hr>
+		<br>
+		<b>대여를 희망하는 장난감을 클릭하여 자세한 내용을 확인하세요.</b>
+		<br><br>
 		<table border="0" width="1000" height="600" cellspacing="0">
 			<c:forEach begin="1" step="1" end="12" var="num">
 			<c:if test="${num%4==1||num==1}">

@@ -14,7 +14,7 @@
 		<logic:present scope="session" name="id">
 		<img alt="" src="../image/giveprocess.png" width="1200px" height="350px"><br>
 		<br>
-		<form action="req_insert.do" method="post" enctype="multipart/form-data">
+		<form action="req_insert.do" method="post" name="givetoy" enctype="multipart/form-data">
 			<table>
 				<tr>
 					<td>장난감 이름:</td>
@@ -42,15 +42,15 @@
 				</tr>
 			</table>
 			<input type="hidden" name="action" value="give">
-			<br> <input type="submit" value="신청"> 
-			<input type="reset" value="초기화">
+			<br> <input type="image" src="../image/button/request_icon.png" width="80">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<img src="../image/button/allclean_icon.png" width="80" style="cursor: pointer;" onclick="document.givetoy.reset()">
 
 		</form>
 		</logic:present>
 		<logic:notPresent scope="session" name="id">
 			<form action="login.do" method="post">
-				현재 회원만 기부 신청이 가능합니다. 로그인하여 신청해주십시오.<br><br>감사합니다.<br><br>
-				<input type="submit" value="로그인">
+				<b>현재 회원만 기부 신청이 가능합니다. 로그인하여 신청해주십시오.<br><br>감사합니다.<br><br></b>
+				<input type="image" src="../image/button/login_icon.png" width="80">
 			</form>	
 		</logic:notPresent>
 		<br>

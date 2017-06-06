@@ -34,33 +34,33 @@
 				<td><input type="password" name="pass"></td>
 			</tr>
 			<tr>
-				<td align="center" colspan="2"><input type="submit" value="로그인"></td>
+				<td align="center" colspan="2"><input type="image" src="../image/button/login_icon.png" width="80"></td>
 			</tr>
 		</table>
-		<br><br>
+		<br>
 		<html:messages id="msgs" message="true">
 			<font color="red"><bean:write name="msgs"/></font>
 		</html:messages>
 		
 		<html:messages property="errorid" id="msgs">
-				<font color="blue"><bean:write name="msgs"/> </font>
+				<font color="red"><bean:write name="msgs"/> </font>
 				</html:messages>
 		<html:messages property="errorpass" id="msgs">
-				<font color="blue"><bean:write name="msgs"/></font>
+				<font color="red"><bean:write name="msgs"/></font>
 			</html:messages> <br>
-		<br>
-		<table border="0" cellspacing="0" cellpadding="3">
+		<br><br>
+		<table border="0" cellspacing="0" cellpadding="5">
 			<tr>
 				<td align="left">아이디를 잊어버렸나요?</td>
-				<td align="right"><input type="button" value="아이디 찾기" onclick="location.href='findid.do'"></td>
+				<td align="right"><img src="../image/button/idfind_icon.png" width="80" height="30" style="cursor: pointer;" onclick="location.href='findid.do'"></td>
 			</tr>
 			<tr>
 				<td align="left">비밀번호를 잊어버렸나요?</td>
-				<td align="right"><input type="button" value="비밀번호 찾기" onclick="location.href='passFound.do'"></td>
+				<td align="right"><img src="../image/button/passfind_icon.png" width="85" height="30" style="cursor: pointer;" onclick="location.href='passFound.do'"></td>
 			</tr>
 			<tr>
 				<td align="left">계정이 없으신가요?</td>
-				<td align="right"><input type="button" value="회원가입" onclick="location.href='signUp.do'"></td>
+				<td align="right"><img src="../image/button/join.png" width="80" height="30" style="cursor: pointer;" onclick="location.href='signUp.do'"></td>
 			</tr>
 		</table>
 		</form>

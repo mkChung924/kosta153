@@ -9,10 +9,74 @@ public class Toys {
 	private String add_date;
 	private String toykind;
 	private String toyage;
+	
+	private String toytotal;
+	private String rentstate;
+	private String reqstate;
+	private String damage;
+
 
 	public Toys() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+
+
+	public String getToytotal() {
+		return toytotal;
+	}
+
+
+
+
+	public void setToytotal(String toytotal) {
+		this.toytotal = toytotal;
+	}
+
+
+
+
+	public String getRentstate() {
+		return rentstate;
+	}
+
+
+
+
+	public void setRentstate(String rentstate) {
+		this.rentstate = rentstate;
+	}
+
+
+
+
+	public String getReqstate() {
+		return reqstate;
+	}
+
+
+
+
+	public void setReqstate(String reqstate) {
+		this.reqstate = reqstate;
+	}
+
+
+
+
+	public String getDamage() {
+		return damage;
+	}
+
+
+
+
+	public void setDamage(String damage) {
+		this.damage = damage;
+	}
+
+
 
 
 	public String getToy_serial() {
