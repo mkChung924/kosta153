@@ -66,7 +66,7 @@
 		</form>
 		</logic:present>
 		<logic:notPresent name="givelist" scope="request">
-		<h4>관리자 페이지<br> 기부 목록이 존재하지 않습니다.</h4>
+		<h4>기부 목록이 존재하지 않습니다.</h4>
 		</logic:notPresent>
 		<br>
 		<!--  -->

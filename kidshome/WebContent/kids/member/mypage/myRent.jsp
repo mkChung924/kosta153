@@ -55,7 +55,7 @@
 					<th>대여일</th>
 					<th>반납일</th>
 					<th>대여방법</th>
-					<th>반납여부</th>
+					<th>상태</th>
 					
 				</tr>
 				<c:forEach items="${list }" var="re">
@@ -66,7 +66,15 @@
 						<td align="center">${re.sdate }</td>
 						<td align="center">${re.edate }</td>
 						<td align="center">${re.rentmethod}</td>
-						<td align="center">${re.retstate}</td>
+						<c:if test="${re.retstate eq '대여중' && re.d eq '0' }">
+						<td align="center"><font color=red>대여중</font></td>
+						</c:if>
+						<c:if test="${re.retstate eq '대여중' && re.d != '0' }">
+						<td align="center">연체중: ${re.d }원</td>
+						</c:if>
+						<c:if test="${re.retstate eq '반납완료'}">
+						<td align="center"><font color=blue>반납완료</font></td>
+						</c:if>
 
 					</tr>
 				</c:forEach>

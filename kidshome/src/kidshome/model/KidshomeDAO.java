@@ -43,7 +43,42 @@ public class KidshomeDAO {
 		}
 		
 		return list;
+	}
+	
+	public List<Notice_Board> selectMainNotice(){
+		List<Notice_Board> list = null;
 		
+		try {
+			list = sqlMap.queryForList("kids.selectMainNotice");
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public List<Free_Board> selectMainFree(){
+		List<Free_Board> list = null;
+		
+		try {
+			list = sqlMap.queryForList("kids.selectMainFree");
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public List<Review_Board> selectMainReview(){
+		List<Review_Board> list = null;
+		
+		try {
+			list = sqlMap.queryForList("kids.selectMainReview");
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 
@@ -260,10 +295,10 @@ public class KidshomeDAO {
 	
 	//관리자가 대여신청에 대응하여 택배 또는 대여 버튼을 눌렀을 때
 	//택배 배송일 경우
-	public boolean insertRentInfoPost(HashMap map){
+	public boolean insertPost(HashMap map){
 		
 		try {
-			sqlMap.insert("kids.insertRentInfoPost", map);
+			sqlMap.insert("kids.insertPost", map);
 			return true;
 			
 		} catch (SQLException e) {
@@ -352,6 +387,63 @@ public class KidshomeDAO {
 			
 			e.printStackTrace();
 		}
+		return false;
+	}
+
+
+	
+	//장난감 반납
+	public boolean returnToy(HashMap map){
+		
+		try {
+			int t = sqlMap.update("kids.returnIt",map);
+			int t2 = sqlMap.update("kids.returnIt2",map);
+			if(t == 1 && t2 == 1) return true;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+	
+	public boolean returnedInventory(String serial){
+		
+		try {
+			int t = sqlMap.update("kids.returnInventory", serial);
+			if(t == 1) return true;
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	public boolean returnedInventoryDamaged(String serial){
+		try {
+			int t = sqlMap.update("kids.returnInventoryDamaged", serial);
+			if(t == 1) return true;
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean insertToyDamaged(HashMap map){
+		
+		try {
+			sqlMap.insert("kids.insertDamage",map);
+			return true;
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
 		return false;
 	}
 	
@@ -653,6 +745,265 @@ public class KidshomeDAO {
 		}
 		return false;
 	}
+	
+	/**********************************************************
+	 ************게시판 (공지사항, 자유게시판, 후기게시판)**************
+	************************************************************ */
+	/////////////////////공지사항///////////////////////
+	
+	public boolean insertBoard(Notice_Board notice_board){
+		try {
+			sqlMap.insert("kids.notice_insert",notice_board);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return false;
+	}//insert
+	
+	public boolean updateBoard(Notice_Board nb){
+		 try {
+				int t = sqlMap.update("kids.notice_update",nb);
+				 if(t==1) return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			 return false; 
+	}//update
+	
+	public boolean deleteBoard(int no){
+		
+		try {
+			int t = sqlMap.delete("kids.notice_delete",no);
+			if(t == 1)return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}//delete
+	
+	public Notice_Board selectBoard(int no){
+		Notice_Board noticeboard = null;
+		try {
+			noticeboard = (Notice_Board) sqlMap.queryForObject("kids.notice_selectId",no);
+			sqlMap.update("kids.notice_count",no);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return noticeboard;
+	}//select
+	
+	public List<Notice_Board> selectAllBoard(int page, int recordCount){
+		 List<Notice_Board> list=null;
+		 int end = page*recordCount;
+		 int start = end-(recordCount-1);
+		  Map<String, Integer> map = new HashMap<>();
+	      map.put("start", start);
+	      map.put("end", end);
+		 try {
+			list = sqlMap.queryForList("kids.notice_selectAll",map);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		 return list;
+	}//selectAll
+	
+	public int selectBoardCount(){
+		  int count=0; 
+		   try {
+			count = (int)sqlMap.queryForObject("kids.notice_countAll");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		  return count;
+	   }//selectCount
+	
+	/////////////////////자유게시판///////////////////////
+	
+	public boolean insertFree(Free_Board free_board){
+		try {
+			sqlMap.insert("kids.free_insert",free_board);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return false;
+	}//insert
+	
+	public boolean updateFree(Free_Board nb){
+		 try {
+				int t = sqlMap.update("kids.free_update",nb);
+				 if(t==1) return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			 return false; 
+	}//update
+	
+	public boolean deleteFree(int no){
+		
+		try {
+			int t = sqlMap.delete("kids.free_delete",no);
+			if(t == 1)return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}//delete
+	
+	public Free_Board selectFree(int no){
+		Free_Board freeboard = null;
+		try {
+			freeboard = (Free_Board) sqlMap.queryForObject("kids.free_selectId",no);
+			
+			sqlMap.update("kids.free_count",no);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return freeboard;
+	}//select
+	
+	public List<Free_Board> selectAllFree(int page, int recordCount){
+		 List<Free_Board> list=null;
+		 int end = page*recordCount;
+		 int start = end-(recordCount-1);
+		  Map<String, Integer> map = new HashMap<>();
+	      map.put("start", start);
+	      map.put("end", end);
+		 try {
+			list = sqlMap.queryForList("kids.free_selectAll",map);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		 return list;
+	}//selectAll
+	
+	
+	public int selectFreeCount(){
+		  int count=0; 
+		   try {
+			count = (int)sqlMap.queryForObject("kids.free_countAll");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		  return count;
+	   }//selectCount
+	
+	/////////////////////////////////////////////////////
+	/////////////////////후기게시판///////////////////////
+	///////////////////////////////////////////////////
+	
+	public boolean insertReview(Review_Board review_board){
+		try {
+			sqlMap.insert("kids.review_insert",review_board);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return false;
+	}//insert
+	
+	public boolean updateReview(Review_Board nb){
+		 try {
+				int t = sqlMap.update("kids.review_update",nb);
+				 if(t==1) return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			 return false; 
+	}//update
+	
+	public boolean deleteReview(int no){
+		
+		try {
+			int t = sqlMap.delete("kids.review_delete",no);
+			if(t == 1)return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}//delete
+	
+	public Review_Board selectReview(int no){
+		Review_Board reviewboard = null;
+		try {
+			reviewboard = (Review_Board) sqlMap.queryForObject("kids.review_selectId",no);
+			sqlMap.update("kids.review_count",no);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return reviewboard;
+	}//select
+	
+	public List<Review_Board> selectAllReview(int page, int recordCount){
+		 List<Review_Board> list=null;
+		 int end = page*recordCount;
+		 int start = end-(recordCount-1);
+		  Map<String, Integer> map = new HashMap<>();
+	      map.put("start", start);
+	      map.put("end", end);
+		 try {
+			list = sqlMap.queryForList("kids.review_selectAll",map);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		 return list;
+	}//selectAll
+	public int selectReviewCount(){
+		  int count=0; 
+		   try {
+			count = (int)sqlMap.queryForObject("kids.review_countAll");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		  return count;
+	   }//selectCount
+	
+	
+	///////////////////////댓글/////////////////////////////////
+	
+	public List<ReplyBeans> selectReply(Map<String, String> map) {
+		List<ReplyBeans> list = null;
+		try {
+			list = (List<ReplyBeans>) sqlMap.queryForList("kids.listReply", map);
+		} catch (SQLException e) {
+			throw new RuntimeException();
+		}
+		return list;
+	}
+
+	public void insertReply(Map<String, String> map) {
+		try {
+			sqlMap.insert("kids.insertReply",map);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException();
+		}
+	}
+
+	public void updateReply(Map<String, String> map) {
+		try {
+			sqlMap.update("kids.updateReply",map);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException();
+		}
+	}
+
+	public void deleteReply(String reply_no) {
+		try {
+			sqlMap.delete("kids.deleteReply",reply_no);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException();
+		}
+	}
+	
+	
+	/**********************************************************
+	 *******************장난감 검색, 종류별 검색 등등****************
+	************************************************************ */
 	
 	public int searchToyCount(String tn,String age,String kind){
 		int count=0;

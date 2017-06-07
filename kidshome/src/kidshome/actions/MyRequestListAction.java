@@ -99,6 +99,7 @@ public class MyRequestListAction extends Action{
 			List<RentBeans> rentList = dao.selectMyRent(id);
 			if(rentList.size() > 0){
 				request.setAttribute("list", rentList);
+				System.out.println(rentList.get(0).getD());
 				
 				for(int i = 0; i < rentList.size(); i++){
 					if(rentList.get(i).getRetstate().equals("0")){

@@ -82,22 +82,80 @@ public class ReqUpdateAction extends Action{
 			System.out.println("택배 대여, 배송완료");
 			id = request.getParameter("id");
 			serial = request.getParameter("serial");
+			method = request.getParameter("method");
 			HashMap<String,String> map2 = new HashMap<>();
 			map2.put("id", id);
 			map2.put("serial",serial);
-			if(dao.insertRentInfoPost(map2)){
-				
-				if(dao.updateStateOfInventory(serial)){
-					System.out.println("재고정보수정완료");
-				}
-				
-				if(dao.updateStateOfRentReq(map2)){
-					System.out.println("대여신청정보수정완료");
-				}
+			map2.put("rentmethod", method);
+			System.out.println(map2.get("id"));
+			System.out.println(map2.get("serial"));
+			System.out.println(map2.get("rentmethod"));
+			
+			if(dao.insertPost(map2)){
+				System.out.println("대여테이블에 추가됨");
+			}
 				
 				forward = mapping.findForward("success");
-			}
+		
 			break;	
+			
+		case "rent_req_del":
+			
+			HashMap<String,String> map3 = new HashMap<>();
+			
+			id = request.getParameter("id");
+			serial = request.getParameter("serial");
+			map3.put("id", id);
+			map3.put("serial", serial);
+			
+			if(dao.delMyRentReq(map3)){
+				if(dao.upInventory(serial)){
+					forward = mapping.findForward("success");
+				}
+			}
+				
+			break;
+			
+		case "rent_return":
+			
+			HashMap<String,String> map4 = new HashMap<>();
+			
+			id = request.getParameter("id");
+			serial = request.getParameter("serial");
+			System.out.println(id);
+			System.out.println(serial);
+			
+			
+			map4.put("id", id);
+			map4.put("serial", serial);
+			
+			if(dao.returnToy(map4)){
+				if(dao.returnedInventory(serial)){
+					forward = mapping.findForward("success");
+				}
+			}
+			break;
+			
+		case "rent_return_damage":
+			
+			HashMap<String,String> map5 = new HashMap<>();
+			
+			id = request.getParameter("id");
+			serial = request.getParameter("serial");
+			
+			map5.put("id", id);
+			map5.put("serial", serial);
+			
+			if(dao.returnToy(map5)){
+				if(dao.returnedInventoryDamaged(serial)){
+					if(dao.insertToyDamaged(map5)){
+						
+						forward = mapping.findForward("success");
+					}
+				}
+			}
+			break;
+			
 		}
 		String no = request.getParameter("no");
 		System.out.println(no);

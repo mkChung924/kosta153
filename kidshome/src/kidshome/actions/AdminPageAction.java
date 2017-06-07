@@ -1,5 +1,6 @@
 package kidshome.actions;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,7 @@ public class AdminPageAction extends Action{
 			HttpServletResponse response) throws Exception {
 		
 		String action = request.getParameter("action");
-		System.out.println(action);
+		System.out.println("AdminPageAction current action : "+action);
 		KidshomeDAO dao = new KidshomeDAO();
 		ActionForward forward = null;
 		String name = "";
@@ -203,7 +204,11 @@ public class AdminPageAction extends Action{
 				forward = mapping.findForward("success_rent");
 				
 				break;
+				
+			
 			}
+			
+			
 	
 		}
 		

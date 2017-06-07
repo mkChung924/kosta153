@@ -96,7 +96,7 @@
 		</form>
 		</logic:present>
 		<logic:notPresent name="reqlist" scope="request">
-		<h4>관리자페이지<br>장난감 신청 목록이 존재하지 않습니다.</h4>
+		<h4>장난감 신청 목록이 존재하지 않습니다.</h4>
 		</logic:notPresent>
 		<br>
 		<!--  -->

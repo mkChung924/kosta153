@@ -275,18 +275,75 @@
 		</action>
 		
 		<!-- 게시판 타일즈 -->
-		<action 
-			path="/kids/board"
-			forward=".board"/>
-		<action 
-			path="/kids/announce"
-			forward=".announceboard"/>	
-		<action 
+			<!-- 공지사항 -->
+ 		<action path="/kids/noticelist"
+				type="kidshome.actions.NoticeListAction">	
+				<forward name="success" path=".noticelist"></forward>
+		</action>
+		<action
+			path="/kids/notice"
+			forward=".notice"/>
+			
+		<action path="/kids/noticeinput"
+				type="kidshome.actions.NoticeAction">
+				<forward name="success" path="/kids/noticelist.do" redirect="true"></forward>
+		</action>
+		<action path="/kids/updel"
+				type="kidshome.actions.NoticeUpDel"
+				input="/kids/noticelist.do">
+				
+				<forward name="success" path=".noticeContents"></forward>
+				<forward name="update" path=".noticeUpdate"></forward>
+				<forward name="updateSuccess" path="/kids/noticelist.do" redirect="true"></forward>
+				<forward name="deleteSuccess" path="/kids/noticelist.do" redirect="true"></forward>		
+		</action>	
+			
+			<!-- 후기게시판 -->
+		<action path="/kids/reviewlist"
+				type="kidshome.actions.ReviewListAction">	
+				<forward name="success" path=".reviewlist"></forward>
+		</action>
+		<action
+			path="/kids/review"
+			forward=".review"/>
+		<action path="/kids/reviewinput"
+				type="kidshome.actions.ReviewAction">
+				<forward name="success" path="/kids/reviewlist.do" redirect="true"></forward>
+		</action>	
+		<action path="/kids/reviewupdel"
+				type="kidshome.actions.ReviewUpDel"
+				input="/kids/reviewlist.do">
+				<forward name="success" path=".reviewContents"></forward>
+				<forward name="update" path=".reviewUpdate"></forward>
+				<forward name="updateSuccess" path="/kids/reviewlist.do" redirect="true"></forward>
+				<forward name="deleteSuccess" path="/kids/reviewlist.do" redirect="true"></forward>	
+		</action>
+					
+			<!-- 자유게시판 -->
+		<action path="/kids/freelist"
+				type="kidshome.actions.FreeListAction">	
+				<forward name="success" path=".freelist"></forward>
+		</action>	
+		<action
 			path="/kids/free"
-			forward=".freeboard"/>	
-		<action 
-			path="/kids/after"
-			forward=".afterboard"/>		
+			forward=".free"/>
+		<action path="/kids/freeinput"
+				type="kidshome.actions.FreeAction">
+				<forward name="success" path="/kids/freelist.do" redirect="true"></forward>	
+		</action>		
+		<action path="/kids/freeupdel"
+				type="kidshome.actions.FreeUpDel"
+				input="/kidshome/freelist.do">
+				<forward name="success" path=".freeContents"></forward>
+				<forward name="update" path=".freeUpdate"></forward>
+				<forward name="updateSuccess" path="/kids/freelist.do" redirect="true"></forward>
+				<forward name="deleteSuccess" path="/kids/freelist.do" redirect="true"></forward>
+		</action>
+		
+			<!-- 댓글 -->
+		<action path="/kids/reply"
+				type="kidshome.actions.ReplyAction">
+		</action>	
 			
 		<!-- 장난감 페이지 타일즈 -->
 		<action 
@@ -518,9 +575,15 @@
       		<forward name="success_rent" path=".adRent"></forward>
       	</action>			
       		
-      		<!-- 관리자가 기부신청이나 장난감 신청, 대여신청을 수락하는 부분 -->
+      		<!-- 관리자가 기부신청이나 장난감 신청, 대여신청, 반납 작업을 하는 부분 -->
       	<action 
 			path="/kids/rentAccept"
+			type="kidshome.actions.ReqUpdateAction">
+		
+			<forward name="success" path="/kids/member/adminpage/update_result.jsp"></forward>
+		</action>
+		<action 
+			path="/kids/rentReturn"
 			type="kidshome.actions.ReqUpdateAction">
 		
 			<forward name="success" path="/kids/member/adminpage/update_result.jsp"></forward>

@@ -13,17 +13,25 @@ public class RentBeans {
 	private String edate;
 	private String retstate;
 	private String rentmethod;
+	private String d;
 	
 	public RentBeans() {
 	
 	}
-	
-	
-	
+
+	public String getD() {
+		return d;
+	}
+
+
+	public void setD(String d) {
+		this.d = d;
+	}
+
+
 	public String getToy_serial() {
 		return toy_serial;
 	}
-
 
 
 	public void setToy_serial(String toy_serial) {

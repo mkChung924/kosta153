@@ -21,18 +21,18 @@
 </select>
 
 	<!-- 공지 정보 4개 -->
-<select id="selectAnnounce1" resultClass="String">
-	select title from (select title from announce order by date desc) where rownum between 1 and 4
+<select id="selectMainNotice" resultClass="kidshome.model.Notice_Board">
+	select notice_title, to_char(gdate,'yy/mm/dd') gdate from (select notice_title, gdate from notice_board order by gdate desc) where rownum between 1 and 4
 </select>
 
 	<!-- 자유게시글 정보 4개 -->
-<select id="selectAnnounce2" resultClass="String">
-	select title from (select title from free order by date desc) where rownum between 1 and 4
+<select id="selectMainFree" resultClass="kidshome.model.Free_Board">
+	select free_title, to_char(gdate,'yy/mm/dd') gdate from (select free_title, gdate from free_board order by gdate desc) where rownum between 1 and 4
 </select>
 
 	<!-- 후기게시글 정보 4개 -->
-<select id="selectAnnounce3" resultClass="String">
-	select title from (select title from after order by date desc) where rownum between 1 and 4
+<select id="selectMainReview" resultClass="kidshome.model.Review_Board">
+	select review_title, to_char(gdate,'yy/mm/dd') gdate from (select review_title, gdate from review_board order by gdate desc) where rownum between 1 and 4
 </select>
 
 <!-- =================================================================================================== -->
@@ -163,11 +163,14 @@
 
 <!-- 나의 대여 현황 불러오기 -->
 <select id="selectMyRent" parameterClass="String" resultClass="kidshome.model.RentBeans">
-select t.toy_serial, t.toyname, t.toykind, t.toyage, to_char(r.sdate,'yyyy-mm-dd') sdate, to_char(r.edate,'yyyy-mm-dd') edate, r.retstate, r.rentmethod 
+<![CDATA[
+select t.toy_serial, t.toyname, t.toykind, t.toyage, to_char(r.sdate,'yyyy-mm-dd') sdate, to_char(r.edate,'yyyy-mm-dd') edate, r.retstate, r.rentmethod, 
+case when sysdate <= r.edate then 0 when sysdate > r.edate then round(sysdate - r.edate)*100 end as d
 from toyinfo t, rentinfo r 
 where t.toy_serial = r.toy_serial and r.id = #id#
+order by retstate, r.sdate desc
+]]>
 </select>
-
 
 
 <!-- 모든 장난감 요청 불러오기-->
@@ -209,7 +212,9 @@ where t.toy_serial = r.toy_serial and r.id = #id#
 
 <!-- 재고 정보 불러오기 -->
  <select id="selectAllInventory" resultClass="kidshome.model.Toys">
- 	select toy_serial, toyname, toykind, toyage, toyimage, toytotal,rentstate, reqstate, damage, toytotal-rentstate-reqstate-damage vacant from toyinfo natural join inventory
+ 	select toy_serial, toyname, toykind, toyage, toyimage, toytotal,rentstate, reqstate, damage, toytotal-rentstate-reqstate-damage vacant 
+ 	from toyinfo natural join inventory
+ 	order by rentstate desc
  </select>
  
  <!-- 재고의 총 재고 업데이트 하기 -->
@@ -239,28 +244,67 @@ where t.toy_serial = r.toy_serial and r.id = #id#
 </select>
 
 <!-- 모든대여 현황 불러오기 -->
-<select id="selectAllRent" resultClass="kidshome.model.RentBeans">
-select u.id, u.name, u.tel, t.toy_serial, t.toyname, t.toykind, t.toyage, to_char(r.sdate,'yyyy-mm-dd') sdate, to_char(r.edate,'yyyy-mm-dd') edate, r.retstate, r.rentmethod
+<select id="selectAllRent" resultClass="kidshome.model.RentBeans"><![CDATA[
+select u.id, u.name, u.tel, t.toy_serial, t.toyname, t.toykind, t.toyage, to_char(r.sdate,'yyyy-mm-dd') sdate, to_char(r.edate,'yyyy-mm-dd') edate, r.retstate, r.rentmethod,
+case when sysdate <= r.edate then 0 when sysdate > r.edate then round(sysdate - r.edate)*100 end as d
  from toyinfo t, rentinfo r, userinfo u 
  where t.toy_serial = r.toy_serial and r.id = u.id
+ order by retstate, r.sdate desc
+ ]]>
 </select>
 
 <!-- 이름 검색으로 대여 현황 불러오기 -->
 <select id="selectAllRentByName" resultClass="kidshome.model.RentBeans" parameterClass="String">
-select u.id, u.name, u.tel, t.toy_serial, t.toyname, t.toykind, t.toyage, to_char(r.sdate,'yyyy-mm-dd') sdate, to_char(r.edate,'yyyy-mm-dd') edate, r.retstate, r.rentmethod
+<![CDATA[
+select u.id, u.name, u.tel, t.toy_serial, t.toyname, t.toykind, t.toyage, to_char(r.sdate,'yyyy-mm-dd') sdate, to_char(r.edate,'yyyy-mm-dd') edate, 
+r.retstate, r.rentmethod, case when sysdate <= r.edate then 0 when sysdate > r.edate then round(sysdate - r.edate)*100 end as d
  from toyinfo t, rentinfo r, userinfo u 
  where t.toy_serial = r.toy_serial and r.id = u.id and u.name = #name#
+ order by r.sdate desc
+ ]]>
 </select>
 
 <!-- 전화번호 뒷자리 검색으로 대여 현황 불러오기 -->
+
 <select id="selectAllRentByTel" resultClass="kidshome.model.RentBeans" parameterClass="String">
-select u.id, u.name, u.tel, t.toy_serial, t.toyname, t.toykind, t.toyage, to_char(r.sdate,'yyyy-mm-dd') sdate, to_char(r.edate,'yyyy-mm-dd') edate, r.retstate, r.rentmethod
+<![CDATA[
+select u.id, u.name, u.tel, t.toy_serial, t.toyname, t.toykind, t.toyage, to_char(r.sdate,'yyyy-mm-dd') sdate, to_char(r.edate,'yyyy-mm-dd') edate, r.retstate, r.rentmethod,
+case when sysdate <= r.edate then 0 when sysdate > r.edate then round(sysdate - r.edate)*100 end as d
  from toyinfo t, rentinfo r, userinfo u 
  where t.toy_serial = r.toy_serial and r.id = u.id and u.tel like #tel#
+ order by r.sdate desc
+ ]]>
 </select>
+
+<!-- 반납 -->
+<update id="returnIt" parameterClass="java.util.Map">
+update rentinfo set retstate = 1 where toy_serial = #serial# and id = #id# and retstate = 0
+</update>
+<update id="returnIt2" parameterClass="java.util.Map">
+update rentedtoy set retstate = 1 where toy_serial = #serial# and id = #id# and retstate = 0
+</update>
+
+<!-- 잘 반납 -->
+<update id="returnInventory" parameterClass="String">
+update inventory set rentstate = rentstate - 1 where toy_serial = #toy_serial#
+</update>
+
+
+<!-- 훼손 반납 -->
+<update id="returnInventoryDamaged" parameterClass="String">
+update inventory set rentstate = rentstate -1, damage = damage + 1 where toy_serial = #toy_serial#
+</update>
+<insert id="insertDamage" parameterClass="java.util.Map">
+insert into damageinfo values(damageinfo_seq.nextval, #serial#, #id#, sysdate)
+</insert>
+
+
+
+
+
   
 <!-- =================================================================================================== -->
-<!-- ================================장난감 대여 가능 여부 쿼리======================================================= -->
+<!-- ================================장난감 대여 가능 여부 쿼리=============================================== -->
 <!-- =================================================================================================== -->
 <select id="checkIt" parameterClass="java.util.Map" resultClass="String">
 select count(*) cnt from rentreq where id = #id# and toy_serial = #serial# and rentstate = 0 union select count(*) cnt from rentinfo where id = #id# and toy_serial = #serial# and retstate = 0 order by cnt desc
@@ -285,8 +329,8 @@ insert into rentreq values(rentreq_seq.nextval, #serial#,#id#,0,#rentmethod#,sys
 <!-- 관리자가 대여 버튼 클릭시 -->
 
 <!-- 택배신청 - [배송완료] -->
-<insert id="insertRentInfoPost" parameterClass="java.util.Map">
-insert into rentinfo values(rentinfo_seq.nextval, #serial#, #id#, sysdate+1, sysdate+16, 0)
+<insert id="insertPost" parameterClass="java.util.Map">
+insert into rentinfo values(rentinfo_seq.nextval, #serial#, #id#, sysdate+1, sysdate+17, 0, #rentmethod#)
 </insert>
 
 <!-- 방문신청 - [대여완료] -->
@@ -294,15 +338,191 @@ insert into rentinfo values(rentinfo_seq.nextval, #serial#, #id#, sysdate+1, sys
 	insert into rentinfo values(rentinfo_seq.nextval, #serial#, #id#, sysdate, sysdate+15, 0, #rentmethod#)
 </insert>
 
-<!-- <update id="updateinventory" parameterClass="String">
-	update inventory set reqstate = reqstate - 1, rentstate = rentstate + 1 where toy_serial = #serial#
-</update>
 
-<update id="updateRentReq" parameterClass="java.util.Map">
-	update rentreq set rentstate = 1 where id = #id# and toy_serial = #serial# and rentstate = 0
-</update> -->
 
-<!--  -->
+
+<!-- =================================================================================================== -->
+<!-- ================================게시판 관련 쿼리======================================================= -->
+<!-- =================================================================================================== -->
+<!-- 자유게시판 -->
+<insert id="free_insert" parameterClass="kidshome.model.Free_Board">
+		insert into free_board (no,free_title,free_content,gdate,user_id,free_count)
+					values (free_seq.nextval,#free_title#,#free_content#,sysdate,#user_id#,1)
+	</insert>
+	
+	<select id="free_selectAll" resultClass="kidshome.model.Free_Board" parameterClass="java.util.Map">
+		<![CDATA[
+		select rn,no,free_title||'['||reply_count||']' as free_title,free_content,gdate,user_id,free_count,reply_count
+		from(
+			select rownum as rn,no,free_title,free_content,gdate,user_id,free_count,nvl(reply_count,'0') as reply_count
+			from (
+				 	select no,free_title,free_content,to_char(gdate,'yy/mm/dd') gdate,user_id,free_count
+					from free_board 
+				    ) A 
+				    left outer join
+				 	(
+				 	select count(post_no) as reply_count,post_no
+				 	from free_reply
+				 	where board_no='1' 	
+				 	group by board_no,post_no
+				 	) B
+				on A.no=B.post_no		 
+		)
+		where rn>=#start# and rn<=#end#
+		order by no desc
+		]]>
+	</select>
+	
+	<select id="free_selectId" resultClass="kidshome.model.Free_Board" parameterClass="int">
+		select no,free_title,free_content,to_char(gdate,'yy/mm/dd') gdate,user_id,free_count
+		from free_board
+		where no=#no#
+	</select>
+	
+	<update id="free_update" parameterClass="kidshome.model.Free_Board">
+		update free_board
+		set free_title=#free_title#,free_content=#free_content#, gdate=sysdate
+		where no = #no#
+	</update>
+	
+	<delete id="free_delete" parameterClass="int">
+		delete from free_board where no=#no#
+	</delete>
+	
+	<select id="free_countAll" resultClass="int">
+		select count(*) from free_board
+	</select>
+	
+	<update id="free_count"  parameterClass="int">
+		update free_board set free_count=free_count+1
+		where no=#no#
+	</update>
+	
+<!-- 공지사항 -->
+	<insert id="notice_insert" parameterClass="kidshome.model.Notice_Board">
+		insert into notice_board (no,notice_title,notice_content,gdate,user_id,notice_count)
+					values (noti_seq.nextval,#notice_title#,#notice_content#,sysdate,#user_id#,1)
+	</insert>
+	
+	<select id="notice_selectAll" resultClass="kidshome.model.Notice_Board" parameterClass="java.util.Map">
+				<![CDATA[
+		select rn,no,notice_title||'['||reply_count||']' as notice_title,notice_content,gdate,user_id,notice_count,reply_count
+		from(
+			select rownum as rn,no,notice_title,notice_content,gdate,user_id,notice_count,nvl(reply_count,'0') as reply_count
+			from (
+				 	select no,notice_title,notice_content,to_char(gdate,'yy/mm/dd') gdate,user_id,notice_count
+					from notice_board 
+				    ) A 
+				    left outer join
+				 	(
+				 	select count(post_no) as reply_count,post_no
+				 	from free_reply
+				 	where board_no='2' 	
+				 	group by board_no,post_no
+				 	) B
+				on A.no=B.post_no		 
+		)
+		where rn>=#start# and rn<=#end#
+		order by no desc
+		]]>
+	</select>
+	
+	<select id="notice_selectId" resultClass="kidshome.model.Notice_Board" parameterClass="int">
+		select no,notice_title,notice_content,to_char(gdate,'yy/mm/dd') gdate,user_id,notice_count
+		from notice_board
+		where no=#no#
+	</select>
+	
+	<update id="notice_update" parameterClass="kidshome.model.Notice_Board">
+		update notice_board
+		set notice_title=#notice_title#,notice_content=#notice_content#, gdate=sysdate
+		where no = #no#
+	</update>
+	
+	<delete id="notice_delete" parameterClass="int">
+		delete from notice_board where no=#no#
+	</delete>
+	
+	<select id="notice_countAll" resultClass="int">
+		select count(*) from notice_board
+	</select>
+	
+	<update id="notice_count"  parameterClass="int">
+		update notice_board set notice_count=notice_count+1
+		where no=#no#
+	</update>
+
+<!-- 후기게시판 -->
+<insert id="review_insert" parameterClass="kidshome.model.Review_Board">
+		insert into review_board (no,review_title,review_content,gdate,user_id,review_count)
+					values (review_seq.nextval,#review_title#,#review_content#,sysdate,#user_id#,1)
+	</insert>
+	
+	<select id="review_selectAll" resultClass="kidshome.model.Review_Board"  parameterClass="java.util.Map">
+		<![CDATA[
+		select rn,no,review_title||'['||reply_count||']' as review_title,review_content,gdate,user_id,review_count,reply_count
+		from(
+			select rownum as rn,no,review_title,review_content,gdate,user_id,review_count,nvl(reply_count,'0') as reply_count
+			from (
+				 	select no,review_title,review_content,to_char(gdate,'yy/mm/dd') gdate,user_id,review_count
+					from review_board 
+				    ) A 
+				    left outer join
+				 	(
+				 	select count(post_no) as reply_count,post_no
+				 	from free_reply
+				 	where board_no='0' 	
+				 	group by board_no,post_no
+				 	) B
+				on A.no=B.post_no		 
+		)
+		where rn>=#start# and rn<=#end#
+		order by no desc
+		]]>
+	</select>
+	
+	<select id="review_selectId" resultClass="kidshome.model.Review_Board" parameterClass="int">
+		select no,review_title,review_content,to_char(gdate,'yy/mm/dd') gdate,user_id,review_count
+		from review_board
+		where no=#no#
+	</select>
+	
+	<update id="review_update" parameterClass="kidshome.model.Review_Board">
+		update review_board
+		set review_title=#review_title#,review_content=#review_content#, gdate=sysdate
+		where no = #no#
+	</update>
+	
+	<delete id="review_delete" parameterClass="int">
+		delete from review_board where no=#no#
+	</delete>
+	
+	<select id="review_countAll" resultClass="int">
+		select count(*) from review_board
+	</select>
+	
+	<update id="review_count"  parameterClass="int">
+		update review_board set review_count=review_count+1
+		where no=#no#
+	</update>
+
+<!-- 댓글 -->
+ <select id="listReply" parameterClass="java.util.Map" resultClass="kidshome.model.ReplyBeans">
+	<![CDATA[select reply_no,user_id,content,gdate from free_reply where board_no=#board_no# and post_no=#post_no#]]>
+ </select>
+ 
+ <insert id="insertReply" parameterClass="java.util.Map">
+ 	<![CDATA[insert into free_reply values(reply_seq.nextval,#post_no#,#board_no#,#user_id#,#content#,sysdate)]]>
+ </insert>
+ 
+ <update id="updateReply" parameterClass="java.util.Map">
+ 	update free_reply set content=#content# where reply_no=#reply_no#
+ </update>
+ 
+ <delete id="deleteReply" parameterClass="String">
+ 	delete free_reply where reply_no=#reply_no#
+ </delete>
+
 <!-- =================================================================================================== -->
 <!-- ================================장난감 페이지 쿼리======================================================= -->
 <!-- =================================================================================================== -->

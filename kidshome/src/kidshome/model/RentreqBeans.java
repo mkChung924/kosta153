@@ -13,19 +13,25 @@ public class RentreqBeans {
 	private String reqdate;
 	private String toy_serial;
 	private String rentmethod;
+	private String d;
 	
 	public RentreqBeans() {
 	
 	}
-	
-	
-	
-	
-	public String getTel() {
-		return tel;
+
+
+	public String getD() {
+		return d;
 	}
 
 
+	public void setD(String d) {
+		this.d = d;
+	}
+
+	public String getTel() {
+		return tel;
+	}
 
 
 	public void setTel(String tel) {

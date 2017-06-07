@@ -190,9 +190,9 @@ a{
 				<li class="topMenuLi">
 				<a class="menuLink" id="flip5">게시판</a>
 				<ul class="submenu" id="panel5">
-						<li><a class="submenuLink" href="announce.do">공지사항</a></li>
-						<li><a class="submenuLink" href="free.do">자유게시판</a></li>
-						<li><a class="submenuLink" href="after.do">후기게시판</a></li>
+						<li><a class="submenuLink" href="noticelist.do">공지사항</a></li>
+						<li><a class="submenuLink" href="freelist.do">자유게시판</a></li>
+						<li><a class="submenuLink" href="reviewlist.do">후기게시판</a></li>
 				</ul></li>
 		
 			</ul>

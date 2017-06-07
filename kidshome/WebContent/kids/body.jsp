@@ -1,6 +1,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -103,48 +104,60 @@
 	<br><br>
 	<table border=0 cellspacing="0" cellpadding="1" width="1300">
 		<tr>
-			<td align="right"><a href='#'><font color="black">공지사항 보기</font></a></td>
-			<td align="right"><a href='#'><font color="black">자유글 더보기</font></a></td>
-			<td align="right"><a href='#'><font color="black">후기글 더보기</font></a></td>
+			<td align="right"><a href='noticelist.do'><font color="black">공지사항 보기</font></a></td>
+			<td align="right"><a href='freelist.do'><font color="black">자유글 더보기</font></a></td>
+			<td align="right"><a href='reviewlist.do'><font color="black">후기글 더보기</font></a></td>
 		</tr>
 	</table>
-	<table border=1 cellspacing="0" cellpadding="1" width="1300">
+	<table border=0 cellspacing="0" cellpadding="1" width="1300">
 		<tr>
 			<td align="center" width="433">
-				<table border="0" cellspacing="1" width="100%">
+				<table border="1" cellspacing="0" width="100%" cellpadding="5">
 				<tr>
-					<td align="center">공지사항</td>
+					<th bgcolor="#FFA7A7">제목</th>
+					<th bgcolor="#FFA7A7">날짜</th>
 				</tr>
-				<tr>
-					<td>게시글</td>
+				<c:forEach items="${mainNotice }" var="notice">
+				<tr align="center">
+					<td>${notice.notice_title }</td>
+					<td>${notice.gdate }</td>
 				</tr>
+				</c:forEach>
 				</table>
 				
 			</td>
 			<td align="center" width="433">
-				<table border="0" cellspacing="1" width="100%">
+				<table border="1" cellspacing="0" width="100%" cellpadding="5">
 				<tr>
-					<td align="center">자유 게시판</td>
+					<th bgcolor="#86E57F">제목</th>
+					<th bgcolor="#86E57F">날짜</th>
 				</tr>
-				<tr>
-					<td>게시글</td>
+				<c:forEach items="${mainFree }" var="free">
+				<tr align="center">
+					<td>${free.free_title }</td>
+					<td>${free.gdate }</td>
 				</tr>
+				</c:forEach>
 				</table>
 			</td>	
 			<td align="center" width="433">
-				<table border="0" cellspacing="1" width="100%">
+				<table border="1" cellspacing="0" width="100%" cellpadding="5">
 				<tr>
-					<td align="center">후기 게시판</td>
+					<th bgcolor="#B2EBF4">제목</th>
+					<th bgcolor="#B2EBF4">날짜</th>
 				</tr>
-				<tr>
-					<td>게시글</td>
+				<c:forEach items="${mainReview }" var="review">
+				<tr align="center">
+					<td>${review.review_title }</td>
+					<td>${review.gdate }</td>
 				</tr>
+				</c:forEach>
 				</table>
 			</td>		
 		</tr>
 	</table>
 </div>
-
+<br><br><br><br><br><br>
 </center>
 </body>
 </html>

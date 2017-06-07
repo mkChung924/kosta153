@@ -73,15 +73,44 @@
 		<put name="body" value="/kids/board/boardbody.jsp"></put>
 		<put name="footer" value="/kids/footer.jsp"></put>
 	</definition>
-	<definition name=".freeboard" extends=".board">
-		<put name="body" value="/kids/board/free.jsp"></put>
+	<definition name=".freelist" extends=".board">
+		<put name="body" value="/kids/board/freelist.jsp"></put>
 	</definition>	
-	<definition name=".announceboard" extends=".board">
-		<put name="body" value="/kids/board/ann.jsp"></put>
+	<definition name=".free" extends=".board">
+		<put name="body" value="/kids/board/freeboard.jsp"></put>
 	</definition>
-	<definition name=".afterboard" extends=".board">
-		<put name="body" value="/kids/board/after.jsp"></put>
-	</definition>		
+	<definition name=".freeContents" extends=".board">
+		<put name="body" value="/kids/board/freeContents.jsp"></put>
+	</definition>
+	<definition name=".freeUpdate" extends=".board">
+		<put name="body" value="/kids/board/freeupdate.jsp"></put>
+	</definition>	
+	
+	<definition name=".noticelist" extends=".board">
+		<put name="body" value="/kids/board/noticelist.jsp"></put>
+	</definition>
+	<definition name=".notice" extends=".board">
+		<put name="body" value="/kids/board/noticeboard.jsp"></put>
+	</definition>
+	<definition name=".noticeContents" extends=".board">
+		<put name="body" value="/kids/board/noticeContents.jsp"></put>
+	</definition>
+	<definition name=".noticeUpdate" extends=".board">
+		<put name="body" value="/kids/board/noticeupdate.jsp"></put>
+	</definition>
+	
+	<definition name=".reviewlist" extends=".board">
+		<put name="body" value="/kids/board/reviewlist.jsp"></put>
+	</definition>	
+	<definition name=".review" extends=".board">
+		<put name="body" value="/kids/board/reviewboard.jsp"></put>	
+	</definition>
+	<definition name=".reviewContents" extends=".board">
+		<put name="body" value="/kids/board/reviewContents.jsp"></put>
+	</definition>
+	<definition name=".reviewUpdate" extends=".board">
+		<put name="body" value="/kids/board/reviewupdate.jsp"></put>
+	</definition>
 	
 	<!-- 장난감 -->
 	<definition name=".toy" path="/kids/toy/toy.jsp">

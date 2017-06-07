@@ -12,13 +12,13 @@
 	
 	function returnedIt(id, serial){ //등록 요청
 		
-		alert(id + ", " + serial);
+		//alert(id + ", " + serial);
 		
- 		if(confirm('대여 수락을 하시겠습니까?') == true){
+ 		if(confirm('반납을 하시겠습니까?') == true){
 			
 			//alert(id + ", " + serial);
 			var params = 'id='+id+'&serial='+serial;
-			new ajax.xhr.Request('Req.do?action=acceptRentVisit',params,acceptVisitResult,'POST');
+			new ajax.xhr.Request('rentReturn.do?action=rent_return',params,returnedItResult,'POST');
 		}
 	return;
 		
@@ -41,11 +41,11 @@
 	function returnedItDamaged(id, serial){ //등록 요청
 		
 		
-		if(confirm('택배 배송을 완료하였나요?') == true){
+		if(confirm('훼손된 반납을 완료하였나요?') == true){
 			
 			//alert(id + ", " + serial);
 			var params = 'id='+id+'&serial='+serial;
-			new ajax.xhr.Request('Req.do?action=acceptRentPost',params,acceptPostResult,'POST');
+			new ajax.xhr.Request('rentReturn.do?action=rent_return_damage',params,returnedItDamagedResult,'POST');
 		}
 	return;
 		
@@ -128,7 +128,7 @@
 					<th>대여일</th>
 					<th>반납일</th>
 					<th>대여 방법</th>
-					<th>반납 여부</th>
+					<th>상태</th>
 					<th></th>
 					<th></th>
 				</tr>
@@ -136,7 +136,7 @@
 				<c:if test="${status.count%2==0 }">
 					<tr bgcolor="#FFD8D8">
 					</c:if>
-						<td align="center">${re.id}</td>
+						<td align="center">${re.id.substring(0,re.id.length()-3)}***</td>
 						<td align="center">${re.name}</td>
 						<td align="center">${re.tel.substring(0,4)}****${re.tel.substring(8,13) }</td>
 						<td align="center"><a href='toydetail.do?serial=${re.toy_serial}'><font color=green>${re.toy_serial}</font></a></td>
@@ -146,10 +146,15 @@
 						<td align="center">${re.sdate }</td>
 						<td align="center">${re.edate }</td>
 						<td align="center">${re.rentmethod}</td>
-						<td align="center">${re.retstate}</td>
-						<c:if test="${re.retstate == '대여중' }">
-						<td align="center"><input type="button" value="반납" style="font-size: 100px" onclick=""></td>
-						<td align="center"><input type="button" value="훼손반납" style="font-size: 100px" onclick=""></td>
+						<c:if test="${re.retstate eq '대여중' && re.d eq '0' }">
+						<td align="center">대여중</td>
+						</c:if>
+						<c:if test="${re.retstate eq '대여중' && re.d != '0' }">
+						<td align="center">연체중: ${re.d }원</td>
+						</c:if>
+						<c:if test="${re.retstate == '대여중'}">
+						<td align="center"><input type="button" value="반납" style="font-size: 100px" onclick="returnedIt('${re.id}','${re.toy_serial }')"></td>
+						<td align="center"><input type="button" value="훼손반납" style="font-size: 100px" onclick="returnedItDamaged('${re.id}','${re.toy_serial }')"></td>
 						</c:if>
 						<c:if test="${re.retstate == '반납완료' }">
 						<td align="center">반납완료</td>

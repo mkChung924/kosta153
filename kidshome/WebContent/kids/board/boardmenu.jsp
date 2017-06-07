@@ -39,9 +39,9 @@
 <body>
 <div class="menu">
 <ul>
-	<li><html:link action="/kids/announce">공지사항</html:link>
-	<li><html:link action="/kids/free">자유 게시판</html:link>
-	<li><html:link action="/kids/after">후기 게시판</html:link>
+	<li><html:link action="/kids/noticelist">공지사항</html:link>
+	<li><html:link action="/kids/freelist">자유 게시판</html:link>
+	<li><html:link action="/kids/reviewlist">후기 게시판</html:link>
 </ul>
 </div>
 </body>

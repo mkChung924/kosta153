@@ -20,7 +20,7 @@
 			<td height="40">
 				<table align="center" border=0 cellspacing="0" cellpadding="1" height="100%">
 					<tr>
-						<td bgcolor="pink" width="1300px" align="center">
+						<td bgcolor="#FFEBFE" width="1300px" align="center">
 						<tiles:insert attribute="menu"/>
 						</td>
 					</tr>

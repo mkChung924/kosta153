@@ -12,7 +12,7 @@
 	
 	function acceptRentVisit(id, serial, rentmethod){ //등록 요청
 		
-		alert(id + ", " + serial);
+		//alert(id + ", " + serial);
 		
  		if(confirm('대여 수락을 하시겠습니까?') == true){
 			
@@ -39,14 +39,14 @@
 		}
 	}
 	
-	function acceptRentPost(id, serial){ //등록 요청
+	function acceptRentPost(id, serial, rentmethod){ //등록 요청
 		
 		
 		if(confirm('택배 배송을 완료하였나요?') == true){
 			
 			//alert(id + ", " + serial);
-			var params = 'id='+id+'&serial='+serial;
-			new ajax.xhr.Request('Req.do?action=acceptRentPost',params,acceptPostResult,'POST');
+			var params = 'id='+id+'&serial='+serial+'&method='+rentmethod;
+			new ajax.xhr.Request('rentAccept.do?action=acceptRentPost',params,acceptPostResult,'POST');
 		}
 	return;
 		
@@ -90,6 +90,32 @@
 				
 	}
 	
+	function delRentReq(id, serial){ //등록 요청
+		
+		if(confirm('정말 신청을 취소하시겠습니까?') == true){
+			
+			//alert(id + ", " + serial);
+			var params = 'id='+id+'&serial='+serial;
+			new ajax.xhr.Request('rentAccept.do?action=rent_req_del',params,agreeResult,'POST');
+		}
+	return;
+		
+	}
+	
+	function agreeResult(xhr){ //콜백
+		if(xhr.readyState == 4){
+			if(xhr.status == 200){
+				
+				//alert(xhr.responseText.trim());
+				location.reload();
+				
+			} else {
+				alert('에러발생');
+				
+			}
+		}
+	}
+	
 </script>
 </head>
 <body>
@@ -119,8 +145,9 @@
 			<table border="1" cellpadding="5" width="1300">
 				<tr bgcolor="#F15F5F">
 					<th>번호</th>
-					<th>신청자 성명</th>
-					<th>신청자 전화번호</th>
+					<th>아이디</th>
+					<th>성명</th>
+					<th>전화번호</th>
 					<th>장난감 시리얼</th>
 					<th>장난감 이름</th>
 					<th>종류</th>
@@ -128,13 +155,15 @@
 					<th>대여 여부</th>
 					<th>대여 방법</th>
 					<th>신청날짜</th>
-					<th></th>
+					<th>수락</th>
+					<th>삭제</th>
 				</tr>
 				<c:forEach items="${list }" var="re" varStatus="status">
 				<c:if test="${status.count%2==0 }">
 					<tr bgcolor="#FFD8D8">
 					</c:if>
 						<td align="center">${re.no}</td>
+						<td align="center">${re.id.substring(0,re.id.length()-3)}***</td>
 						<td align="center">${re.name}</td>
 						<td align="center">${re.tel.substring(0,4)}****${re.tel.substring(8,13) }</td>
 						<td align="center">${re.toy_serial}</td>
@@ -149,9 +178,11 @@
 						</c:if>
 						<c:if test="${re.rentmethod == '방문' && re.rentstate == '대여 대기'}">
 						<td align="center"><input type="button" value="대여" style="font-size: 100px" onclick="acceptRentVisit('${re.id }','${re.toy_serial}','${re.rentmethod }')"></td>
+						<td align="center"><input type="submit" value="삭제" onclick="delRentReq('${re.id}', '${re.toy_serial }')"></td>
 						</c:if>
 						<c:if test="${re.rentmethod == '택배' }">
 						<td align="center"><input type="button" value="배송" style="font-size: 100px" onclick="acceptRentPost('${re.id }','${re.toy_serial}','${re.rentmethod }')"></td>
+						<td align="center"><input type="submit" value="삭제" onclick="delRentReq('${re.id}', '${re.toy_serial }')"></td>
 						</c:if>
 
 					</tr>
