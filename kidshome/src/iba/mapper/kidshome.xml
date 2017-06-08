@@ -276,6 +276,15 @@ case when sysdate <= r.edate then 0 when sysdate > r.edate then round(sysdate - 
  ]]>
 </select>
 
+
+ <select id="trssa" resultClass="kidshome.model.RentreqBeans" parameterClass="String">
+  select userinfo.id, name, rentmethod, to_char(reqdate,'yyyy/mm/dd hh24:mi:ss') reqdate from userinfo, rentreq where userinfo.id = rentreq.id and toy_serial = #serial#
+ </select>
+ <select id="trssa2" resultClass="kidshome.model.RentBeans" parameterClass="String">
+select id, name, to_char(sdate,'yyyy-mm-dd') sdate, to_char(edate,'yyyy-mm-dd') edate, toyname from userinfo natural join toyinfo natural join rentinfo where retstate=0 and toy_serial = #serial#
+ </select>
+
+
 <!-- 반납 -->
 <update id="returnIt" parameterClass="java.util.Map">
 update rentinfo set retstate = 1 where toy_serial = #serial# and id = #id# and retstate = 0
@@ -313,7 +322,6 @@ select count(*) cnt from rentreq where id = #id# and toy_serial = #serial# and r
 <select id="countMaximum" parameterClass="String" resultClass="String">
 select count(*) cnt from rentreq where id = #id# and rentstate = 0 union select count(*) cnt from rentinfo where id = #id# and retstate = 0 order by cnt desc
 </select>
-
 <select id="checkVacant" parameterClass="String" resultClass="int">
 select toytotal-rentstate-reqstate-damage vacant from inventory where toy_serial = #toy_serial#
 </select>

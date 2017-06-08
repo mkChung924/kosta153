@@ -6,11 +6,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+
+   function check(){
+   form = document.givetoy;
+      if (form.toyname.value == ""){
+         alert('장난감 이름을 입력해주세요.');
+      }else if(form.toydesc.value == ""){
+         alert('장난감 설명을 간략하게 입력해주세요.');
+  	 }else{
+  		 form.submit();
+  	 }
+   }
+   </script>
 </head>
 <body>
 	<center>
-		
-		
+
 		<logic:present scope="session" name="id">
 		<img alt="" src="../image/giveprocess.png" width="1200px" height="350px"><br>
 		<br>
@@ -22,7 +34,7 @@
 				</tr>
 				<tr>
 					<td>장난감 설명:</td>
-					<td><textarea rows="9" cols="50" name="toydesc">#간략한 설명 부탁드립니다.</textarea></td>
+					<td><textarea rows="9" cols="50" name="toydesc"></textarea></td>
 				</tr>
 				<tr>
 					<td>사진 첨부:</td>
@@ -42,7 +54,7 @@
 				</tr>
 			</table>
 			<input type="hidden" name="action" value="give">
-			<br> <input type="image" src="../image/button/request_icon.png" width="80">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<br> <img src="../image/button/request_icon.png" width="80" style="cursor: pointer;" onclick="check()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<img src="../image/button/allclean_icon.png" width="80" style="cursor: pointer;" onclick="document.givetoy.reset()">
 
 		</form>

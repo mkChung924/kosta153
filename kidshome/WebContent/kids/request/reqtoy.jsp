@@ -6,6 +6,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+
+   function check(){
+   form = document.reqtoy;
+      if (form.toyname.value == ""){
+         alert('장난감 이름을 입력해주세요.');
+      }else if(form.toydesc.value == ""){
+         alert('신청 이유를 입력해주세요.');
+  	 }else{
+  		 form.submit();
+  	 }
+   }
+</script>
 </head>
 <body>
 	<center>
@@ -20,14 +33,14 @@
 				</tr>
 				<tr>
 					<td>신청 이유:</td>
-					<td><textarea rows="7" cols="50" name="toydesc">#간략한 설명 부탁드립니다.</textarea></td>
+					<td><textarea rows="7" cols="50" name="toydesc"></textarea></td>
 				</tr>
 				<tr>
 					<td>사진 첨부:</td>
 					<td><input type="file" name="pic"><br></td>
 				</tr>
 			</table>
-			<br> <input type="image" src="../image/button/request_icon.png" width="80">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<br> <img src="../image/button/request_icon.png" style="cursor: pointer;" width="80" onclick="check()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<img src="../image/button/allclean_icon.png" width="80" style="cursor: pointer;" onclick="document.reqtoy.reset()">
 		</form>
 		</logic:present>

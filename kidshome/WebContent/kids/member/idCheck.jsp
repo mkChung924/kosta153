@@ -19,23 +19,26 @@
 	}
 	
 	function Check(){
-		form = document.checkF;
-		
-		id = form.idCheck.value;
-		
-		var idExp = /^[a-zA-Z0-9]{5,10}$/g;
-	
-		if(id == ""){
-			alert('값을 입력 해 주세요.');
-		}else if(id.indexOf(" ")> -1 || 
-				id.indexOf("\t")>=0 ||id.indexOf("\n")>-1){
-			alert('값의 공백이 있습니다.')
-		}else if(!idExp.test(id)){
-	         alert('아이디 형식이 옳지 않습니다.');
-		}else{
-		 form.submit();
-		}
-	}
+	      form = document.checkF;
+	      
+	      id = form.idCheck;
+	      
+	      var idExp = /^[a-zA-Z0-9]{5,10}$/g;
+	   
+	      if(id.value == ""){
+	         alert('값을 입력 해 주세요.');
+	      }else if(id.value.indexOf(" ")> -1 || 
+	            id.value.indexOf("\t")>=0 ||id.value.indexOf("\n")>-1){
+	         alert('값의 공백이 있습니다.')
+	      }else if(!idExp.test(id.value)){
+	            alert('아이디 형식이 옳지 않습니다.');
+	               id.value ='';
+	               id.focus();
+	               
+	      }else{
+	       form.submit();
+	      }
+	   }
 </script>
 </head>
 <body>

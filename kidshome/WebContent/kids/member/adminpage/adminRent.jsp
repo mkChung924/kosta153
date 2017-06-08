@@ -10,7 +10,7 @@
 <script type="text/javascript" src="../js/ajax2.js"></script>
 <script type="text/javascript">
 	
-	function returnedIt(id, serial){ //등록 요청
+	function returnedIt(id, serial, fine){ //반납 요청
 		
 		//alert(id + ", " + serial);
 		
@@ -38,7 +38,7 @@
 		}
 	}
 	
-	function returnedItDamaged(id, serial){ //등록 요청
+	function returnedItDamaged(id, serial, fine){ //등록 요청
 		
 		
 		if(confirm('훼손된 반납을 완료하였나요?') == true){
@@ -153,8 +153,8 @@
 						<td align="center">연체중: ${re.d }원</td>
 						</c:if>
 						<c:if test="${re.retstate == '대여중'}">
-						<td align="center"><input type="button" value="반납" style="font-size: 100px" onclick="returnedIt('${re.id}','${re.toy_serial }')"></td>
-						<td align="center"><input type="button" value="훼손반납" style="font-size: 100px" onclick="returnedItDamaged('${re.id}','${re.toy_serial }')"></td>
+						<td align="center"><input type="button" value="반납" style="font-size: 100px" onclick="returnedIt('${re.id}','${re.toy_serial }','${re.d })"></td>
+						<td align="center"><input type="button" value="훼손반납" style="font-size: 100px" onclick="returnedItDamaged('${re.id}','${re.toy_serial }','${re.d }')"></td>
 						</c:if>
 						<c:if test="${re.retstate == '반납완료' }">
 						<td align="center">반납완료</td>

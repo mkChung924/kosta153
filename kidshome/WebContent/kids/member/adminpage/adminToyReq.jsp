@@ -13,7 +13,7 @@
 
 		alert(num);
 		var params = 'no='+num
-		new ajax.xhr.Request('Req.do?action=toyreq',params,agreeResult,'POST');
+		new ajax.xhr.Request('rentAccept.do?action=toyreq',params,agreeResult,'POST');
 	}
 	
 	function agreeResult(xhr){ //콜백
@@ -34,7 +34,7 @@
 
 		alert(num);
 		var params = 'no='+num
-		new ajax.xhr.Request('Req.do?action=toyreq_no',params,disagreeResult,'POST');
+		new ajax.xhr.Request('rentAccept.do?action=toyreq_no',params,disagreeResult,'POST');
 	}
 	
 	function disagreeResult(xhr){ //콜백

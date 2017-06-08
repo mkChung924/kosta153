@@ -11,9 +11,9 @@
 <script>
 	function agreeReq(num){ //등록 요청
 
-		alert(num);
+		//alert(num);
 		var params = 'no='+num
-		new ajax.xhr.Request('Req.do?action=givereq',params,agreeResult,'POST');
+		new ajax.xhr.Request('rentAccept.do?action=givereq',params,agreeResult,'POST');
 	}
 	
 	function agreeResult(xhr){ //콜백

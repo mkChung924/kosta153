@@ -239,5 +239,11 @@
 	<definition name=".adRent" extends=".mypage">
 		<put name="body" value="/kids/member/adminpage/adminRent.jsp"></put>
 	</definition>
+	<definition name=".rentreqstate" extends=".mypage">
+		<put name="body" value="/kids/member/adminpage/reqstate.jsp"></put>
+	</definition>
+	<definition name=".rentstate" extends=".mypage">
+		<put name="body" value="/kids/member/adminpage/rentstate.jsp"></put>
+	</definition>
 
 </tiles-definitions>

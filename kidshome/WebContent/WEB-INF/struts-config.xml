@@ -537,6 +537,16 @@
 			
 			<forward name="success" path="/kids/inventory.do"/>
 		</action>
+		
+		
+		<action 
+			path="/kids/toyreqstate" 
+			type="kidshome.actions.RentReqStateAction">
+			
+			<forward name="success_req" path=".rentreqstate"></forward>
+			<forward name="success_rent" path=".rentstate"></forward>
+		</action>	
+	
 			
 			<!-- 총 재고 업데이트 -->
 		<action path="/kids/updateTotalInventory" 

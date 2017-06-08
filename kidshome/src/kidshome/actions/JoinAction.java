@@ -36,7 +36,7 @@ public class JoinAction extends Action{
 		String email = request.getParameter("email");
 		String birth= year+"-"+month+"-"+day;
 		String addr= addr1+"-"+addr2;
-		String secure_code = request.getParameter("secure_code ");
+		String secure_code = request.getParameter("secure_code");
 		String secure_ans= request.getParameter("secure_ans");
 		
 		System.out.println(id);

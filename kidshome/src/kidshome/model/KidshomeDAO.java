@@ -475,6 +475,31 @@ public class KidshomeDAO {
 		return false;
 	}//delete
 	
+	//대여중인 회원 확인
+	public ArrayList<RentBeans> selectRentState(String serial) {
+		ArrayList<RentBeans> list = null;
+		try {
+			list = (ArrayList<RentBeans>) sqlMap.queryForList("kids.trssa2", serial);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+
+	}
+	//대여 신청 중인 회원 확인
+	public ArrayList<RentreqBeans> selectRentReqState(String serial) {
+		ArrayList<RentreqBeans> list = null;
+		try {
+			list = (ArrayList<RentreqBeans>) sqlMap.queryForList("kids.trssa", serial);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+
+	}
+	
+	
+	
 	/*
 	 * 회원가입
 	 */

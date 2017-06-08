@@ -59,8 +59,18 @@
 						<td>${toyinfo.toyage}세</td>
 						<td>${toyinfo.toyimage}</td>
 						<td><input type="text" size="7" id=${stat.count } style="text-align: right; font-size: 15px;" name="total" value="${toyinfo.toytotal}"></td>
+						<c:if test="${toyinfo.rentstate != '0' }">
+						<td><a href="toyreqstate.do?action=rent&serial=${toyinfo.toy_serial }">${toyinfo.rentstate}</a>
+						</c:if>
+						<c:if test="${toyinfo.rentstate == '0' }">
 						<td>${toyinfo.rentstate}</td>
+						</c:if>
+						<c:if test="${toyinfo.reqstate != '0' }">
+						<td><a href="toyreqstate.do?action=rentreq&serial=${toyinfo.toy_serial }">${toyinfo.reqstate}</a></td>
+						</c:if>
+						<c:if test="${toyinfo.reqstate == '0' }">
 						<td>${toyinfo.reqstate}</td>
+						</c:if>
 						<td>${toyinfo.damage}</td>
 						<td>${toyinfo.vacant}</td>
 						<td><input type="button" value="변경" style="font-size: 100px" onclick="update('${toyinfo.toy_serial }','${stat.count}')"> </td>

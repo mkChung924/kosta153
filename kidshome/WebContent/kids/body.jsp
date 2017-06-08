@@ -30,10 +30,11 @@
             <div class="images" style="display:block">
                 <img src="../image/slidetoy.png" width="1300px">
             </div>
-            <div class="images"><img src="../image/daum.jpg" width="1300px"></div>
-            <div class="images"><img src="../image/slidetoy.png" width="1300px"></div>
-            <div class="images"><img src="../image/nate.jpg" width="1300px"></div>
-            <div class="images"><img src="../image/slidetoy.png" width="1300px"></div>
+            <div class="images"><img src="../image/kidshome_intro.png" width="1300px"></div>
+            <div class="images"><img src="../image/kidshome_team.png" width="1300px"></div>
+            <div class="images"><img src="../image/kidshome_event.png" width="1300px"></div>
+            <div class="images"><img src="../image/kidshome_review_event.png" width="1300px"></div>
+            
         </div>
 </div>
 
@@ -109,7 +110,7 @@
 			<td align="right"><a href='reviewlist.do'><font color="black">후기글 더보기</font></a></td>
 		</tr>
 	</table>
-	<table border=0 cellspacing="0" cellpadding="1" width="1300">
+	<table border=0 cellspacing="0" cellpadding="5" width="1300">
 		<tr>
 			<td align="center" width="433">
 				<table border="1" cellspacing="0" width="100%" cellpadding="5">
