@@ -13,11 +13,10 @@
 	function returnedIt(id, serial, fine){ //반납 요청
 		
 		//alert(id + ", " + serial);
-		
- 		if(confirm('반납을 하시겠습니까?') == true){
+ 		if(confirm('반납을 하시겠습니까?\n\n연체료는 '+fine+'원 입니다.') == true){
 			
 			//alert(id + ", " + serial);
-			var params = 'id='+id+'&serial='+serial;
+			var params = 'id='+id+'&serial='+serial+'&fine='+fine;
 			new ajax.xhr.Request('rentReturn.do?action=rent_return',params,returnedItResult,'POST');
 		}
 	return;
@@ -40,11 +39,10 @@
 	
 	function returnedItDamaged(id, serial, fine){ //등록 요청
 		
-		
-		if(confirm('훼손된 반납을 완료하였나요?') == true){
+		if(confirm('훼손된 반납을 하시겠습니까?\n\n수리 비용은 회사 규제에 따라 책정하시기 바랍니다.\n\n연체료는 '+fine+'원 입니다.') == true){
 			
 			//alert(id + ", " + serial);
-			var params = 'id='+id+'&serial='+serial;
+			var params = 'id='+id+'&serial='+serial+'&fine='+fine;
 			new ajax.xhr.Request('rentReturn.do?action=rent_return_damage',params,returnedItDamagedResult,'POST');
 		}
 	return;
@@ -96,7 +94,7 @@
 	<center>
 		<logic:present name="id" scope="session">
 		<logic:notPresent name="list" scope="request">
-		<h3>대여 신청이 존재하지 않습니다.</h3><br><br>
+		<h3>대여중인 장난감이 존재하지 않습니다.</h3><br><br>
 		</logic:notPresent>
 		<logic:present name="list" scope="request">
 		<h3>대여 현황</h3>
@@ -115,7 +113,7 @@
 			</tr>		
 			</table>
 			<br>
-			<table border="1" cellpadding="5" width="1300">
+			<table border="1" cellpadding="6" width="1300" cellspacing="1">
 				<tr bgcolor="#F15F5F">
 
 					<th>신청자 아이디</th>
@@ -129,8 +127,7 @@
 					<th>반납일</th>
 					<th>대여 방법</th>
 					<th>상태</th>
-					<th></th>
-					<th></th>
+					
 				</tr>
 				<c:forEach items="${list }" var="re" varStatus="status">
 				<c:if test="${status.count%2==0 }">
@@ -147,17 +144,17 @@
 						<td align="center">${re.edate }</td>
 						<td align="center">${re.rentmethod}</td>
 						<c:if test="${re.retstate eq '대여중' && re.d eq '0' }">
-						<td align="center">대여중</td>
+						<td align="center"><font color=red>대여중</font></td>
 						</c:if>
 						<c:if test="${re.retstate eq '대여중' && re.d != '0' }">
-						<td align="center">연체중: ${re.d }원</td>
+						<td align="center"><font color=red><b>연체중: ${re.d }원</b></font></td>
 						</c:if>
 						<c:if test="${re.retstate == '대여중'}">
-						<td align="center"><input type="button" value="반납" style="font-size: 100px" onclick="returnedIt('${re.id}','${re.toy_serial }','${re.d })"></td>
-						<td align="center"><input type="button" value="훼손반납" style="font-size: 100px" onclick="returnedItDamaged('${re.id}','${re.toy_serial }','${re.d }')"></td>
+						<td align="center"><input type="button" value="반납" style="font-size: 10px" onclick="returnedIt('${re.id}','${re.toy_serial }','${re.d }')"></td>
+						<td align="center"><input type="button" value="훼손반납" style="font-size: 10px" onclick="returnedItDamaged('${re.id}','${re.toy_serial }','${re.d }')"></td>
 						</c:if>
 						<c:if test="${re.retstate == '반납완료' }">
-						<td align="center">반납완료</td>
+						<td align="center"><font color=blue>반납완료</font></td>
 						</c:if>
 					</tr>
 				</c:forEach>
@@ -168,6 +165,7 @@
 			<input type="submit" value="메인으로">
 		</form>
 		</logic:present>
+		<br><br>
 	</center>
 </body>
 </html>

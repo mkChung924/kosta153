@@ -39,11 +39,16 @@ function createReply(reply){
 	var replyDiv = document.createElement('div');
 	replyDiv.setAttribute('id', reply.reply_no);
 	replyDiv.reply=reply;
-	$(replyDiv).html("<table border=0 width=1100><tr><td width=120 align='center'>" +
-			reply.user_id + ":</td><td width=600>" + reply.content + "</td><td align='center'>" +reply.gdate +
-			"<input type='hidden' id=r" + reply.reply_no + "value='" + reply.reply_no + 
-			"'/><c:if test='${dto.user_id eq id}'><td align='center'><a href=\"javascript:callUpForm('" + reply.reply_no + 
-					"')\">수정</a> <a href=\"javascript:deleteR('" + reply.reply_no + "')\">삭제</a></td></c:if></tr></table>");
+	var html="<table border=0 width=1100><tr><td width=120 align='center'>" +
+	reply.user_id + ":</td><td width=600>" + reply.content + "</td><td align='center'>" +reply.gdate +
+	"</td><input type='hidden' id=r" + reply.reply_no + "value='" + reply.reply_no + 
+	"'/>";
+	if("${id}"==reply.user_id || "${auth}" == 2)
+		{html+="<td align='center' width='150'><a href=\"javascript:callUpForm('" + reply.reply_no + 
+		"')\">수정</a> <a href=\"javascript:deleteR('" + reply.reply_no + "')\">삭제</a></td></tr></table>"}
+		else
+			html+="<td width='150'></td></tr></table>"
+	$(replyDiv).html(html);
 	return replyDiv;
 }
 }
@@ -51,12 +56,21 @@ $(function(){
 	list();
  	$("#commentInput").click(function(){
 		var content=$("#commentText").val();
-		insertR('${id}',content);
+		if(content.length < 1){
+			alert('댓글을 입력하세요.');
+		} else {
+		insertR("${id}", content);
+		}
 	});
  	$("#upcommentInput").click(function(){
 		var content=$("#upcommentText").val();
 		var no=$("#upreplyno").val();
-		updateR(no,content);
+		if(content < 1){
+			alert('댓글을 입력하세요.');
+		} else {
+			updateR(no,content);
+		}
+		
 	});
  	$("#commentCancle").click(hideUpForm);
 

@@ -27,7 +27,9 @@ public class ReqAction extends Action{
 		request.setCharacterEncoding("utf-8"); 
 		String id = (String) request.getSession().getAttribute("id");
 		
+
 		String saveDir = "/Users/myungkyuchung/kidshome/kidshome/WebContent/upload";
+		//System.out.println(request.getRealPath("/"));
 		//System.out.println(saveDir);
 		int maxSize = 5*1024*1024;//1kb - 1mb - 5mb
 		MultipartRequest multipartRequest = new MultipartRequest(request,saveDir,maxSize,"utf-8", new DefaultFileRenamePolicy());

@@ -33,7 +33,10 @@
 <body>
 	<center>
 	<br>
-	<h2>총 재고 현황</h2><br>
+	<h2>총 재고 현황</h2>
+		<div align="right">
+		<input type="button" value="장난감 추가" style="font-size: 20px" onclick="alert('빠른 시일내 구현하도록 하겠습니다.')"><br><br>
+		</div>
 		<form method="post" id="inv">
 			<table border="1" cellpadding="5" width="1300">
 				<tr bgcolor="#F15F5F">
@@ -57,8 +60,8 @@
 						<td>${toyinfo.toyname}</td>
 						<td>${toyinfo.toykind}</td>
 						<td>${toyinfo.toyage}세</td>
-						<td>${toyinfo.toyimage}</td>
-						<td><input type="text" size="7" id=${stat.count } style="text-align: right; font-size: 15px;" name="total" value="${toyinfo.toytotal}"></td>
+						<td width="100"><img src='../image/toy/${toyinfo.toyimage}' width="100" height="100"></td>
+						<td><input type="text" size="5" id=${stat.count } style="text-align: right; font-size: 15px;" name="total" value="${toyinfo.toytotal}"></td>
 						<c:if test="${toyinfo.rentstate != '0' }">
 						<td><a href="toyreqstate.do?action=rent&serial=${toyinfo.toy_serial }">${toyinfo.rentstate}</a>
 						</c:if>
@@ -73,7 +76,7 @@
 						</c:if>
 						<td>${toyinfo.damage}</td>
 						<td>${toyinfo.vacant}</td>
-						<td><input type="button" value="변경" style="font-size: 100px" onclick="update('${toyinfo.toy_serial }','${stat.count}')"> </td>
+						<td><input type="button" value="변경" style="font-size: 10px" onclick="update('${toyinfo.toy_serial }','${stat.count}')"> </td>
 					</tr>
 				</c:forEach>
 			</table>

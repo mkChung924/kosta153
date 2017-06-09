@@ -75,8 +75,8 @@
 			</table>
 			<br><br>
 		</logic:present>
-			<input type="button" value="장난감 보러가기" style="font-size: 100px" onclick="location.href='search.do'">&nbsp;&nbsp;&nbsp;
-			<input type="submit" value="메인으로" style="font-size: 100px" onclick="location.href='main.do'"><br><br>
+			<input type="button" value="장난감 보러가기" style="font-size: 10px" onclick="location.href='search.do'">&nbsp;&nbsp;&nbsp;
+			<input type="submit" value="메인으로" style="font-size: 10px" onclick="location.href='main.do'"><br><br>
 	
 	</center>
 </body>

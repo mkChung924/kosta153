@@ -58,7 +58,7 @@
 			});
 		});
 	});
-	
+
 </script>
 <style>
 #flip1 {
@@ -166,14 +166,12 @@ a{
 				<li class="topMenuLi">
 				<a class="menuLink" id="flip1" style="cursor: pointer;">소개</a>
 					<ul class="submenu" id="panel1">
-						<li><a class="submenuLink" href="vision.do">Vision</a></li>
 						<li><a class="submenuLink" href="about.do">우리소개</a></li>
 					</ul></li>
 				<li class="topMenuLi">
 				<a class="menuLink" id="flip2">안내</a>
 					<ul class="submenu" id="panel2">
 						<li><a class="submenuLink" href="rentinfo.do">이용 안내</a></li>
-						<li><a class="submenuLink" href="giveinfo.do">기부 안내</a></li>
 						<li><a class="submenuLink" href="meminfo.do">회원 안내</a></li>
 					</ul></li>
 				<li class="topMenuLi">
@@ -185,7 +183,7 @@ a{
 				<a class="menuLink" id="flip4">신청</a>
 				<ul class="submenu" id="panel4">
 						<li><a class="submenuLink" href="givetoy.do">기부 신청하기</a></li>
-						<li><a class="submenuLink" href="reqtoy.do">정남감 요청하기</a></li>
+						<li><a class="submenuLink" href="reqtoy.do">장난감 요청하기</a></li>
 					</ul></li>
 				<li class="topMenuLi">
 				<a class="menuLink" id="flip5">게시판</a>

@@ -58,14 +58,14 @@
 			<input type="radio" name="rentmethod" value="택배">택배<br><br>
 			</c:if>
 		<logic:present name="id" scope="session">	
-			<input type="submit" value="대여신청" style="font-size: 100px"> &nbsp;&nbsp;&nbsp;
+			<input type="submit" value="대여신청" style="font-size: 15px"> &nbsp;&nbsp;&nbsp;
 		</logic:present>
 		</c:if>
 		
 		<c:if test="${possible eq 'nok'}">
 		이미 대여 신청중이거나 대여중인 상품입니다.<br><br> 
 		</c:if>
-			<input type="button" value="뒤로가기" style="font-size: 100px" onclick="history.back()"><br>
+			<input type="button" value="뒤로가기" style="font-size: 15px" onclick="history.back()"><br>
 			</form>
 		<br>
 		<br>

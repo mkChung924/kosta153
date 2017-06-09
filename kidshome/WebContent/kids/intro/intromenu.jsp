@@ -39,7 +39,6 @@
 <body>
 <div class="menu">
 <ul>
-	<li><a href="vision.do">Vision</a>
 	<li><a href="about.do">우리 소개</a>
 </ul>
 </div>

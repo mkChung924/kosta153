@@ -177,11 +177,11 @@
 						<td align="center">대여중</td>
 						</c:if>
 						<c:if test="${re.rentmethod == '방문' && re.rentstate == '대여 대기'}">
-						<td align="center"><input type="button" value="대여" style="font-size: 100px" onclick="acceptRentVisit('${re.id }','${re.toy_serial}','${re.rentmethod }')"></td>
+						<td align="center"><input type="button" value="대여" style="font-size: 10px" onclick="acceptRentVisit('${re.id }','${re.toy_serial}','${re.rentmethod }')"></td>
 						<td align="center"><input type="submit" value="삭제" onclick="delRentReq('${re.id}', '${re.toy_serial }')"></td>
 						</c:if>
 						<c:if test="${re.rentmethod == '택배' }">
-						<td align="center"><input type="button" value="배송" style="font-size: 100px" onclick="acceptRentPost('${re.id }','${re.toy_serial}','${re.rentmethod }')"></td>
+						<td align="center"><input type="button" value="배송" style="font-size: 10px" onclick="acceptRentPost('${re.id }','${re.toy_serial}','${re.rentmethod }')"></td>
 						<td align="center"><input type="submit" value="삭제" onclick="delRentReq('${re.id}', '${re.toy_serial }')"></td>
 						</c:if>
 
@@ -194,6 +194,7 @@
 			<input type="submit" value="메인으로">
 		</form>
 		</logic:present>
+		<br><br>
 	</center>
 </body>
 </html>

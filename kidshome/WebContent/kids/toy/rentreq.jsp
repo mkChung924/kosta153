@@ -21,19 +21,29 @@
 			<input type="button" value="메인으로" onclick="location.href='main.do'">
 		</c:if>
 		<c:if test="${rentreq eq 'overCount' }">
-	대여횟수를 초과하였습니다.<br>
-			<br>
-			<input type="button" value="메인으로">
+			<b>대여횟수를 초과하였습니다.</b><br><br>
+			<c:if test="${auth == 0 }">
+				대여 가능 장난감은 <font color=red size=5>2</font>개를 초과할 수 없습니다.
+			</c:if>
+			<c:if test="${auth == 1 }">
+				대여 가능 장난감은 <font color=red size=5>3</font>개를 초과할 수 없습니다.
+			</c:if>
+			<br><br>
+			<input type="button" value="메인으로" onclick="location.href='main.do'">&nbsp;&nbsp;&nbsp; 
+			<input type="button" value="뒤로가기" onclick="history.back()">
 		</c:if>
 		<c:if test="${rentreq eq 'underCount' }">
-	재고가 초과하였습니다.<br>
-			<br>
-			<input type="button" value="메인으로">
+			재고가 부족합니다.<br>
+			
+			<br><br>
+			<input type="button" value="메인으로" onclick="location.href='main.do'">&nbsp;&nbsp;&nbsp;
+			<input type="button" value="뒤로가기" onclick="history.back()">
 		</c:if>
 		<c:if test="${rentreq eq 'error' }">
-	알수없는 에러가 발생하였습니다.<br>
-			<br>
-			<input type="button" value="메인으로">
+			알 수없는 에러가 발생하였습니다.<br>
+			<br><br>
+			<input type="button" value="메인으로" onclick="location.href='main.do'">&nbsp;&nbsp;&nbsp;
+			<input type="button" value="뒤로가기" onclick="history.back()">
 		</c:if>
 
 	</center>

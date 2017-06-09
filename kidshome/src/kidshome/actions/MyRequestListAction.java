@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import kidshome.model.Fine;
 import kidshome.model.Give;
 import kidshome.model.KidshomeDAO;
 import kidshome.model.RentBeans;
@@ -112,6 +113,20 @@ public class MyRequestListAction extends Action{
 			
 			
 			forward = mapping.findForward("success_rent");
+			break;
+			
+		case "fine":
+			System.out.println(id);
+			List<Fine> fineList = dao.selectFine(id);
+			System.out.println(fineList.size());
+			if(fineList.size() > 1){
+				request.setAttribute("tot", fineList.get(fineList.size()-1));
+				fineList.remove(fineList.size()-1);
+				request.setAttribute("list", fineList);	
+			}
+			
+			forward = mapping.findForward("success_fine");
+			
 			break;
 			
 			default:break;

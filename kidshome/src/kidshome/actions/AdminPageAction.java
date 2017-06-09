@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import kidshome.model.Fine;
 import kidshome.model.Give;
 import kidshome.model.KidshomeDAO;
 import kidshome.model.RentBeans;
@@ -205,6 +206,44 @@ public class AdminPageAction extends Action{
 				
 				break;
 				
+			case "fine":
+				
+				List<Fine> fineList = dao.selectAllFine();
+				if(fineList.size() > 1){
+					request.setAttribute("tot", fineList.get(fineList.size()-1));
+					fineList.remove(fineList.size()-1);
+					request.setAttribute("list", fineList);
+					
+				}
+				forward = mapping.findForward("success_fine");
+				
+				break;
+				
+			case "fine_name":
+				
+				name = request.getParameter("name");
+				List<Fine> fineNameList = dao.selectAllFineByName(name);
+				if(fineNameList.size() > 0){
+					
+					request.setAttribute("list", fineNameList);
+					
+				}
+				forward = mapping.findForward("success_fine");
+				
+				break;
+				
+			case "fine_tel":
+				
+				tel = request.getParameter("tel");
+				List<Fine> fineTelList = dao.selectAllFineByTel("%"+tel);
+				if(fineTelList.size() > 0){
+					
+					request.setAttribute("list", fineTelList);
+					
+				}
+				forward = mapping.findForward("success_fine");
+				
+				break;
 			
 			}
 			

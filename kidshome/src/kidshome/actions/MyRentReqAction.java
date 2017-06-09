@@ -25,6 +25,7 @@ public class MyRentReqAction extends Action{
 			
 			String serial = request.getParameter("serial");
 			String rentMethod = request.getParameter("rentmethod");
+			int auth = (Integer) request.getSession().getAttribute("auth");
 			System.out.println("대여 방법: " +rentMethod);
 			System.out.println("시리얼번호: "+serial);
 			String id = (String) request.getSession().getAttribute("id");
@@ -37,7 +38,7 @@ public class MyRentReqAction extends Action{
 			map.put("serial", serial);
 			map.put("rentmethod", rentMethod);
 			
-			if(dao.countMaximum(id)){
+			if(dao.countMaximum(id, auth)){
 				if(dao.checkVacant(serial)){
 					if(dao.updateInventory(serial) && dao.insertMyRentReq(map)){
 						System.out.println("대여신청완료!");

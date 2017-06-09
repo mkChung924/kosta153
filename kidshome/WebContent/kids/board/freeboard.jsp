@@ -18,6 +18,8 @@
 		}else if(content===''){
 			alert('내용을 입력해주세요.');
 			f.content.focus();
+		}else if(content.length > 500){
+			alert('작성된 글의 길이가 너무 깁니다.');
 		}else{
   			f.submit();
   		}
@@ -31,7 +33,7 @@
 		<table border="0">
 			<tr>
 				<td class='bgc' align="center"><font size='2' ><b>글 제목</b></font></td>
-				<td><input type='text' size='72' maxlength='50' name='free_title'></td>
+				<td><input type='text' size='70' maxlength='50' name='free_title'></td>
 			</tr>
 			<tr>
 				<td class='bgc' align="center"><font size='2'><b>내 용</b></font></td>
@@ -40,7 +42,7 @@
 			<tr>
 				<td colspan="2" align="center">
 				<input type="button" value="등록" style="background-color: #FFE08C" onclick="check()"> 
-				<a href="listboard.do"><input type="button" value="취소" style="background-color: #FFE08C"></a>
+				<a href="freelist.do"><input type="button" value="취소" style="background-color: #FFE08C"></a>
 				</td>
 			</tr>
 		</table>

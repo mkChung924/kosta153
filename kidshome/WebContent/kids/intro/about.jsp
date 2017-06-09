@@ -8,7 +8,14 @@
 </head>
 <body>
 <center>
-<h3>우리는...</h3>
+<br>
+<h1>나 JAVA 봐라! 소개 및 소감</h1><br>
+<table border=1 cellpadding="5" cellspacing="0">
+<tr>
+<td><img src="../image/about.png" width="700" height="1000"></td>
+</tr>
+</table>
+<br><br><br><br>
 </center>
 </body>
 </html>

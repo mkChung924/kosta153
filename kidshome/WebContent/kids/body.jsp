@@ -6,6 +6,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+	function detail(serial){
+		
+		var toy_serial = serial.split(".");
+		location.href='toydetail.do?serial='+toy_serial[0];
+	}
+</script>
 <style type="text/css">
 #toys td{
 	border-radius: 25px;
@@ -28,10 +35,11 @@
 <div id="image_list_2">
         <div class="clsBannerScreen">
             <div class="images" style="display:block">
-                <img src="../image/slidetoy.png" width="1300px">
+                <img src="../image/kidshome_team.png" width="1300px">
             </div>
+            
+            <div class="images"><img src="../image/slidetoy.png" width="1300px"></div>
             <div class="images"><img src="../image/kidshome_intro.png" width="1300px"></div>
-            <div class="images"><img src="../image/kidshome_team.png" width="1300px"></div>
             <div class="images"><img src="../image/kidshome_event.png" width="1300px"></div>
             <div class="images"><img src="../image/kidshome_review_event.png" width="1300px"></div>
             
@@ -58,18 +66,18 @@
 			<!-- JSTL forEeach를 사용해서 DB에서 얻은 값을 출력해야함. -->
 				<tr>
 					<td align="center" width="300" height="250">
-						<img alt="최신장난감1" src="../image/toy/${newToy[0] }" width="300" height="250" style="border-radius: 25px;">
+						<img alt="최신장난감1" src="../image/toy/${newToy[0] }" width="300" height="250" style="border-radius: 25px; cursor: pointer;" onclick="detail('${newToy[0]}')">
 					</td>
 					<td align="center" width="300" height="250">
-						<img alt="최신장난감2" src="../image/toy/${newToy[1] }" width="300" height="250" style="border-radius: 25px;">
+						<img alt="최신장난감2" src="../image/toy/${newToy[1] }" width="300" height="250" style="border-radius: 25px; cursor: pointer;" onclick="detail('${newToy[1]}')">
 					</td>
 				</tr>
 				<tr>
 					<td align="center" width="300" height="250">
-						<img alt="최신장난감3" src="../image/toy/${newToy[2] }" width="300" height="250" style="border-radius: 25px;">
+						<img alt="최신장난감3" src="../image/toy/${newToy[2] }" width="300" height="250" style="border-radius: 25px; cursor: pointer;" onclick="detail('${newToy[2]}')">
 					</td>
 					<td align="center" width="300" height="250">
-						<img alt="최신장난감4" src="../image/toy/${newToy[3] }" width="300" height="250" style="border-radius: 25px;">
+						<img alt="최신장난감4" src="../image/toy/${newToy[3] }" width="300" height="250" style="border-radius: 25px; cursor: pointer;" onclick="detail('${newToy[3]}')">
 					</td>
 				</tr>
 			</table>
@@ -77,20 +85,40 @@
 		<td>
 			<table border="1" cellspacing="0" cellpadding="0" width="600" height="500" style="border-radius: 25px;">
 				<tr>
+					<c:if test="${popToy[0].length() > 0 }">
 					<td align="center" width="280" height="250">
-						<img alt="인기장난감1" src="../image/toy/${popToy[0] }" width="280" height="250" style="border-radius: 25px;">
+						<img alt="인기장난감1" src="../image/toy/${popToy[0] }" width="280" height="250" style="border-radius: 25px; cursor: pointer;" onclick="detail('${popToy[0]}')">
 					</td>
+					</c:if>
+					<c:if test="${popToy[0] == null }">
+					<td align="center">대여기록 없음</td>
+					</c:if>
+					<c:if test="${popToy[1].length() > 0 }">
 					<td align="center" width="280" height="250">
-						<img alt="인기장난감2" src="../image/toy/${popToy[1] }" width="280" height="250" style="border-radius: 25px;">
+						<img alt="인기장난감2" src="../image/toy/${popToy[1] }" width="280" height="250" style="border-radius: 25px; cursor: pointer;" onclick="detail('${popToy[1]}')">
 					</td>
+					</c:if>
+					<c:if test="${popToy[1] == null }">
+					<td align="center">대여기록 없음</td>
+					</c:if>
 				</tr>
 				<tr>
+					<c:if test="${popToy[2].length() > 0 }">
 					<td align="center" width="280" height="250">
-						<img alt="인기장난감3" src="../image/toy/${popToy[2] }" width="280" height="250" style="border-radius: 25px;">
+						<img alt="인기장난감3" src="../image/toy/${popToy[2] }" width="280" height="250" style="border-radius: 25px; cursor: pointer;" onclick="detail('${popToy[2]}')">
 					</td>
+					</c:if>
+					<c:if test="${popToy[2] == null }">
+					<td align="center">대여기록 없음</td>
+					</c:if>
+					<c:if test="${popToy[3].length() > 0 }">
 					<td align="center" width="280" height="250">
-						<img alt="인기장난감4" src="../image/toy/${popToy[3] }" width="280" height="250" style="border-radius: 25px;">
+						<img alt="인기장난감4" src="../image/toy/${popToy[3] }" width="280" height="250" style="border-radius: 25px; cursor: pointer;" onclick="detail('${popToy[3]}')">
 					</td>
+					</c:if>
+					<c:if test="${popToy[3] == null }">
+					<td align="center">대여기록 없음</td>
+					</c:if>
 				</tr>
 			</table>
 		</td>
@@ -115,12 +143,12 @@
 			<td align="center" width="433">
 				<table border="1" cellspacing="0" width="100%" cellpadding="5">
 				<tr>
-					<th bgcolor="#FFA7A7">제목</th>
+					<th width="300" bgcolor="#FFA7A7">제목</th>
 					<th bgcolor="#FFA7A7">날짜</th>
 				</tr>
 				<c:forEach items="${mainNotice }" var="notice">
 				<tr align="center">
-					<td>${notice.notice_title }</td>
+					<td><a href='updel.do?action=call&no=${notice.no }'><font color=black>${notice.notice_title }</font></a></td>
 					<td>${notice.gdate }</td>
 				</tr>
 				</c:forEach>
@@ -130,12 +158,12 @@
 			<td align="center" width="433">
 				<table border="1" cellspacing="0" width="100%" cellpadding="5">
 				<tr>
-					<th bgcolor="#86E57F">제목</th>
+					<th width="300" bgcolor="#86E57F">제목</th>
 					<th bgcolor="#86E57F">날짜</th>
 				</tr>
 				<c:forEach items="${mainFree }" var="free">
 				<tr align="center">
-					<td>${free.free_title }</td>
+					<td><a href='freeupdel.do?action=call&no=${free.no }'><font color=black>${free.free_title }</font></a></td>
 					<td>${free.gdate }</td>
 				</tr>
 				</c:forEach>
@@ -144,12 +172,12 @@
 			<td align="center" width="433">
 				<table border="1" cellspacing="0" width="100%" cellpadding="5">
 				<tr>
-					<th bgcolor="#B2EBF4">제목</th>
+					<th width="300" bgcolor="#B2EBF4">제목</th>
 					<th bgcolor="#B2EBF4">날짜</th>
 				</tr>
 				<c:forEach items="${mainReview }" var="review">
 				<tr align="center">
-					<td>${review.review_title }</td>
+					<td><a href='reviewupdel.do?action=call&no=${review.no }'><font color=black>${review.review_title }</font></a></td>
 					<td>${review.gdate }</td>
 				</tr>
 				</c:forEach>
@@ -158,7 +186,7 @@
 		</tr>
 	</table>
 </div>
-<br><br><br><br><br><br>
+<br><br><br><br><br>
 </center>
 </body>
 </html>

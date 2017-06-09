@@ -27,13 +27,14 @@
 				</table>
 			</td>	
 		</tr>
+
 		<tr>
 		<logic:present name="id" scope="session">
 			<td height="580"><tiles:insert attribute="body"/></td>
-		</logic:present>	
+		</logic:present>
 		<logic:notPresent name="id" scope="session">
-			<td height="580" align="center"><h1>잘못된 접근입니다.</h1><br><br><input type="button" value="메인으로" style="font-size: 100px" onclick="location.href='main.do'"></td>
-		</logic:notPresent>	
+ 			<td height="580" align="center"><h1>잘못된 접근입니다.</h1><br><br><input type="button" value="로그인" style="font-size: 100px" onclick="location.href='login.do'"></td>
+		</logic:notPresent>
 		</tr>
 		
 		<tr>

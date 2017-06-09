@@ -18,6 +18,8 @@
 		}else if(content===''){
 			alert('내용을 입력해주세요.');
 			f.content.focus();
+		}else if(content.length > 500){
+			alert('작성된 글의 길이가 너무 깁니다.');
 		}else{
   			f.submit();
   		}
@@ -39,9 +41,9 @@
 				<td><textarea cols='70' rows='15' name='notice_content'>${dto.notice_content }</textarea></td>
 			</tr>
 			<tr>
-				<td>
+				<td colspan="2" align="center">
 				<input type="button" value="수정" style="background-color: #FFE08C" onclick="check()">
-				<a href="listboard.do"><input type="button" value="취소" style="background-color: #FFE08C"></a>
+				<input type="button" value="취소" style="background-color: #FFE08C" onclick="history.back()">
 				</td>
 			</tr>
 		</table>

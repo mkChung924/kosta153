@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>우리 소개</title>
 </head>
 <body>
 <center>
@@ -15,7 +15,7 @@
 			<td align="center" colspan="2"><tiles:insert attribute="header"/></td>
 		</tr>
 		
-		<tr>
+<%-- 		<tr>
 			<td height="40">
 				<table align="center" border=0 cellspacing="0" cellpadding="1" height="100%">
 					<tr>
@@ -25,9 +25,9 @@
 					</tr>
 				</table>
 			</td>	
-		</tr>
+		</tr> --%>
 		<tr>
-			<td height="580"><tiles:insert attribute="body"/></td>
+			<td height="620"><tiles:insert attribute="body"/></td>
 		
 		</tr>
 		

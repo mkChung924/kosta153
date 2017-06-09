@@ -46,6 +46,7 @@
 	<li><html:link action="/kids/myRentReq?action=rentreq">대여 신청 현황 </html:link>
 	<li><html:link action="/kids/myToyReq?action=toy">장난감 요청 현황</html:link>
 	<li><html:link action="/kids/myGiveReq?action=give">기부 현황</html:link>
+	<li><html:link action="/kids/myFine?action=fine">연체료 납부</html:link>
 	<li><html:link action="/kids/delInfo">탈퇴</html:link>
 
 </ul>
@@ -60,6 +61,7 @@
 	<li><html:link action="/kids/adRentReq?action=rentreq">대여 신청 현황 </html:link>
 	<li><html:link action="/kids/ToyReq?action=toy">장난감 요청 현황</html:link>
 	<li><html:link action="/kids/GiveReq?action=give">기부 현황</html:link>
+	<li><html:link action="/kids/adFine?action=fine">연체료 납부</html:link>
 
 </ul>
 </div>

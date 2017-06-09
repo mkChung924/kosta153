@@ -35,7 +35,7 @@
 		</table>
 		<br><br>
 		<c:forEach begin="1" end="${totalPage }" var="i">
-       [<a href="reviewboard.do?page=${i}">${i }</a>]
+       [<a href="reviewlist.do?page=${i}">${i }</a>]
     </c:forEach>
     <br><br>
       <c:choose>
@@ -43,7 +43,7 @@
                 이전
         </c:when>
         <c:otherwise>
-         <a href="reviewboard.do?page=${page-1 }">이전</a> 
+         <a href="reviewlist.do?page=${page-1 }">이전</a> 
         </c:otherwise>
       </c:choose>
             
@@ -52,7 +52,7 @@
       </c:if>
       
       <c:if test="${page<totalPage }">
-        <a href="reviewboard.do?page=${page+1 }">다음</a>
+        <a href="reviewlist.do?page=${page+1 }">다음</a>
       </c:if>
 
 		<br><br>

@@ -4,6 +4,7 @@ public class Give {
 	
 	private String num;
 	private String id;
+	private String name;
 	private String toyname;
 	private String toydesc;
 	private String method;
@@ -27,6 +28,14 @@ public class Give {
 	
 	
 
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public String getNum() {
 		return num;

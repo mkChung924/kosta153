@@ -11,7 +11,7 @@
 <script>
 	function agreeReq(num){ //등록 요청
 
-		alert(num);
+		//alert(num);
 		var params = 'no='+num
 		new ajax.xhr.Request('rentAccept.do?action=toyreq',params,agreeResult,'POST');
 	}
@@ -32,7 +32,7 @@
 	
 	function disagreeReq(num){ //등록 요청
 
-		alert(num);
+		//alert(num);
 		var params = 'no='+num
 		new ajax.xhr.Request('rentAccept.do?action=toyreq_no',params,disagreeResult,'POST');
 	}
@@ -57,8 +57,8 @@
 	<h2>장난감 신청 현황</h2><br><br>
 		<logic:present name="reqlist" scope="request">
 		<form action="requestdelete.do" method="post" name=f>
-			<table border="1" cellpadding="5">
-				<tr bgcolor="orange">
+			<table border="1" cellpadding="5" width="1300">
+				<tr bgcolor=#F15F5F>
 					<th>신청 번호</th>
 					<th>장난감 이름</th>
 					<th>신청 설명</th>
@@ -71,11 +71,21 @@
 					
 				</tr>
 				<c:forEach items="${reqlist }" var="reqlist">
-					<tr>
-						<td align="center">${reqlist.num}</td>
-						<td align=center>${reqlist.toyname}</td>
+				<c:if test="${reqlist.req_state eq '신청 반려' }">
+					<tr bgcolor="#BDBDBD">
+					</c:if>
+					<c:if test="${reqlist.req_state eq '추가 완료' }">
+					<tr bgcolor="#FFD8D8">
+					</c:if>
+						<td align="center" width="70">${reqlist.num}</td>
+						<td align=center width="100">${reqlist.toyname}</td>
 						<td align=center>${reqlist.reason}</td>
-						<td align=center>${reqlist.image}</td>
+						<c:if test="${reqlist.image == null }">
+						<td align="center">이미지없음</td>
+						</c:if>
+						<c:if test="${reqlist.image.length() > 0 }">
+						<td align=center width="300"><img alt="${reqlist.image }" src='../upload/${reqlist.image }' width="300" height="200" onclick="location.href='../upload/${reqlist.image }'" style="cursor: pointer;"></td>
+						</c:if>
 						<td align=center>${reqlist.reqdate}</td>
 						<td align=center>${reqlist.req_state}</td>
 						<c:if test="${reqlist.req_state eq '신청 진행중' }">
@@ -83,11 +93,11 @@
 						<td width="80" align="center"><input type="button" value="신청반려" onclick="disagreeReq(${reqlist.num})"></td>
 						</c:if>
 						<c:if test="${reqlist.req_state eq '추가 완료' }">
-						<td width="80" align="center">추가 완료</td>
+						<td width="80" align="center"><font color=blue>추가 완료</font></td>
 						<td width="80" align="center">이상 없음</td>
 						</c:if>
 						<c:if test="${reqlist.req_state eq '신청 반려' }">
-						<td width="80" align="center">신청 반려</td>
+						<td width="80" align="center"><font color=white>신청 반려</font></td>
 						<td width="80" align="center">반려됨</td>
 						</c:if>
 					</tr>

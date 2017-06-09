@@ -25,6 +25,8 @@ public class ReqUpdateAction extends Action{
 		String id = "";
 		String serial = "";
 		String method = "";
+		String finestr= "";
+		int fine = 0;
 		
 		switch(action){
 		
@@ -118,16 +120,24 @@ public class ReqUpdateAction extends Action{
 			
 		case "rent_return":
 			
-			HashMap<String,String> map4 = new HashMap<>();
+			HashMap<String,Object> map4 = new HashMap<>();
 			
 			id = request.getParameter("id");
 			serial = request.getParameter("serial");
+			finestr = request.getParameter("fine");
+			fine = Integer.parseInt(finestr);
+			
 			System.out.println(id);
 			System.out.println(serial);
-			
+			System.out.println("연체료: " + fine);
 			
 			map4.put("id", id);
 			map4.put("serial", serial);
+			map4.put("fine", fine);
+			
+			if(fine > 0){
+				if(dao.insertFine(map4)) System.out.println("연체료 저장 완료");
+			}
 			
 			if(dao.returnToy(map4)){
 				if(dao.returnedInventory(serial)){
@@ -138,13 +148,21 @@ public class ReqUpdateAction extends Action{
 			
 		case "rent_return_damage":
 			
-			HashMap<String,String> map5 = new HashMap<>();
+			HashMap<String,Object> map5 = new HashMap<>();
 			
 			id = request.getParameter("id");
 			serial = request.getParameter("serial");
+			finestr = request.getParameter("fine");
+			fine = Integer.parseInt(finestr);
+			System.out.println("연체료: " + fine);
 			
 			map5.put("id", id);
 			map5.put("serial", serial);
+			map5.put("fine", fine);
+			
+			if(fine > 0){
+				if(dao.insertFine(map5)) System.out.println("연체료 저장 완료");
+			}
 			
 			if(dao.returnToy(map5)){
 				if(dao.returnedInventoryDamaged(serial)){

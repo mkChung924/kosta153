@@ -13,7 +13,7 @@
 	<h2>장난감 기부 현황</h2><br><br>
 		<logic:present name="givelist" scope="request">
 		<form action="requestdelete.do" method="post" name=f>
-			<table border="1" cellpadding="5">
+			<table border="1" cellpadding="5" width="1100">
 				<tr bgcolor="orange">
 					<th>장난감 이름</th>
 					<th>장난감 설명</th>

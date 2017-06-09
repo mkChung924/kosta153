@@ -258,7 +258,7 @@
 			path="/kids/req_insert"
 			type="kidshome.actions.ReqAction">
 			
-			<forward name="success" path="/kids/req_suc.do"></forward>
+			<forward name="success" path="/kids/req_suc.do" redirect="true"></forward>
 		</action>	
 		
 		<!-- 장난감 대여 신청 -->
@@ -484,6 +484,15 @@
       		<forward name="success_del" path=".delsuc"></forward>
       	</action>	
       	
+      	<!-- 연체료 -->
+      	<action 
+      		path="/kids/myFine"
+      		type="kidshome.actions.MyRequestListAction">
+      		
+      		<forward name="success_fine" path=".myFine"></forward>
+      		</action>
+      	
+      	
       					<!-- 대여 신청 삭제 -->
       	<action 
 			path="/kids/rentReqDel"
@@ -529,6 +538,12 @@
 			
 			<forward name="success" path="/kids/members.do"/>
 		</action>
+		
+		<action path="/kids/updateAuth"
+			type="kidshome.actions.UpdateAuthAction">
+			
+			<forward name="success" path="/kids/member/adminpage/update_result.jsp"></forward>
+			</action>
 		
 			<!-- 재고정보 -->
 		<action 
@@ -583,7 +598,15 @@
       		type="kidshome.actions.AdminPageAction">
       		
       		<forward name="success_rent" path=".adRent"></forward>
-      	</action>			
+      	</action>
+
+      	
+      	<action 
+      		path="/kids/adFine"
+      		type="kidshome.actions.AdminPageAction">
+      		
+      		<forward name="success_fine" path=".adFine"></forward>
+      	</action>				
       		
       		<!-- 관리자가 기부신청이나 장난감 신청, 대여신청, 반납 작업을 하는 부분 -->
       	<action 

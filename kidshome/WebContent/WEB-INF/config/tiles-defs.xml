@@ -172,7 +172,7 @@
 	<definition name=".passfindsuc" extends=".login">
 		<put name="body" value="/kids/member/passFoundSuccess.jsp"></put>
 	</definition>
-	<definition name=".passupdatesuc" extends=".mypage">
+	<definition name=".passupdatesuc" extends=".login">
 		<put name="body" value="/kids/member/passup.jsp"></put>
 	</definition>
 	
@@ -199,6 +199,9 @@
 	<definition name=".myGiveReq" extends=".mypage">
 		<put name="body" value="/kids/member/mypage/myGive.jsp"></put>
 	</definition>
+	<definition name=".myFine" extends=".mypage">
+		<put name="body" value="/kids/member/mypage/fine.jsp"></put>
+	</definition>
 	<definition name=".wrong" path="/kids/member/mypage/wrongaccess.jsp">
 		<put name="header" value="/kids/header.jsp"></put>
 		<put name="body" value="/kids/member/mypage/wrongbody.jsp"></put>
@@ -210,7 +213,7 @@
 	<definition name=".updatefail" extends=".mypage">
 		<put name="body" value="/kids/member/mypage/updatefail.jsp"></put>
 	</definition>
-	<definition name=".updatesuc" extends=".mypage">
+	<definition name=".updatesuc" extends=".login">
 		<put name="body" value="/kids/member/mypage/updatesuc.jsp"></put>
 	</definition>
 	<definition name=".delcheck" extends=".mypage">
@@ -244,6 +247,9 @@
 	</definition>
 	<definition name=".rentstate" extends=".mypage">
 		<put name="body" value="/kids/member/adminpage/rentstate.jsp"></put>
+	</definition>
+	<definition name=".adFine" extends=".mypage">
+		<put name="body" value="/kids/member/adminpage/fine.jsp"></put>
 	</definition>
 
 </tiles-definitions>

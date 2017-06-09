@@ -40,7 +40,6 @@
 <div class="menu">
 	<ul>
 		<li><a href="rentinfo.do">이용 안내</a>
-		<li><a href="giveinfo.do">기부 안내</a>
 		<li><a href="meminfo.do">회원 안내</a>
 	</ul>
 </div>

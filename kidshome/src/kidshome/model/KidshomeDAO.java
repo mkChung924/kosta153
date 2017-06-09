@@ -390,8 +390,6 @@ public class KidshomeDAO {
 		return false;
 	}
 
-
-	
 	//장난감 반납
 	public boolean returnToy(HashMap map){
 		
@@ -445,6 +443,82 @@ public class KidshomeDAO {
 		}
 		
 		return false;
+	}
+	
+	//연체료 납부
+	public boolean insertFine(HashMap map){
+		
+		try {
+			sqlMap.insert("kids.insertFine", map);
+			return true;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return false;
+		
+	}
+	
+	//연체료 불러오기 (관리자)
+	
+	public List<Fine> selectAllFine(){
+		List<Fine> list = null;
+		
+		try {
+			list = sqlMap.queryForList("kids.selectAllFine");
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	//연체료 불러오기 (관리자- 이름으로)
+	
+	public List<Fine> selectAllFineByName(String name){
+		List<Fine> list = null;
+		
+		try {
+			list = sqlMap.queryForList("kids.selectAllFineByName", name);
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	//연체료 불러오기 (관리자- 전화번호로)
+	
+	public List<Fine> selectAllFineByTel(String tel){
+		List<Fine> list = null;
+		
+		try {
+			list = sqlMap.queryForList("kids.selectAllFineByTel", tel);
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	//연체료 불러오기 (회원)
+	public List<Fine> selectFine(String id){
+		List<Fine> list = null;
+		
+		try {
+			list = sqlMap.queryForList("kids.selectFine", id);
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 	
 	//장난감 요청
@@ -582,6 +656,21 @@ public class KidshomeDAO {
 	  return list;
 	}//selectAllMember
 	
+	public boolean updateAuth(HashMap map){
+		
+		try {
+			int t = sqlMap.update("kids.updateAuth",map);
+			if(t == 1) return true;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+		return false;
+		
+	}
+	
 	//재고 정보 가져오기
 	public List<Toys> selectAllInventory() {
 		List<Toys> list = null;
@@ -706,18 +795,28 @@ public class KidshomeDAO {
 		return false;
 	}
 	
-	public boolean countMaximum(String id){
+	public boolean countMaximum(String id, int auth){
 		
 		try {
 			List<String> list = sqlMap.queryForList("kids.countMaximum",id);
 
 			int count = Integer.parseInt(list.get(0));
 			System.out.println("대여 신청중인 상품 개수: " + count);
-			if(count >= 3){
-				return false;
-			} else {
-				return true;
+			
+			if(auth == 0){
+				if(count >= 2){
+					return false;
+				} else {
+					return true;
+				}
+			} else if(auth == 1){
+				if(count >= 3){
+					return false;
+				} else {
+					return true;
+				}
 			}
+			
 			
 		} catch (SQLException e) {
 			
