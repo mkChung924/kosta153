@@ -58,7 +58,7 @@
 	
 	<div align="left"><b>&nbsp;&nbsp;&nbsp;<font size=5px>운영진</font></b></div><br>
     <table border="1" cellpadding="5" width="1300">
-       <tr bgcolor="#F15F5F"><th>이름</th><th>이름</th><th>생년월일</th><th>주소</th><th>이메일</th><th>전화번호</th><th>등급</th><th>가입일</th></tr>      
+       <tr bgcolor="#F15F5F"><th>아이디</th><th>이름</th><th>생년월일</th><th>주소</th><th>이메일</th><th>전화번호</th><th>등급</th><th>가입일</th></tr>      
        <c:forEach items="${list }" var="toy">
        	<c:if test="${toy.auth == '2' }">
 	       <tr>
@@ -78,7 +78,7 @@
     <br><br>
     <div align="left"><b>&nbsp;&nbsp;&nbsp;<font size=5px>회원</font></b></div><br>
     <table border="1" cellpadding="5" width="1300">
-       <tr bgcolor="#F15F5F"><th>이름</th><th>이름</th><th>생년월일</th><th>주소</th><th>이메일</th><th>전화번호</th><th>등급</th><th>가입일</th><th>등급 변경</th></tr>      
+       <tr bgcolor="#F15F5F"><th>아이디</th><th>이름</th><th>생년월일</th><th>주소</th><th>이메일</th><th>전화번호</th><th>등급</th><th>가입일</th><th>등급 변경</th></tr>      
        <c:forEach items="${list }" var="toy" varStatus="status">
        	<c:if test="${toy.auth != '2' }">
        	<c:if test="${status.count%2 == 0 }">
@@ -97,7 +97,7 @@
 	    </c:if>              
        </c:forEach>        
     </table>
-    <br>
+    <br><br>
 	<input type="submit" value="메인으로">
 	</form>
 	<br><br>

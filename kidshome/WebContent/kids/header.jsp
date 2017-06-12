@@ -147,6 +147,7 @@ a{
 			</td>
 			<td class="member" align="right">
 				<logic:present name="id" scope="session">
+				<font color=black><b>${id }</b>님 <font color=red>사랑중♥︎</font></font><br><br>
 				<a href="logout.do"><font color="blue">로그아웃</font></a> | <a href="my.do"><font color="blue">마이페이지</font></a>
 				</logic:present>
 				<logic:notPresent name="id" scope="session">
